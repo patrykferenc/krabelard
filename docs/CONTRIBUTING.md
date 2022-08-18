@@ -47,11 +47,17 @@ Please use the following structure:
 - Always make sure that at least one developer accepts your changes - ideally all main devs.
 - Don't get upset over comments :>
 
+Default merge strategy:
+- merge using rebase
+- squash commits when merging
+
 ## Code style
 
 We use prettier in our project [tbd], always run [tbd: command to run prettier].
 
-[tbd - some code style guidelines]
+We try to stick (at least a bit) to the [Google guidelines](https://google.github.io/styleguide/javaguide.html).
+
+If package names are getting long split them using dots (bad example but prefer bus.lines over buslines etc.)
 
 ## Tests
 
