@@ -53,11 +53,20 @@ Default merge strategy:
 
 ## Code style
 
-We use prettier in our project [tbd], always run [tbd: command to run prettier].
+<!---[TODO:#6 - Add link to a corresponding section]
+We use prettier in our project, always run [tbd: command to run prettier].
+-->
 
 We try to stick (at least a bit) to the [Google guidelines](https://google.github.io/styleguide/javaguide.html).
 
-If package names are getting long split them using dots (bad example but prefer bus.lines over buslines etc.)
+If package names are getting long split them using dots:
+
+DO:
+bus.route.locator
+
+DON'T:
+busroutelocator
+(hopefully you get the ida.)
 
 ## Tests
 
