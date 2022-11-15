@@ -1,13 +1,13 @@
-package dev.patrykferenc.krabelard;
+package dev.patrykferenc.krapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class KrabelardServerApplicationTests {
+class KrapiApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+	@Test
+	void contextLoads() {
+	}
 
 }
