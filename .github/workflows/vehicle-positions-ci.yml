@@ -4,18 +4,22 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'vehicle-positions/**'
+
   pull_request:
     branches:
       - master
       - 'features/*'
       - 'bugs/*'
-  paths:
-    - 'vehicle-positions/**'
+    paths:
+      - 'vehicle-positions/**'
 
 permissions:
   contents: read
 
 jobs:
+
   build:
 
     runs-on: ubuntu-latest

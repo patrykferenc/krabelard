@@ -4,18 +4,22 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'krapi/**'
+
   pull_request:
     branches:
       - master
       - 'features/*'
       - 'bugs/*'
-  paths:
-    - 'krapi/**'
+    paths:
+      - 'krapi/**'
 
 permissions:
   contents: read
 
 jobs:
+
   build:
 
     runs-on: ubuntu-latest
