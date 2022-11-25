@@ -5,3 +5,4 @@
 **/.gradle
 .nvmrc
 **/.idea
+**/package-lock.json

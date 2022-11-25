@@ -20,3 +20,5 @@ Setup:
 3. Go to Language & Frameworks -> Javascript -> Prettier, select it from the dropdown menu and click both:
    1. on reformat
    2. reformat on save
+4. Go to Editor -> Code Style -> Javascript -> Prettier and select the prettier file from the project root (node_modules)
+5. IntelliJ plugin does not run the format via the npm script so you need to add all the files manually (make sure that java js etc. are selected)

@@ -1,8 +1,12 @@
 {
-  "devDependencies": {
-    "prettier-plugin-java": "^1.6.2"
-  },
+  "name": "krabelard",
+  "version": "0.0.0",
   "scripts": {
-    "format": "npx prettier --write \"**/*.java\""
+    "check": "npx prettier --check {**/*,*}.{ts,java,js,css,scss,html,json}",
+    "format": "npx prettier --write {**/*,*}.{ts,java,js,css,scss,html,json}"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.0",
+    "prettier-plugin-java": "^1.6.2"
   }
 }
