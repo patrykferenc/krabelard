@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.krabelard.vehicle.position.domain.model.Vehicle;
 import pl.krabelard.vehicle.position.domain.model.VehicleStubs;
+import pl.krabelard.vehicle.position.domain.model.value.Line;
 import pl.krabelard.vehicle.position.domain.model.value.VehicleType;
 import pl.krabelard.vehicle.position.domain.port.VehiclePositionRepository;
 
@@ -63,14 +64,20 @@ class VehiclePositionsFacadeUnitTest {
 		VehicleType vehicleTypeToTest
 	) {
 		// given there are vehicles in the repository
+		final var expectedLine = Line.of("179");
 		final var expectedVehicles = VehicleStubs.getSampleVehiclesListWithLineAndVehicleType(
-			"179",
+			expectedLine,
 			vehicleTypeToTest
 		);
-		setUpRepositoryMockToReturnVehicles(expectedVehicles, vehicleTypeToTest);
+		setUpRepositoryMockToReturnVehicles(
+			expectedVehicles,
+			expectedLine,
+			vehicleTypeToTest
+		);
 
 		// when
-		final var vehiclesReturnedFromRepository = vehiclePositionsFacadeUnderTest.getAllVehiclesOfType(
+		final var vehiclesReturnedFromRepository = vehiclePositionsFacadeUnderTest.getAllVehiclesOnLineThatAreOfGivenType(
+			expectedLine,
 			vehicleTypeToTest
 		);
 
@@ -84,11 +91,13 @@ class VehiclePositionsFacadeUnitTest {
 
 	private void setUpRepositoryMockToReturnVehicles(
 		List<Vehicle> vehiclesToReturn,
+		Line line,
 		VehicleType vehicleTypeToTest
 	) {
 		Mockito
 			.when(
-				vehiclePositionRepositoryMocked.getAllVehiclePositionsForVehicleType(
+				vehiclePositionRepositoryMocked.getVehiclePositionsForLineAndVehicleType(
+					line,
 					vehicleTypeToTest
 				)
 			)

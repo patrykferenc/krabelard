@@ -11,34 +11,23 @@ import pl.krabelard.vehicle.position.test.TimeUtils;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class VehicleStubs {
 
-	public static Vehicle getSampleVehicle() {
-		return Vehicle
-			.builder()
-			.vehicleNumber(1)
-			.vehicleType(VehicleType.BUS)
-			.line(Line.of("1"))
-			.position(Position.of(51, 22))
-			.timestamp(TimeUtils.LOCAL_DATE_TIME_NOW_MOCKED)
-			.build();
-	}
-
 	public static Vehicle getSampleVehicleWithNumberTypeAndLine(
 		int vehicleNumber,
-		String line,
+		Line line,
 		VehicleType vehicleType
 	) {
 		return Vehicle
 			.builder()
 			.vehicleNumber(vehicleNumber)
 			.vehicleType(vehicleType)
-			.line(Line.of(line))
+			.line(line)
 			.position(Position.of(51, 22))
 			.timestamp(TimeUtils.LOCAL_DATE_TIME_NOW_MOCKED)
 			.build();
 	}
 
 	public static List<Vehicle> getSampleVehiclesListWithLineAndVehicleType(
-		String line,
+		Line line,
 		VehicleType vehicleType
 	) {
 		return List.of(
