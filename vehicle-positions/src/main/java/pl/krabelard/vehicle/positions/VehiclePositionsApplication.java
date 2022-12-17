@@ -1,4 +1,4 @@
-package pl.krabelard.vehiclepositions;
+package pl.krabelard.vehicle.positions;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
