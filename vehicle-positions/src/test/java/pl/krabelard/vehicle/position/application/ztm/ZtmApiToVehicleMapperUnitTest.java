@@ -1,12 +1,12 @@
 package pl.krabelard.vehicle.position.application.ztm;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 import pl.krabelard.vehicle.position.domain.model.value.Position;
 import pl.krabelard.vehicle.position.domain.model.value.VehicleType;
 import pl.krabelard.vehicle.position.test.TimeUtils;
-
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ZtmApiToVehicleMapperUnitTest {
 
@@ -31,7 +31,10 @@ class ZtmApiToVehicleMapperUnitTest {
 		assertAll(
 			() -> assertEquals(11, vehicleMappedFromDTO.getVehicleNumber()),
 			() ->
-				assertEquals(Position.of(12.0, 3.0), vehicleMappedFromDTO.getPosition()),
+				assertEquals(
+					Position.of(12.0, 3.0),
+					vehicleMappedFromDTO.getPosition()
+				),
 			() ->
 				assertEquals(VehicleType.BUS, vehicleMappedFromDTO.getVehicleType()),
 			() ->
