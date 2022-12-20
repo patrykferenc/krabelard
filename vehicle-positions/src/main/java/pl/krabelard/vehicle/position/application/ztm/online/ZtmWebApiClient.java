@@ -1,14 +1,14 @@
 package pl.krabelard.vehicle.position.application.ztm.online;
 
+import java.net.URI;
 import java.util.List;
+import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.util.UriBuilder;
 import pl.krabelard.vehicle.position.domain.model.value.Line;
 import pl.krabelard.vehicle.position.domain.model.value.VehicleType;
-import pl.krabelard.vehicle.position.utils.exception.KrabelardMethodNotImplementedException;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
 class ZtmWebApiClient {
@@ -19,22 +19,26 @@ class ZtmWebApiClient {
 		Line line,
 		VehicleType vehicleType
 	) {
-		final var vehicleTypeToGet = VehicleTypeQueryStringParameters.from(
-			vehicleType
+		return executeRequestToZtmApiUsingParameters(
+			buildUriWithLineAndVehicleTypeParameters(vehicleType, line)
 		);
+	}
 
+	public List<ZtmVehiclePositionDTO> getAllVehiclePositionsForVehicleType(
+		VehicleType vehicleType
+	) {
+		return executeRequestToZtmApiUsingParameters(
+			buildUriWithVehicleTypeParameters(vehicleType)
+		);
+	}
+
+	private List<ZtmVehiclePositionDTO> executeRequestToZtmApiUsingParameters(
+		Function<UriBuilder, URI> uriBuilderFunctionWithParameters
+	) {
 		return WebClient
 			.create(configuration.getBaseUrl())
 			.get()
-			.uri(uriBuilder ->
-				uriBuilder
-					.path(configuration.getPositionsResourceUrl())
-					.queryParam("resource_id", configuration.getResourceId())
-					.queryParam("apikey", configuration.getApiKey())
-					.queryParam("type", vehicleTypeToGet.value)
-					.queryParam("line", line.getName())
-					.build()
-			)
+			.uri(uriBuilderFunctionWithParameters)
 			.accept(MediaType.APPLICATION_JSON)
 			.retrieve()
 			.bodyToMono(ZtmWebApiResponseDTO.class)
@@ -42,10 +46,56 @@ class ZtmWebApiClient {
 			.block();
 	}
 
-	public Flux<ZtmVehiclePositionDTO> getAllVehiclePositionsForVehicleType(
+	private Function<UriBuilder, URI> buildUriWithVehicleTypeParameters(
 		VehicleType vehicleType
 	) {
-		throw new KrabelardMethodNotImplementedException();
+		final var vehicleTypeToGet = VehicleTypeQueryStringParameters.from(
+			vehicleType
+		);
+
+		return uriBuilder ->
+			uriBuilder
+				.path(configuration.getPositionsResourceUrl())
+				.queryParam(
+					ZtmApiQueryParameters.RESOURCE_ID.value,
+					configuration.getResourceId()
+				)
+				.queryParam(
+					ZtmApiQueryParameters.APIKEY.value,
+					configuration.getApiKey()
+				)
+				.queryParam(
+					ZtmApiQueryParameters.VEHICLE_TYPE.value,
+					vehicleTypeToGet.value
+				)
+				.build();
+	}
+
+	private Function<UriBuilder, URI> buildUriWithLineAndVehicleTypeParameters(
+		VehicleType vehicleType,
+		Line line
+	) {
+		final var vehicleTypeToGet = VehicleTypeQueryStringParameters.from(
+			vehicleType
+		);
+
+		return uriBuilder ->
+			uriBuilder
+				.path(configuration.getPositionsResourceUrl())
+				.queryParam(
+					ZtmApiQueryParameters.RESOURCE_ID.value,
+					configuration.getResourceId()
+				)
+				.queryParam(
+					ZtmApiQueryParameters.APIKEY.value,
+					configuration.getApiKey()
+				)
+				.queryParam(
+					ZtmApiQueryParameters.VEHICLE_TYPE.value,
+					vehicleTypeToGet.value
+				)
+				.queryParam(ZtmApiQueryParameters.LINE.value, line.getName())
+				.build();
 	}
 
 	@RequiredArgsConstructor
@@ -61,5 +111,15 @@ class ZtmWebApiClient {
 				case TRAM -> TRAM;
 			};
 		}
+	}
+
+	@RequiredArgsConstructor
+	private enum ZtmApiQueryParameters {
+		RESOURCE_ID("resource_id"),
+		APIKEY("apikey"),
+		VEHICLE_TYPE("type"),
+		LINE("line");
+
+		private final String value;
 	}
 }
