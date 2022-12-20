@@ -1,27 +1,36 @@
 package pl.krabelard.vehicle.position.application.ztm;
 
 import java.util.List;
+import lombok.RequiredArgsConstructor;
+import pl.krabelard.vehicle.position.application.ztm.online.ZtmApiVehiclePositionRetrievingService;
 import pl.krabelard.vehicle.position.domain.model.Vehicle;
 import pl.krabelard.vehicle.position.domain.model.value.Line;
 import pl.krabelard.vehicle.position.domain.model.value.VehicleType;
 import pl.krabelard.vehicle.position.domain.port.VehiclePositionRepository;
-import pl.krabelard.vehicle.position.utils.exception.KrabelardMethodNotImplementedException;
 
+@RequiredArgsConstructor
 public class ZtmApiVehiclePositionRepository
 	implements VehiclePositionRepository {
+
+	private final ZtmApiVehiclePositionRetrievingService ztmApiVehiclePositionRetrievingService;
 
 	@Override
 	public List<Vehicle> getVehiclePositionsForLineAndVehicleType(
 		Line line,
 		VehicleType vehicleType
 	) {
-		throw new KrabelardMethodNotImplementedException();
+		return ztmApiVehiclePositionRetrievingService.getVehiclePositionsForLineAndVehicleType(
+			line,
+			vehicleType
+		);
 	}
 
 	@Override
 	public List<Vehicle> getAllVehiclePositionsForVehicleType(
 		VehicleType vehicleType
 	) {
-		throw new KrabelardMethodNotImplementedException();
+		return ztmApiVehiclePositionRetrievingService.getAllVehiclePositionsForVehicleType(
+			vehicleType
+		);
 	}
 }

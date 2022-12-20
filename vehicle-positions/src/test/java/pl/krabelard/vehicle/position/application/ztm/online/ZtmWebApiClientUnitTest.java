@@ -1,4 +1,4 @@
-package pl.krabelard.vehicle.position.application.ztm;
+package pl.krabelard.vehicle.position.application.ztm.online;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import org.assertj.core.api.Assertions;
@@ -17,10 +17,24 @@ class ZtmWebApiClientUnitTest {
 
 	@BeforeEach
 	void setUp() {
+		startMockedZtmApi();
+		configureClient();
+	}
+
+	private void startMockedZtmApi() {
 		wireMockServer = new WireMockServer();
 		wireMockServer.start();
+	}
 
-		ztmWebApiClient = new ZtmWebApiClient();
+	private void configureClient() {
+		ZtmWebApiClientFactory ztmWebApiClientFactory = new ZtmWebApiClientTestFactory(
+			wireMockServer.baseUrl(),
+			MockedZtmApi.MOCKED_ZTM_API_POSITIONS_RESOURCE_URL,
+			MockedZtmApi.POSITIONS_RESOURCE_ID,
+			MockedZtmApi.MOCKED_VALID_API_KEY
+		);
+
+		ztmWebApiClient = ztmWebApiClientFactory.getClient();
 	}
 
 	@AfterEach
@@ -41,6 +55,7 @@ class ZtmWebApiClientUnitTest {
 
 		// then proper positions are returned
 		final var expectedPositionDTOs = MockedZtmApi.getExpectedBusPositionDTOsForMockedResponse();
+
 		Assertions
 			.assertThat(returnedPositionDTOs)
 			.isNotEmpty()
