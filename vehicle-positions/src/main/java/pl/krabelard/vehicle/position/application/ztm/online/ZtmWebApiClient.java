@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriBuilder;
+import pl.krabelard.vehicle.position.application.ztm.online.exception.ZtmWebApiClientIsUnauthorisedException;
 import pl.krabelard.vehicle.position.domain.model.value.Line;
 import pl.krabelard.vehicle.position.domain.model.value.VehicleType;
 
@@ -15,7 +16,7 @@ class ZtmWebApiClient {
 
 	private final ZtmWebApiClientConfiguration configuration;
 
-	public List<ZtmVehiclePositionDTO> getVehiclePositionsForLineAndVehicleType(
+	List<ZtmVehiclePositionDTO> getVehiclePositionsForLineAndVehicleType(
 		Line line,
 		VehicleType vehicleType
 	) {
@@ -24,7 +25,7 @@ class ZtmWebApiClient {
 		);
 	}
 
-	public List<ZtmVehiclePositionDTO> getAllVehiclePositionsForVehicleType(
+	List<ZtmVehiclePositionDTO> getAllVehiclePositionsForVehicleType(
 		VehicleType vehicleType
 	) {
 		return executeRequestToZtmApiUsingParameters(
@@ -43,6 +44,7 @@ class ZtmWebApiClient {
 			.retrieve()
 			.bodyToMono(ZtmWebApiResponseDTO.class)
 			.map(ZtmWebApiResponseDTO::getResult)
+			.onErrorMap(handleApiErrorFromThrowable())
 			.block();
 	}
 
@@ -96,6 +98,13 @@ class ZtmWebApiClient {
 				)
 				.queryParam(ZtmApiQueryParameters.LINE.value, line.getName())
 				.build();
+	}
+
+	// TODO #KRB-86: Fix error handling in ZtmWebApiClient
+	private static Function<Throwable, Throwable> handleApiErrorFromThrowable() {
+		return throwable -> {
+			throw ZtmWebApiClientIsUnauthorisedException.becauseOfInvalidApiKey();
+		};
 	}
 
 	@RequiredArgsConstructor

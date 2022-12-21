@@ -21,7 +21,7 @@ public class VehicleStubs {
 			.vehicleNumber(vehicleNumber)
 			.vehicleType(vehicleType)
 			.line(line)
-			.position(Position.of(51, 22))
+			.position(Position.of(51.11, 22.233))
 			.timestamp(TimeUtils.LOCAL_DATE_TIME_NOW_MOCKED)
 			.build();
 	}

@@ -27,5 +27,5 @@ public class ZtmVehiclePositionDTO {
 
 	@JsonProperty("Time")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-	LocalDateTime lastUpdate;
+	LocalDateTime timeOfLastUpdate;
 }

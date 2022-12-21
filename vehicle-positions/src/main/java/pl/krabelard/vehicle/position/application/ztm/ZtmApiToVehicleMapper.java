@@ -26,7 +26,7 @@ class ZtmApiToVehicleMapper {
 					ztmApiVehiclePosition.getLongitude()
 				)
 			)
-			.timestamp(ztmApiVehiclePosition.getLastUpdate())
+			.timestamp(ztmApiVehiclePosition.getTimeOfLastUpdate())
 			.build();
 	}
 }
