@@ -19,18 +19,32 @@ public class ZtmApiVehiclePositionRepository
 		Line line,
 		VehicleType vehicleType
 	) {
-		return ztmApiVehiclePositionRetrievingService.getVehiclePositionsForLineAndVehicleType(
+		final var ztmVehiclePositionDTOs = ztmApiVehiclePositionRetrievingService.getVehiclePositionsForLineAndVehicleType(
 			line,
 			vehicleType
 		);
+
+		return ztmVehiclePositionDTOs
+			.stream()
+			.map(ztmVehiclePositionDTO ->
+				ZtmApiToVehicleMapper.mapToVehicle(ztmVehiclePositionDTO, vehicleType)
+			)
+			.toList();
 	}
 
 	@Override
 	public List<Vehicle> getAllVehiclePositionsForVehicleType(
 		VehicleType vehicleType
 	) {
-		return ztmApiVehiclePositionRetrievingService.getAllVehiclePositionsForVehicleType(
+		final var ztmVehiclePositionDTOs = ztmApiVehiclePositionRetrievingService.getAllVehiclePositionsForVehicleType(
 			vehicleType
 		);
+
+		return ztmVehiclePositionDTOs
+			.stream()
+			.map(ztmVehiclePositionDTO ->
+				ZtmApiToVehicleMapper.mapToVehicle(ztmVehiclePositionDTO, vehicleType)
+			)
+			.toList();
 	}
 }
