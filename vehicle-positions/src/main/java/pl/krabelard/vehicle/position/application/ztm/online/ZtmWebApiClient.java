@@ -13,7 +13,7 @@ import pl.krabelard.vehicle.position.domain.model.value.VehicleType;
 @RequiredArgsConstructor
 class ZtmWebApiClient {
 
-	private final ZtmWebApiClientConfiguration configuration;
+	private final ZtmWebApiClientConfiguration configuration; // TODO#KRB-86: Add defensive copy
 
 	List<ZtmVehiclePositionDTO> getVehiclePositionsForLineAndVehicleType(
 		Line line,
@@ -43,7 +43,7 @@ class ZtmWebApiClient {
 			.retrieve()
 			.bodyToMono(ZtmWebApiResponseDTO.class)
 			.map(ZtmWebApiResponseDTO::getResult)
-			//			.onErrorMap(handleApiErrorFromThrowable())
+			//			.onErrorMap(handleApiErrorFromThrowable()) // TODO#KRB-86: Handle errors from ZTM API
 			.block();
 	}
 

@@ -50,7 +50,7 @@ class ZtmWebApiClientIntegrationTest extends IntegrationTest {
 
 		@Test
 		void shouldThrowUnauthorisedException_whenApiKeyIsInvalid() {
-			mockedZtmApi.mockZtmApiThatReturnsUnauthorisedErrorWhenApiKeyIsInvalid();
+			mockedZtmApi.thatReturnsUnauthorisedErrorWhenApiKeyIsInvalid();
 
 			Assertions
 				.assertThatThrownBy(() ->
@@ -64,7 +64,7 @@ class ZtmWebApiClientIntegrationTest extends IntegrationTest {
 
 		@Test
 		void shouldThrowUnauthorisedException_whenNoApiKeyWasProvided() {
-			mockedZtmApi.mockZtmApiThatReturnsUnauthorisedErrorWhenApiKeyIsNotProvided();
+			mockedZtmApi.thatReturnsUnauthorisedErrorWhenApiKeyIsNotProvided();
 
 			Assertions
 				.assertThatThrownBy(() ->
@@ -90,7 +90,7 @@ class ZtmWebApiClientIntegrationTest extends IntegrationTest {
 		@Test
 		void shouldReturnListOfVehiclePositionsForGivenLineAndVehicleType_whenRequestingListOfBuses() {
 			// given that the ZTM api will return an expected list of vehicle positions
-			mockedZtmApi.mockZtmApiThatReturnsListOfBusPositionsFromResourceJson();
+			mockedZtmApi.thatReturnsListOfBusPositionsOfOnlyOneLine();
 
 			// when
 			final var vehiclePositions = ztmWebApiClient.getVehiclePositionsForLineAndVehicleType(
@@ -98,7 +98,7 @@ class ZtmWebApiClientIntegrationTest extends IntegrationTest {
 				VehicleType.BUS
 			);
 
-			final var expectedVehiclePositions = MockedZtmApi.getExpectedBusPositionDTOsForMockedResponseOfOneLine();
+			final var expectedVehiclePositions = MockedZtmApi.getExpectedBusPositionsForMockedResponseOfOnlyOneLine();
 			// then
 			Assertions
 				.assertThat(vehiclePositions)
@@ -110,7 +110,7 @@ class ZtmWebApiClientIntegrationTest extends IntegrationTest {
 		@Test
 		void shouldReturnListOfVehiclePositionsForGivenLineAndVehicleType_whenRequestingListOfTrams() {
 			// given that the ZTM api will return an expected list of vehicle positions
-			mockedZtmApi.mockZtmApiThatReturnsListOfTramPositionsFromResourceJson();
+			mockedZtmApi.thatReturnsListOfTramPositionsOfOnlyOneLine();
 
 			// when
 			final var vehiclePositions = ztmWebApiClient.getVehiclePositionsForLineAndVehicleType(
@@ -118,7 +118,7 @@ class ZtmWebApiClientIntegrationTest extends IntegrationTest {
 				VehicleType.TRAM
 			);
 
-			final var expectedVehiclePositions = MockedZtmApi.getExpectedTramPositionDTOsForMockedResponseOfOneLine();
+			final var expectedVehiclePositions = MockedZtmApi.getExpectedTramPositionsForMockedResponseOfOnlyOneLine();
 			// then
 			Assertions
 				.assertThat(vehiclePositions)
@@ -135,7 +135,7 @@ class ZtmWebApiClientIntegrationTest extends IntegrationTest {
 		@Test
 		void shouldReturnEmptyList_whenReturnedPositionsWereEmpty() {
 			// given that api with line is available
-			mockedZtmApi.mockZtmApiThatReturnsEmptyListWithQueryParameter(true);
+			mockedZtmApi.thatReturnsEmptyListWithQueryParameterOfBusesOrTrams(true);
 
 			// when requesting positions for line
 			final var returnedPositionDTOs = ztmWebApiClient.getAllVehiclePositionsForVehicleType(
@@ -148,14 +148,14 @@ class ZtmWebApiClientIntegrationTest extends IntegrationTest {
 		@Test
 		void shouldReturnListOfDifferentBusPositions_whenRequestingBuses() {
 			// given that the ZTM api will return an expected list of vehicle positions of given type
-			mockedZtmApi.mockZtmApiThatReturnsListOfDifferentBusPositionsFromResourceJson();
+			mockedZtmApi.thatReturnsListOfDifferentBusPositions();
 
 			// when requesting positions for line
 			final var returnedPositionDTOs = ztmWebApiClient.getAllVehiclePositionsForVehicleType(
 				VehicleType.BUS
 			);
 
-			final var expectedVehiclePositions = MockedZtmApi.getExpectedBusPositionDTOsForMockedResponseOfDifferentLines();
+			final var expectedVehiclePositions = MockedZtmApi.getExpectedBusPositionsForMockedResponseOfDifferentLines();
 			Assertions
 				.assertThat(returnedPositionDTOs)
 				.isNotEmpty()
@@ -166,14 +166,14 @@ class ZtmWebApiClientIntegrationTest extends IntegrationTest {
 		@Test
 		void shouldReturnListOfDifferentTramPositions_whenRequestingTrams() {
 			// given that the ZTM api will return an expected list of vehicle positions of given type
-			mockedZtmApi.mockZtmApiThatReturnsListOfDifferentTramPositionsFromResourceJson();
+			mockedZtmApi.thatReturnsListOfDifferentTramPositions();
 
 			// when requesting positions for line
 			final var returnedPositionDTOs = ztmWebApiClient.getAllVehiclePositionsForVehicleType(
 				VehicleType.TRAM
 			);
 
-			final var expectedVehiclePositions = MockedZtmApi.getExpectedTramPositionDTOsForMockedResponseOfDifferentLines();
+			final var expectedVehiclePositions = MockedZtmApi.getExpectedTramPositionsForMockedResponseOfDifferentLines();
 			Assertions
 				.assertThat(returnedPositionDTOs)
 				.isNotEmpty()

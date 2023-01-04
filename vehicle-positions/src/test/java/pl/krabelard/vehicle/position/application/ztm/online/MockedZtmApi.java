@@ -24,8 +24,7 @@ public class MockedZtmApi {
 		ZtmWebApiClientConfiguration ztmWebApiClientConfiguration
 	) {
 		this.wireMockServer =
-			new WireMockServer(WireMockConfiguration.options().port(5080)); // add base url
-		//		System.out.println("MockedZtmApi: " + ztmWebApiClientConfiguration);
+			new WireMockServer(WireMockConfiguration.options().port(5080)); // TODO#KRB-86: add base url
 		this.mockedZtmApiPositionsResourceUrl =
 			ztmWebApiClientConfiguration.getPositionsResourceUrl();
 		this.positionsResourceId = ztmWebApiClientConfiguration.getResourceId();
@@ -41,13 +40,11 @@ public class MockedZtmApi {
 		this.wireMockServer.stop();
 	}
 
-	public void mockZtmApiThatReturnsUnauthorisedErrorWhenApiKeyIsInvalid() {
-		mockZtmApiThatReturnsExactlyResponseFromResourceJson(
-			"unauthorised_response_bad_api_key.json"
-		);
+	public void thatReturnsUnauthorisedErrorWhenApiKeyIsInvalid() {
+		mockAnyPathAndReturnJsonFromFile("unauthorised_response_bad_api_key.json");
 	}
 
-	private void mockZtmApiThatReturnsExactlyResponseFromResourceJson(
+	private void mockAnyPathAndReturnJsonFromFile(
 		String jsonResponseFileLocation
 	) {
 		wireMockServer.stubFor(
@@ -63,13 +60,11 @@ public class MockedZtmApi {
 		);
 	}
 
-	public void mockZtmApiThatReturnsUnauthorisedErrorWhenApiKeyIsNotProvided() {
-		mockZtmApiThatReturnsExactlyResponseFromResourceJson(
-			"unauthorised_response_no_api_key.json"
-		);
+	public void thatReturnsUnauthorisedErrorWhenApiKeyIsNotProvided() {
+		mockAnyPathAndReturnJsonFromFile("unauthorised_response_no_api_key.json");
 	}
 
-	public void mockZtmApiThatReturnsListOfBusPositionsFromResourceJson() {
+	public void thatReturnsListOfBusPositionsOfOnlyOneLine() {
 		wireMockServer.stubFor(
 			WireMock
 				.get(WireMock.urlPathMatching(mockedZtmApiPositionsResourceUrl))
@@ -90,7 +85,7 @@ public class MockedZtmApi {
 		);
 	}
 
-	public static List<ZtmVehiclePositionDTO> getExpectedBusPositionDTOsForMockedResponseOfOneLine() {
+	public static List<ZtmVehiclePositionDTO> getExpectedBusPositionsForMockedResponseOfOnlyOneLine() {
 		return List.of(
 			new ZtmVehiclePositionDTO(
 				"179",
@@ -116,7 +111,7 @@ public class MockedZtmApi {
 		);
 	}
 
-	public void mockZtmApiThatReturnsListOfTramPositionsFromResourceJson() {
+	public void thatReturnsListOfTramPositionsOfOnlyOneLine() {
 		wireMockServer.stubFor(
 			WireMock
 				.get(WireMock.urlPathMatching(mockedZtmApiPositionsResourceUrl))
@@ -137,7 +132,7 @@ public class MockedZtmApi {
 		);
 	}
 
-	public static List<ZtmVehiclePositionDTO> getExpectedTramPositionDTOsForMockedResponseOfOneLine() {
+	public static List<ZtmVehiclePositionDTO> getExpectedTramPositionsForMockedResponseOfOnlyOneLine() {
 		return List.of(
 			new ZtmVehiclePositionDTO(
 				"17",
@@ -163,7 +158,7 @@ public class MockedZtmApi {
 		);
 	}
 
-	public void mockZtmApiThatReturnsEmptyListWithQueryParameter(
+	public void thatReturnsEmptyListWithQueryParameterOfBusesOrTrams(
 		boolean isBusOrTram
 	) {
 		wireMockServer.stubFor(
@@ -189,7 +184,7 @@ public class MockedZtmApi {
 		);
 	}
 
-	public void mockZtmApiThatReturnsListOfDifferentBusPositionsFromResourceJson() {
+	public void thatReturnsListOfDifferentBusPositions() {
 		wireMockServer.stubFor(
 			WireMock
 				.get(WireMock.urlPathMatching(mockedZtmApiPositionsResourceUrl))
@@ -209,7 +204,7 @@ public class MockedZtmApi {
 		);
 	}
 
-	public static List<ZtmVehiclePositionDTO> getExpectedBusPositionDTOsForMockedResponseOfDifferentLines() {
+	public static List<ZtmVehiclePositionDTO> getExpectedBusPositionsForMockedResponseOfDifferentLines() {
 		return List.of(
 			new ZtmVehiclePositionDTO(
 				"179",
@@ -242,7 +237,7 @@ public class MockedZtmApi {
 		);
 	}
 
-	public void mockZtmApiThatReturnsListOfDifferentTramPositionsFromResourceJson() {
+	public void thatReturnsListOfDifferentTramPositions() {
 		wireMockServer.stubFor(
 			WireMock
 				.get(WireMock.urlPathMatching(mockedZtmApiPositionsResourceUrl))
@@ -262,7 +257,7 @@ public class MockedZtmApi {
 		);
 	}
 
-	public static List<ZtmVehiclePositionDTO> getExpectedTramPositionDTOsForMockedResponseOfDifferentLines() {
+	public static List<ZtmVehiclePositionDTO> getExpectedTramPositionsForMockedResponseOfDifferentLines() {
 		return List.of(
 			new ZtmVehiclePositionDTO(
 				"17",
