@@ -33,7 +33,6 @@ public class MockedZtmApi {
 
 	public void start() {
 		this.wireMockServer.start();
-		System.out.println(wireMockServer.baseUrl());
 	}
 
 	public void stop() {
