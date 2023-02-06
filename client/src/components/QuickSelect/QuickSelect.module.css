@@ -1,0 +1,101 @@
+.pageContainer {
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.userIcon {
+  width: 56px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  cursor: pointer;
+}
+
+.circles {
+  width: 100%;
+  position: relative;
+}
+
+.circle {
+  width: 77px;
+  height: 77px;
+  border: 1px solid black;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.circles>.circle:nth-of-type(9) { transform: translate(-50%, -50%) rotate(-45deg) translateX(110px) rotate(45deg); }
+.circles>.circle:nth-of-type(8) { transform: translate(-50%, -50%) rotate(-90deg) translateX(110px) rotate(90deg); }
+.circles>.circle:nth-of-type(7) { transform: translate(-50%, -50%) rotate(-135deg) translateX(110px) rotate(135deg); }
+.circles>.circle:nth-of-type(6) { transform: translate(-50%, -50%) rotate(180deg) translateX(110px) rotate(180deg); }
+.circles>.circle:nth-of-type(5) { transform: translate(-50%, -50%) rotate(135deg) translateX(110px) rotate(-135deg); }
+.circles>.circle:nth-of-type(4) { transform: translate(-50%, -50%) rotate(90deg) translateX(110px) rotate(-90deg); }
+.circles>.circle:nth-of-type(3) { transform: translate(-50%, -50%) rotate(45deg) translateX(110px) rotate(-45deg); }
+.circles>.circle:nth-of-type(2) { transform: translate(-50%, -50%) rotate(0deg) translateX(110px) rotate(0deg); }
+
+
+.mainCircle {
+  width: 115px;
+  height: 115px;
+  border: 1px solid black;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.departureLabel {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 8px;
+  margin: 0;
+  text-align: center;
+}
+
+.departureHour {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 21px;
+  margin: 0;
+  text-align: center;
+}
+
+.savedLocationLabel {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 8px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.savedLocationContent {
+  text-align: center;
+}
+
+.buttonContainer {
+  width: 85%;
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+}
+
+.disabled {
+  background-color: #DADADA;
+  cursor: not-allowed;
+}
