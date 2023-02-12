@@ -26,7 +26,8 @@ public class AuthController {
 
     @PostMapping("login")
     public ResponseEntity<LoginResponse> nativeLogin(@RequestBody LoginRequest loginRequest) {
-        return ResponseEntity.ok(null);
+        return ResponseEntity
+                .ok(authService.nativeLogin(loginRequest));
     }
 
 }

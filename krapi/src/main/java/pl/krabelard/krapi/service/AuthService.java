@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
@@ -51,7 +54,23 @@ public class AuthService {
     }
 
     public LoginResponse nativeLogin(LoginRequest loginRequest) {
-        return null;
+        val authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password())
+        );
+
+        val securityContext = SecurityContextHolder.getContext();
+        securityContext.setAuthentication(authentication);
+
+        val jwt = jwtService.generateJwt(authentication);
+
+        return LoginResponse.builder()
+                .uuid(userRepository
+                        .findByUsername(loginRequest.username())
+                        .orElseThrow(() -> new UsernameNotFoundException(String.format("%s - user not found", loginRequest.username())))
+                        .getUuid()
+                )
+                .jwt(jwt)
+                .build();
     }
 
     private void checkForConflicts(RegisterRequest registerRequest) {
