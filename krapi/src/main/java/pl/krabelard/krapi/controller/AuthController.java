@@ -1,6 +1,7 @@
 package pl.krabelard.krapi.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.krabelard.krapi.dto.LoginRequest;
@@ -18,7 +19,9 @@ public class AuthController {
 
     @PostMapping("register")
     public ResponseEntity<RegisterResponse> nativeRegister(@RequestBody RegisterRequest registerRequest) {
-        return ResponseEntity.ok(null);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(authService.nativeRegister(registerRequest));
     }
 
     @PostMapping("login")
