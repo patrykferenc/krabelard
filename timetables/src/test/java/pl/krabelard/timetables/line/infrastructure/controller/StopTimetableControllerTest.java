@@ -41,7 +41,7 @@ public class StopTimetableControllerTest {
 			.readString(
 				Path.of("src/test/resources/line/repository-timetable-response.json")
 			)
-			.trim();
+			.replaceAll("\\s+","");
 		var serviceExpected = new LineTimetable(List.of("a"));
 		when(service.getFor(any())).thenReturn(serviceExpected);
 		//when - then
