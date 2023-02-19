@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
     implementation(
+            'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2',
             'org.springframework.boot:spring-boot-starter-web',
             'org.mapstruct:mapstruct:1.5.3.Final'
     )
@@ -28,7 +29,12 @@ dependencies {
             'org.mapstruct:mapstruct-processor:1.5.3.Final'
     )
     compileOnly 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation(
+            'org.springframework.boot:spring-boot-starter-test',
+            'org.mockito:mockito-core:2.1.0',
+            'org.junit.jupiter:junit-jupiter',
+            platform('org.junit:junit-bom:5.9.2')
+    )
 }
 
 tasks.named('test') {
