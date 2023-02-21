@@ -1,4 +1,4 @@
-import styles from './QuickSelect.module.css'
+import styles from './QuickSelect.module.scss'
 import {useContext, useEffect, useState} from "react";
 import {LoggedInContext} from "../../App";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
@@ -7,16 +7,13 @@ export default function QuickSelect() {
   const [savedLocations, setSavedLocations] = useState(['Kochanka 1', 'Kochanka 2', 'Kochanka 3']);
   const {loggedIn, setLoggedIn} = useContext(LoggedInContext);
   const isLoggedIn = () => loggedIn && loggedIn !== '';
-  useEffect(_ => {
-    // setLoggedIn('dupa')
-  }, []);
   return (
     <div className={`${styles.pageContainer}`}>
       <img src="icons/user.svg" alt="user" className={styles.userIcon}/>
       <div className={`${styles.circles}`}>
-        <div className={`${styles.mainCircle}`}>
+        <a className={`${styles.mainCircle}`} href='find-a-way'>
           <img src="icons/route.svg" alt="route"/>
-        </div>
+        </a>
         <div className={`${styles.circle}`}>
           <div>
             <p className={`${styles.departureLabel}`}>WYJAZD O</p>
@@ -49,7 +46,7 @@ export default function QuickSelect() {
       {
         isLoggedIn() ? (<></>) : (
           <div className={`${styles.buttonContainer}`}>
-            <PrimaryButton text='zaloguj się'/>
+            <PrimaryButton text='zaloguj się' onClick={() => {}}/>
             {loggedIn}
           </div>
         )

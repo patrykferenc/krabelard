@@ -1,0 +1,33 @@
+@import "../../index";
+
+$font-size: $main-font-size;
+$padding: 0.688rem;
+
+.container {
+  background: #FFFFFF;
+  border: 1px solid #DADADA;
+  border-radius: $font-size;
+  font-weight: 400;
+  font-size: $font-size;
+  color: white;
+  display: flex;
+}
+
+.label {
+  background-color: #0496FF;
+  width: fit-content;
+  display: block;
+  padding: $padding;
+  border-radius: inherit;
+  text-align: center;
+}
+
+.input {
+  border: none;
+  outline: none;
+  margin: $padding;
+  font-weight: 400;
+  font-size: $font-size;
+  width: 100%;
+  text-transform: uppercase;
+}

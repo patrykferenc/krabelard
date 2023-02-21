@@ -6,10 +6,10 @@
 }
 
 .userIcon {
-  width: 56px;
+  width: 3.5rem;
   position: absolute;
-  right: 15px;
-  top: 15px;
+  right: 0;
+  top: 0;
   cursor: pointer;
 }
 
@@ -19,8 +19,8 @@
 }
 
 .circle {
-  width: 77px;
-  height: 77px;
+  width: 4.813rem;
+  height: 4.813rem;
   border: 1px solid black;
   border-radius: 50%;
   position: absolute;
@@ -31,16 +31,18 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  text-decoration: none;
+  color: black;
 }
 
-.circles>.circle:nth-of-type(9) { transform: translate(-50%, -50%) rotate(-45deg) translateX(110px) rotate(45deg); }
-.circles>.circle:nth-of-type(8) { transform: translate(-50%, -50%) rotate(-90deg) translateX(110px) rotate(90deg); }
-.circles>.circle:nth-of-type(7) { transform: translate(-50%, -50%) rotate(-135deg) translateX(110px) rotate(135deg); }
-.circles>.circle:nth-of-type(6) { transform: translate(-50%, -50%) rotate(180deg) translateX(110px) rotate(180deg); }
-.circles>.circle:nth-of-type(5) { transform: translate(-50%, -50%) rotate(135deg) translateX(110px) rotate(-135deg); }
-.circles>.circle:nth-of-type(4) { transform: translate(-50%, -50%) rotate(90deg) translateX(110px) rotate(-90deg); }
-.circles>.circle:nth-of-type(3) { transform: translate(-50%, -50%) rotate(45deg) translateX(110px) rotate(-45deg); }
-.circles>.circle:nth-of-type(2) { transform: translate(-50%, -50%) rotate(0deg) translateX(110px) rotate(0deg); }
+.circles>.circle:nth-child(9) { transform: translate(-50%, -50%) rotate(-45deg) translateX(6.875rem) rotate(45deg); }
+.circles>.circle:nth-child(8) { transform: translate(-50%, -50%) rotate(-90deg) translateX(6.875rem) rotate(90deg); }
+.circles>.circle:nth-child(7) { transform: translate(-50%, -50%) rotate(-135deg) translateX(6.875rem) rotate(135deg); }
+.circles>.circle:nth-child(6) { transform: translate(-50%, -50%) rotate(180deg) translateX(6.875rem) rotate(180deg); }
+.circles>.circle:nth-child(5) { transform: translate(-50%, -50%) rotate(135deg) translateX(6.875rem) rotate(-135deg); }
+.circles>.circle:nth-child(4) { transform: translate(-50%, -50%) rotate(90deg) translateX(6.875rem) rotate(-90deg); }
+.circles>.circle:nth-child(3) { transform: translate(-50%, -50%) rotate(45deg) translateX(6.875rem) rotate(-45deg); }
+.circles>.circle:nth-child(2) { transform: translate(-50%, -50%) rotate(0deg) translateX(6.875rem) rotate(0deg); }
 
 
 .mainCircle {

@@ -1,0 +1,23 @@
+<svg width="46" height="52" viewBox="0 0 46 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_0_1)">
+        <path d="M32.2761 48.25H13.7136C10.4936 48.25 7.8418 45.6437 7.8418 42.4375V16.5625C7.8418 13.375 10.4746 10.75 13.7136 10.75H32.2761C35.4961 10.75 38.1479 13.3562 38.1479 16.5625V42.4375C38.1479 45.6437 35.5151 48.25 32.2761 48.25Z" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M35.3067 31.375H10.683C9.11087 31.375 7.8418 30.1187 7.8418 28.5625V24.8125C7.8418 23.2563 9.11087 22 10.683 22H35.3067C36.8788 22 38.1479 23.2563 38.1479 24.8125V28.5625C38.1479 30.1187 36.8788 31.375 35.3067 31.375Z" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M16.356 40.1875H16.3711M29.6149 40.1875H29.6319" stroke="#F5F5F5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M18.2593 16.375H27.7299" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <line y1="-1" x2="7.23382" y2="-1" transform="matrix(0.5586 0.829437 -0.834635 0.550803 30.5713 49)" stroke="#F5F5F5" stroke-width="2"/>
+        <line y1="-1" x2="7.23382" y2="-1" transform="matrix(-0.5586 0.829437 0.834635 0.550803 15.418 49)" stroke="#F5F5F5" stroke-width="2"/>
+    </g>
+    <line y1="-0.5" x2="7.85713" y2="-0.5" transform="matrix(0.771405 -0.636344 0.644016 0.765012 24.5103 10.9999)" stroke="#F5F5F5"/>
+    <line y1="-0.5" x2="7.85738" y2="-0.5" transform="matrix(-0.771405 -0.636344 -0.644015 0.765013 20.4692 11)" stroke="#F5F5F5"/>
+    <line x1="20.4692" y1="10.5" x2="24.5101" y2="10.5" stroke="#F5F5F5"/>
+    <line y1="-0.5" x2="7.85713" y2="-0.5" transform="matrix(0.771405 0.636344 0.644016 -0.765012 24.5103 0.00012207)" stroke="#F5F5F5"/>
+    <line y1="-0.5" x2="7.85738" y2="-0.5" transform="matrix(-0.771405 0.636344 -0.644015 -0.765013 20.4692 0)" stroke="#F5F5F5"/>
+    <line y1="-0.5" x2="4.04082" y2="-0.5" transform="matrix(1 0 0 -1 20.4692 0)" stroke="#F5F5F5"/>
+    <line x1="30.061" y1="5" x2="30.061" y2="6" stroke="#F5F5F5"/>
+    <line x1="14.9082" y1="5" x2="14.9082" y2="6" stroke="#F5F5F5"/>
+    <defs>
+        <clipPath id="clip0_0_1">
+            <rect width="45.4592" height="45" fill="white" transform="translate(0.265137 7)"/>
+        </clipPath>
+    </defs>
+</svg>
