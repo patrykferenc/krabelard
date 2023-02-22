@@ -6,7 +6,6 @@ import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import Layers from "../ol/Layers/Layers";
 import TileLayer from "../ol/Layers/TileLayer/TileLayer";
 import {OSM} from "ol/source";
-import {toStringXY} from "ol/coordinate";
 import {FunctionComponent, useState} from "react";
 
 const FindAWay: FunctionComponent = () => {
@@ -16,11 +15,12 @@ const FindAWay: FunctionComponent = () => {
     <div className={`${styles.container}`}>
       <a className={`${styles.a}`} href='/'><img src="/icons/go-back.svg" alt="go back"/></a>
       {
-        isFullscreen ? <></> :
+        !isFullscreen &&
         <CheckboxGroup
           checked={true}
           isText={false}
           labels={['/icons/bus.svg', '/icons/tram.svg', '/icons/metro.svg']}
+          requireOneSelected={true}
           selectionChanged={((checked: boolean[]) => {
             // TODO
           })}
@@ -35,7 +35,7 @@ const FindAWay: FunctionComponent = () => {
         <button className={`${styles.button}`} onClick={toggle}><img src={isFullscreen ? '/icons/arrow-up.svg' : '/icons/arrow-down.svg'} alt="toggle"/></button>
       </div>
       {
-        isFullscreen ? <></> :
+        !isFullscreen &&
         <>
           <Input label='Z' placeholder='TWOJA LOKALIZACJA' labelWidth={'2rem'} onChange={((currentLocation) => {
             // TODO
