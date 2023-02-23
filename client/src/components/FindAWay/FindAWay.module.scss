@@ -1,0 +1,35 @@
+@import "../../index";
+
+$gap: 1.25rem;
+
+$border-radius: $main-font-size;
+
+.mapContainer {
+  border-radius: $border-radius;
+  flex: 1;
+  position: relative;
+}
+
+.a {
+  width: fit-content;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+  height: 100%;
+}
+
+.button {
+  border: none;
+  background-color: #0496FF;
+  border-radius: 1.313rem;
+  position: absolute;
+  bottom: 0.625rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: fit-content;
+  cursor: pointer;
+}

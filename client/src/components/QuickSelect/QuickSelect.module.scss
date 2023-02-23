@@ -1,0 +1,103 @@
+.pageContainer {
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.userIcon {
+  width: 3.5rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+.circles {
+  width: 100%;
+  position: relative;
+}
+
+.circle {
+  width: 4.813rem;
+  height: 4.813rem;
+  border: 1px solid black;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
+.circles>.circle:nth-child(9) { transform: translate(-50%, -50%) rotate(-45deg) translateX(6.875rem) rotate(45deg); }
+.circles>.circle:nth-child(8) { transform: translate(-50%, -50%) rotate(-90deg) translateX(6.875rem) rotate(90deg); }
+.circles>.circle:nth-child(7) { transform: translate(-50%, -50%) rotate(-135deg) translateX(6.875rem) rotate(135deg); }
+.circles>.circle:nth-child(6) { transform: translate(-50%, -50%) rotate(180deg) translateX(6.875rem) rotate(180deg); }
+.circles>.circle:nth-child(5) { transform: translate(-50%, -50%) rotate(135deg) translateX(6.875rem) rotate(-135deg); }
+.circles>.circle:nth-child(4) { transform: translate(-50%, -50%) rotate(90deg) translateX(6.875rem) rotate(-90deg); }
+.circles>.circle:nth-child(3) { transform: translate(-50%, -50%) rotate(45deg) translateX(6.875rem) rotate(-45deg); }
+.circles>.circle:nth-child(2) { transform: translate(-50%, -50%) rotate(0deg) translateX(6.875rem) rotate(0deg); }
+
+
+.mainCircle {
+  width: 115px;
+  height: 115px;
+  border: 1px solid black;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.departureLabel {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 8px;
+  margin: 0;
+  text-align: center;
+}
+
+.departureHour {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 21px;
+  margin: 0;
+  text-align: center;
+}
+
+.savedLocationLabel {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 8px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.savedLocationContent {
+  text-align: center;
+}
+
+.buttonContainer {
+  width: 85%;
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+}
+
+.disabled {
+  background-color: #DADADA;
+  cursor: not-allowed;
+}
