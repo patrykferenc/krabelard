@@ -1,10 +1,7 @@
 package pl.krabelard.timetables.line.infrastructure.repository;
 
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import pl.krabelard.timetables.line.domain.entity.BusStop;
 import pl.krabelard.timetables.line.domain.entity.LineTimetable;
@@ -13,30 +10,32 @@ import pl.krabelard.timetables.line.domain.usecase.ZtmLineTimetableRepository;
 import pl.krabelard.timetables.line.infrastructure.repository.resource.ZtmLineTimetableApiResource;
 import pl.krabelard.timetables.line.infrastructure.repository.resource.ZtmLineTimetableMapper;
 
-@Service
 public class ZtmLineTimetableRepositoryImpl
 	implements ZtmLineTimetableRepository {
 
-	@Value("${ztm.api.key}")
-	private String ZTM_API_KEY;
+	private final String apiKey;
 
-	@Value("${ztm.query.timetable.id}")
-	private String ZTM_QUERY_TIMETABLE_ID;
+	private final String resourceId;
 
-	@Value("${ztm.query.string}")
-	private String ZTM_QUERY_STRING;
+	private final String baseUri;
 
-	@Value("${ztm.query.param.string}")
-	private String ZTM_QUERY_PARAM_STRING;
+	private final String paramUri;
 
 	private final RestTemplate restTemplate;
 	private final ZtmLineTimetableMapper mapper;
 
-	@Autowired
 	public ZtmLineTimetableRepositoryImpl(
+		String apiKey,
+		String resourceId,
+		String baseUri,
+		String paramUri,
 		RestTemplateBuilder restTemplateBuilder,
 		ZtmLineTimetableMapper mapper
 	) {
+		this.apiKey = apiKey;
+		this.resourceId = resourceId;
+		this.baseUri = baseUri;
+		this.paramUri = paramUri;
 		this.restTemplate = restTemplateBuilder.messageConverters().build();
 		this.mapper = mapper;
 	}
@@ -51,10 +50,10 @@ public class ZtmLineTimetableRepositoryImpl
 	) {
 		this.restTemplate = restTemplate;
 		this.mapper = mapper;
-		this.ZTM_API_KEY = apiKey;
-		this.ZTM_QUERY_TIMETABLE_ID = timetableId;
-		this.ZTM_QUERY_STRING = queryString;
-		this.ZTM_QUERY_PARAM_STRING = paramString;
+		this.apiKey = apiKey;
+		this.resourceId = timetableId;
+		this.baseUri = queryString;
+		this.paramUri = paramString;
 	}
 
 	@Override
@@ -83,13 +82,13 @@ public class ZtmLineTimetableRepositoryImpl
 
 	private String queryFor(BusStop stop) {
 		return String.format(
-			ZTM_QUERY_PARAM_STRING,
-			ZTM_QUERY_STRING,
-			ZTM_QUERY_TIMETABLE_ID,
+			baseUri,
+			paramUri,
+			resourceId,
 			stop.name(),
 			stop.number(),
 			stop.line(),
-			ZTM_API_KEY
+			apiKey
 		);
 	}
 }

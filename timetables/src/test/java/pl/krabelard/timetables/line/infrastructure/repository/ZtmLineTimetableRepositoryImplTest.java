@@ -1,6 +1,5 @@
 package pl.krabelard.timetables.line.infrastructure.repository;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalTime;
@@ -9,6 +8,13 @@ import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
 import pl.krabelard.timetables.line.domain.entity.BusStop;
 import pl.krabelard.timetables.line.domain.entity.LineTimetable;
@@ -18,21 +24,32 @@ import pl.krabelard.timetables.line.infrastructure.repository.resource.ZtmLineTi
 import pl.krabelard.timetables.line.infrastructure.repository.resource.ZtmLineTimetableMapper;
 import pl.krabelard.timetables.line.infrastructure.repository.resource.ZtmLineTimetableMapperImpl;
 
+@TestPropertySource("classpath:application-test.properties")
+@ExtendWith({ MockitoExtension.class, SpringExtension.class })
 public class ZtmLineTimetableRepositoryImplTest {
 
-	private static final String MOCK_API_KEY = "key";
-	private static final String MOCK_QUERY_ID = "id";
-	private static final String MOCK_QUERY_STRING =
-		"https://api.um.warszawa.pl/api/action/dbtimetable_get?";
-	private static final String MOCK_QUERY_PARAM_STRING =
-		"%sid=%s&busstopId=%s&busstopNr=%02d&line=%d&apikey=%s";
+	@Value("${ztm.test.key}")
+	private String MOCK_API_KEY;
+
+	@Value("${ztm.test.database.id}")
+	private String MOCK_QUERY_ID;
+
+	@Value("${ztm.test.base.uri}")
+	private String MOCK_QUERY_STRING;
+
+	@Value("${ztm.test.param.uri}")
+	private String MOCK_QUERY_PARAM_STRING;
+
+	@Mock
 	private RestTemplate restTemplate;
+
+	@Spy
+	ZtmLineTimetableMapper mapper = new ZtmLineTimetableMapperImpl();
+
 	private ZtmLineTimetableRepository repository;
 
 	@BeforeEach
 	void setup() {
-		ZtmLineTimetableMapper mapper = new ZtmLineTimetableMapperImpl();
-		restTemplate = mock(RestTemplate.class);
 		repository =
 			new ZtmLineTimetableRepositoryImpl(
 				restTemplate,

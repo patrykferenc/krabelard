@@ -17,6 +17,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import pl.krabelard.timetables.configuration.TimetablesApplicationConfiguration;
 import pl.krabelard.timetables.line.domain.entity.LineTimetable;
 import pl.krabelard.timetables.line.domain.exception.LineTimetableFetchingException;
 import pl.krabelard.timetables.line.domain.usecase.LineTimetableService;
@@ -33,6 +34,9 @@ public class StopTimetableControllerTest {
 	private LineTimetableService service;
 
 	@MockBean
+	private TimetablesApplicationConfiguration timetablesApplicationConfiguration;
+
+	@MockBean
 	private ZtmLineTimetableRepository repository;
 
 	@Test
@@ -42,7 +46,7 @@ public class StopTimetableControllerTest {
 			.readString(
 				Path.of("src/test/resources/line/repository-timetable-response.json")
 			)
-			.replaceAll("\\s+","");
+			.replaceAll("\\s+", "");
 		var serviceExpected = new LineTimetable(List.of(LocalTime.NOON));
 		when(service.getFor(any())).thenReturn(serviceExpected);
 		//when - then
