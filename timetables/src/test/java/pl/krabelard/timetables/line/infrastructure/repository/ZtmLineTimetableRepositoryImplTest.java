@@ -3,6 +3,7 @@ package pl.krabelard.timetables.line.infrastructure.repository;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.time.LocalTime;
 import java.util.Collections;
 import java.util.List;
 import org.assertj.core.api.Assertions;
@@ -50,13 +51,13 @@ public class ZtmLineTimetableRepositoryImplTest {
 		var queryResult = new ZtmLineTimetableApiResource(
 			List.of(
 				new ZtmLineTimetableApiResource.Value(
-					List.of(new ZtmLineTimetableApiResource.KeyValue("czas", "2"))
+					List.of(new ZtmLineTimetableApiResource.KeyValue("czas", "12:00:00"))
 				)
 			)
 		);
 		var expectedQuery =
 			"https://api.um.warszawa.pl/api/action/dbtimetable_get?id=id&busstopId=7009&busstopNr=01&line=520&apikey=key";
-		var expectedResult = new LineTimetable(List.of("2"));
+		var expectedResult = new LineTimetable(List.of(LocalTime.NOON));
 		when(
 			restTemplate.getForObject(
 				expectedQuery,

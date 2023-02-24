@@ -3,6 +3,7 @@ package pl.krabelard.timetables.line.infrastructure.adapter;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+import java.time.LocalTime;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ public class LineTimetableServiceImplTest {
 	void whenGetForCalled_shouldCallRepositoryGetForMethod() {
 		//given
 		var stop = new BusStop("name", 1, 23);
-		when(repository.getFor(stop)).thenReturn(new LineTimetable(List.of("")));
+		when(repository.getFor(stop)).thenReturn(new LineTimetable(List.of(LocalTime.NOON)));
 		//when
 		service.getFor(stop);
 		//then

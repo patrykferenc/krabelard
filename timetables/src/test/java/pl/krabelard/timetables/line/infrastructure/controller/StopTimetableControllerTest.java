@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalTime;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class StopTimetableControllerTest {
 				Path.of("src/test/resources/line/repository-timetable-response.json")
 			)
 			.replaceAll("\\s+","");
-		var serviceExpected = new LineTimetable(List.of("a"));
+		var serviceExpected = new LineTimetable(List.of(LocalTime.NOON));
 		when(service.getFor(any())).thenReturn(serviceExpected);
 		//when - then
 		this.mockMvc.perform(get("/timetable/7009/1/520"))
