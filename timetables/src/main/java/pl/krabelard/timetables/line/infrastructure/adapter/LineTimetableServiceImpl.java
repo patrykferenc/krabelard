@@ -12,10 +12,10 @@ import pl.krabelard.timetables.line.domain.usecase.ZtmLineTimetableRepository;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class LineTimetableServiceImpl implements LineTimetableService {
 
-    private final ZtmLineTimetableRepository repository;
+	private final ZtmLineTimetableRepository repository;
 
-    @Override
-    public LineTimetable getFor(BusStop stop) {
-        return repository.getFor(stop);
-    }
+	@Override
+	public LineTimetable getFor(BusStop stop) {
+		return repository.getFor(stop);
+	}
 }
