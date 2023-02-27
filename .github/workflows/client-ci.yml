@@ -1,0 +1,38 @@
+name: Client CI
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'client/**'
+  pull_request:
+    branches:
+      - master
+      - 'features/*'
+      - 'bugs/*'
+    paths:
+      - 'client/**'
+      - '.github/workflows/client-ci.yml'
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: ./client
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: npm install
+      - name: Build app
+        run: npm run build
