@@ -40,6 +40,9 @@ dependencies {
     )
 }
 test {
+    if(System.properties['test.profile'] != 'integration') {
+        exclude '**/*ZtmLineTimetableIntegrationTest*'
+    }
     finalizedBy jacocoTestReport
 }
 jacocoTestReport {
