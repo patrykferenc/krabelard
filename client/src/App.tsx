@@ -4,11 +4,11 @@ import QuickSelect from "./components/QuickSelect/QuickSelect";
 import {createContext, useState} from "react";
 import FindAWay from "./components/FindAWay/FindAWay";
 
-const initialLoggedIn = { loggedIn: null, setLoggedIn: ((username) => {}) };
+const initialLoggedIn = { loggedIn: null, setLoggedIn: ((username: string) => {}) };
 export const LoggedInContext = createContext(initialLoggedIn);
 
 export default function App() {
-  const [loggedIn, setLoggedIn] = useState(initialLoggedIn.username);
+  const [loggedIn, setLoggedIn] = useState(initialLoggedIn.loggedIn);
   const router = createBrowserRouter(
     createRoutesFromElements([
       <Route path="/find-a-way" element={<FindAWay/>}/>,
@@ -17,6 +17,7 @@ export default function App() {
     ])
   );
   return (
+    // @ts-ignore
     <LoggedInContext.Provider value={{ loggedIn, setLoggedIn }}>
       <RouterProvider router={router}></RouterProvider>
     </LoggedInContext.Provider>

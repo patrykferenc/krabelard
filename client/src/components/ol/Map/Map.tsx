@@ -40,6 +40,7 @@ const Map: FunctionComponent<MapProps> = ({center, zoom,  children}) => {
 
   return (
     <MapContext.Provider value={{map}}>
+      {/* @ts-ignore */}
       <div ref={mapRef} className={`${styles.mapContainer}`}>
         {children}
       </div>
