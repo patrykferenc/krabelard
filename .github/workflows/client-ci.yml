@@ -13,6 +13,8 @@ on:
       - 'bugs/*'
     paths:
       - 'client/**'
+      - '.github/workflows/client-ci.yml'
+
 permissions:
   contents: read
 
