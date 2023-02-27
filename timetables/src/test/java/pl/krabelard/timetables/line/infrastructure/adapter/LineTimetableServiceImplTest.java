@@ -9,8 +9,9 @@ import java.time.LocalTime;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import pl.krabelard.timetables.line.domain.entity.BusStop;
 import pl.krabelard.timetables.line.domain.entity.LineTimetable;
 import pl.krabelard.timetables.line.infrastructure.repository.ZtmLineTimetableRepositoryImpl;
@@ -18,10 +19,10 @@ import pl.krabelard.timetables.line.infrastructure.repository.ZtmLineTimetableRe
 @ExtendWith(MockitoExtension.class)
 public class LineTimetableServiceImplTest {
 
-	@MockBean
+	@Mock
 	private ZtmLineTimetableRepositoryImpl repository;
 
-	@MockBean
+	@InjectMocks
 	private LineTimetableServiceImpl service;
 
 	@Test
