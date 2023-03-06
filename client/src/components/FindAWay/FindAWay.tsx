@@ -7,13 +7,14 @@ import Layers from "../ol/Layers/Layers";
 import TileLayer from "../ol/Layers/TileLayer/TileLayer";
 import {OSM} from "ol/source";
 import {FunctionComponent, useState} from "react";
+import {Link} from "react-router-dom";
 
 const FindAWay: FunctionComponent = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const toggle = () => {setIsFullscreen(!isFullscreen)};
   return (
     <div className={`${styles.container}`}>
-      <a className={`${styles.a}`} href='/'><img src="/icons/go-back.svg" alt="go back"/></a>
+      <Link className={`${styles.a}`} to='/'><img src="/icons/go-back.svg" alt="go back"/></Link>
       {
         !isFullscreen &&
         <CheckboxGroup
@@ -37,9 +38,11 @@ const FindAWay: FunctionComponent = () => {
       {
         !isFullscreen &&
         <>
+          {/* @ts-ignore */}
           <Input label='Z' placeholder='TWOJA LOKALIZACJA' labelWidth={'2rem'} onChange={((currentLocation) => {
             // TODO
           })}/>
+          {/* @ts-ignore */}
           <Input label='DO' placeholder='TWÓJ CEL' labelWidth={'2rem'} onChange={((destination) => {
             // TODO
           })}/>

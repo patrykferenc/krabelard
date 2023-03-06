@@ -14,13 +14,24 @@ $padding: 0.688rem;
 }
 
 .label {
-  background-color: #0496FF;
   width: fit-content;
   display: block;
   padding: $padding;
   border-radius: inherit;
   text-align: center;
+
+  &.noImage {
+    background-color: #0496FF;
+  }
+
+  &.image {
+    background-color: #FFFFFF;
+    border-right: 1px solid #DADADA;
+    display: flex;
+    align-items: center;
+  }
 }
+
 
 .input {
   border: none;

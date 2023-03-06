@@ -1,0 +1,21 @@
+.disabled {
+  background-color: #DADADA !important;
+  cursor: not-allowed !important;
+}
+
+.circle {
+  width: 4.813rem;
+  height: 4.813rem;
+  border: 1px solid black;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
