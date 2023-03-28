@@ -14,9 +14,14 @@ services:
       - KC_DB_PASSWORD=password
     ports:
       - '8080:8080'
-    command: start-dev
+    volumes:
+      - ./krapi-realm.json:/opt/keycloak/data/import/krapi-realm.json
+    entrypoint: "/opt/keycloak/bin/kc.sh start-dev --import-realm"
+    networks:
+      - network
     depends_on:
-      - keycloak-db
+      keycloak-db:
+        condition: service_healthy
     healthcheck:
       test: "curl -f http://localhost:8080/admin || exit 1"
 
@@ -30,10 +35,16 @@ services:
       - MYSQL_ROOT_PASSWORD=root
     ports:
       - '5432:3306'
+    networks:
+      - network
     volumes:
       - keycloak_db:/var/lib/mysql
     healthcheck:
       test: "mysqladmin ping -u root -p$${MYSQL_ROOT_PASSWORD}"
+
+networks:
+  network:
+    driver: bridge
 
 volumes:
   keycloak_db:
