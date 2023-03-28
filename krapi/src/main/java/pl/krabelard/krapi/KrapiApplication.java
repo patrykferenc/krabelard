@@ -9,4 +9,5 @@ public class KrapiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(KrapiApplication.class, args);
 	}
+
 }
