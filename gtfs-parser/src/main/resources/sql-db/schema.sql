@@ -1,3 +1,7 @@
+drop table  calendar_dates;
+drop table route;
+drop table frequencies;
+
 CREATE TABLE calendar_dates
 (
     id             serial  NOT NULL,
@@ -9,14 +13,12 @@ CREATE TABLE calendar_dates
 
 CREATE TABLE route
 (
-    id               integer NOT NULL,
-    agency_id        integer,
-    route_id         integer,
+    route_id         integer NOT NULL,
     route_short_name varchar(255),
     route_long_name  varchar(255),
     route_type       integer,
     route_sort_order integer,
-    CONSTRAINT pk_route PRIMARY KEY (id)
+    CONSTRAINT pk_route PRIMARY KEY (route_id)
 );
 
 CREATE TABLE frequencies
