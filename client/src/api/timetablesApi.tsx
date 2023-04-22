@@ -1,6 +1,6 @@
-import { krapi } from "./krapi";
+import { krapi } from './krapi';
 
-const timetablesClient = krapi("/timetables");
+const timetablesClient = krapi('/timetables');
 
 export const timetableApi = {
   getAllLines() {
@@ -16,7 +16,7 @@ export const timetableApi = {
 
       // TODO: format stop names as JSON object
       const jsonStops = {
-        lines: lines,
+        lines: lines
       };
 
       // Return JSON object
@@ -24,29 +24,12 @@ export const timetableApi = {
     }
     async function fetchLines(): Promise<Array<string>> {
       // TODO: connect to GTFS database and fetch arrival times
-      const lines = [
-        "M1",
-        "M2",
-        "1",
-        "2",
-        "3",
-        "4",
-        "6",
-        "7",
-        "9",
-        "11",
-        "13",
-        "15",
-        "17",
-        "20",
-        "102",
-        "103",
-      ];
+      const lines = ['M1', 'M2', '1', '2', '3', '4', '6', '7', '9', '11', '13', '15', '17', '20', '102', '103'];
 
       return lines;
     }
 
-    getAllLines().then((result) => console.log(result));
+    getAllLines().then(result => console.log(result));
     return getAllLines();
   },
 
@@ -64,7 +47,7 @@ export const timetableApi = {
       // TODO: format stop names as JSON object
       const jsonStops = {
         line: line,
-        directions: directions,
+        directions: directions
       };
 
       // Return JSON object
@@ -72,13 +55,13 @@ export const timetableApi = {
     }
     async function fetchDirections(line: string): Promise<Array<string>> {
       // TODO: connect to GTFS database and fetch arrival times
-      const directions = ["Młociny", "Kabaty"];
+      const directions = ['Młociny', 'Kabaty'];
 
       return directions;
     }
     // Example usage
-    line = "M1";
-    getDirectionsForLine(line).then((result) => console.log(result));
+    line = 'M1';
+    getDirectionsForLine(line).then(result => console.log(result));
     return getDirectionsForLine(line);
   },
 
@@ -90,10 +73,7 @@ export const timetableApi = {
     //   SELECT DISTINCT stop_id FROM stop_times WHERE trip_id IN (
     //     SELECT trip_id FROM trips WHERE route_id = <route_id>));
 
-    async function getAllStopsForLineAndDirection(
-      line: string,
-      direction: string
-    ): Promise<object> {
+    async function getAllStopsForLineAndDirection(line: string, direction: string): Promise<object> {
       // TODO: connect to GTFS database and fetch stop names
       const stops = await fetchStopNames(line, direction);
 
@@ -101,7 +81,7 @@ export const timetableApi = {
       const jsonStops = {
         line: line,
         direction: direction,
-        stops: stops,
+        stops: stops
       };
 
       // Return JSON object
@@ -109,42 +89,37 @@ export const timetableApi = {
     }
 
     // Fetch stop names from GTFS database
-    async function fetchStopNames(
-      line: string,
-      direction: string
-    ): Promise<Array<string>> {
+    async function fetchStopNames(line: string, direction: string): Promise<Array<string>> {
       // TODO: connect to GTFS database and fetch stop names
       const stops = [
-        "Stokłosy",
-        "Ursynów",
-        "Służew",
-        "Wilanowska",
-        "Wierzbno",
-        "Racławicka",
-        "Pole Mokotowskie",
-        "Politechnika",
-        "Centrum",
-        "Świętokrzyska",
-        "Ratusz Arsenał",
-        "Dworzec Gdański",
-        "Plac Wilsona",
-        "Wawelowe",
-        "Stare Bielany",
-        "Słodowiec",
-        "Marymont",
-        "Wawrzyszew",
-        "Młociny",
+        'Stokłosy',
+        'Ursynów',
+        'Służew',
+        'Wilanowska',
+        'Wierzbno',
+        'Racławicka',
+        'Pole Mokotowskie',
+        'Politechnika',
+        'Centrum',
+        'Świętokrzyska',
+        'Ratusz Arsenał',
+        'Dworzec Gdański',
+        'Plac Wilsona',
+        'Wawelowe',
+        'Stare Bielany',
+        'Słodowiec',
+        'Marymont',
+        'Wawrzyszew',
+        'Młociny'
       ];
 
       return stops;
     }
 
     // Example usage
-    line = "M1";
-    direction = "Młociny";
-    getAllStopsForLineAndDirection(line, direction).then((result) =>
-      console.log(result)
-    );
+    line = 'M1';
+    direction = 'Młociny';
+    getAllStopsForLineAndDirection(line, direction).then(result => console.log(result));
 
     return null;
   },
@@ -162,11 +137,7 @@ export const timetableApi = {
     // WHERE routes.route_long_name = 'your_line_here'
     // AND trips.direction_id = 'your_direction_here'
     // AND stops.stop_name = 'your_stop_name_here';
-    async function getArrivalsForStopAndLine(
-      line: string,
-      direction: string,
-      stopName: string
-    ): Promise<object> {
+    async function getArrivalsForStopAndLine(line: string, direction: string, stopName: string): Promise<object> {
       // TODO: connect to GTFS database and fetch arrival times
       const arrivals = await fetchArrivalTimes(line, direction, stopName);
 
@@ -175,7 +146,7 @@ export const timetableApi = {
         line: line,
         direction: direction,
         stopName: stopName,
-        arrivals: arrivals,
+        arrivals: arrivals
       };
 
       // Return JSON object
@@ -183,24 +154,18 @@ export const timetableApi = {
     }
 
     // Fetch arrival times from GTFS database
-    async function fetchArrivalTimes(
-      line: string,
-      direction: string,
-      stopName: string
-    ): Promise<Array<string>> {
+    async function fetchArrivalTimes(line: string, direction: string, stopName: string): Promise<Array<string>> {
       // TODO: connect to GTFS database and fetch arrival times
-      const arrivals = ["09:35:00", "10:15:00", "11:00:00"];
+      const arrivals = ['09:35:00', '10:15:00', '11:00:00'];
 
       return arrivals;
     }
     // Example usage
-    line = "M1";
-    direction = "Młociny";
-    stopName = "Centrum";
-    getArrivalsForStopAndLine(line, direction, stopName).then((result) =>
-      console.log(result)
-    );
+    line = 'M1';
+    direction = 'Młociny';
+    stopName = 'Centrum';
+    getArrivalsForStopAndLine(line, direction, stopName).then(result => console.log(result));
 
     return getArrivalsForStopAndLine(line, direction, stopName);
-  },
+  }
 };
