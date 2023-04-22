@@ -1,6 +1,6 @@
-import { krapi } from "./krapi";
+import { krapi } from './krapi';
 
-const postionsClient = krapi("/vehicle-positions");
+const postionsClient = krapi('/vehicle-positions');
 
 export const positionsApi = {
   getAllTramsPositions() {
@@ -17,5 +17,5 @@ export const positionsApi = {
 
   getAllBusesPositionsOnLine(line: string) {
     return postionsClient.get(`/buses/${line}`);
-  },
+  }
 };

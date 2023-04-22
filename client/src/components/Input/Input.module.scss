@@ -4,8 +4,8 @@ $font-size: $main-font-size;
 $padding: 0.688rem;
 
 .container {
-  background: #FFFFFF;
-  border: 1px solid #DADADA;
+  background: #ffffff;
+  border: 1px solid #dadada;
   border-radius: $font-size;
   font-weight: 400;
   font-size: $font-size;
@@ -21,17 +21,16 @@ $padding: 0.688rem;
   text-align: center;
 
   &.noImage {
-    background-color: #0496FF;
+    background-color: #0496ff;
   }
 
   &.image {
-    background-color: #FFFFFF;
-    border-right: 1px solid #DADADA;
+    background-color: #ffffff;
+    border-right: 1px solid #dadada;
     display: flex;
     align-items: center;
   }
 }
-
 
 .input {
   border: none;

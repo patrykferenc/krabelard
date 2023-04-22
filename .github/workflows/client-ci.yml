@@ -5,15 +5,15 @@ on:
     branches:
       - master
     paths:
-      - 'client/**'
+      - "client/**"
   pull_request:
     branches:
       - master
-      - 'features/*'
-      - 'bugs/*'
+      - "features/*"
+      - "bugs/*"
     paths:
-      - 'client/**'
-      - '.github/workflows/client-ci.yml'
+      - "client/**"
+      - ".github/workflows/client-ci.yml"
 
 permissions:
   contents: read

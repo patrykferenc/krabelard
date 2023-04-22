@@ -11,8 +11,9 @@ import pl.krabelard.vehicle.position.domain.VehiclePositionsFacade;
 class VehiclePositionsSpringBeanConfig {
 
 	@Bean
-	public VehiclePositionsFacade vehiclePositionsFacade(ZtmApiVehiclePositionRepository ztmApiVehiclePositionRepository) {
-		return new VehiclePositionsFacade( ztmApiVehiclePositionRepository
-		);
+	public VehiclePositionsFacade vehiclePositionsFacade(
+		ZtmApiVehiclePositionRepository ztmApiVehiclePositionRepository
+	) {
+		return new VehiclePositionsFacade(ztmApiVehiclePositionRepository);
 	}
 }
