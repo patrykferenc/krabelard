@@ -3,7 +3,7 @@ spring:
     gateway:
       routes:
         - id: vehicle_positions
-          uri: http://localhost:8081
+          uri: http://vehicle-positions:8080
           predicates:
             - Path=/api/v1/vehicle-positions/**
           filters:

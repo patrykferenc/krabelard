@@ -1,0 +1,16 @@
+FROM busybox AS builder
+
+ARG build_file
+COPY "${build_file}" /build.zip
+RUN unzip /build.zip
+
+FROM eclipse-temurin:17
+
+RUN mkdir /opt/app
+COPY --from=builder /b/timetables.jar /opt/app
+
+WORKDIR /opt/app
+
+EXPOSE 8080
+
+CMD ["java", "-jar", "timetables.jar"]

@@ -1,0 +1,30 @@
+services:
+  krapi:
+    image: krapi:latest
+    ports:
+      - "8080:8080"
+    build:
+      context: ./krapi/docker
+      dockerfile: Dockerfile
+      args:
+        - build_file=build.zip
+
+  vehicle-positions:
+    image: vehicle-positions:latest
+    ports:
+      - "8081:8080"
+    build:
+      context: ./vehicle-positions/docker
+      dockerfile: Dockerfile
+      args:
+        - build_file=build.zip
+
+  timetables:
+    image: timetables:latest
+    ports:
+      - "8082:8080"
+    build:
+      context: ./timetables/docker
+      dockerfile: Dockerfile
+      args:
+        - build_file=build.zip
