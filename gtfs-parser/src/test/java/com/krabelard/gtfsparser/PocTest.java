@@ -1,10 +1,13 @@
 package com.krabelard.gtfsparser;
 
+import java.util.List;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.onebusaway.csv_entities.EntityHandler;
 import org.onebusaway.gtfs.impl.GtfsDaoImpl;
+import org.onebusaway.gtfs.model.Agency;
 import org.onebusaway.gtfs.model.Route;
 import org.onebusaway.gtfs.model.Stop;
 import org.onebusaway.gtfs.serialization.GtfsReader;
@@ -28,7 +31,6 @@ public class PocTest {
 
         var input = new File("src/test/resources/warsaw.zip");
         reader.setInputLocation(input);
-        reader.addEntityHandler(new GtfsEntityHandler());
 
         GtfsDaoImpl store = new GtfsDaoImpl();
         reader.setEntityStore(store);
@@ -39,17 +41,8 @@ public class PocTest {
         for (Route route : store.getAllRoutes()) {
             System.out.println("route: " + route.getShortName());
         }
-
-    }
-
-    private static class GtfsEntityHandler implements EntityHandler {
-
-        @Override
-        public void handleEntity(Object bean) {
-            if (bean instanceof Stop stop) {
-                System.out.println("stop: " + stop.getName());
-            }
-        }
+        System.out.println("Duopa");
+        Assertions.assertThat(reader.getAgencies()).isEqualTo(List.of(new Agency()));
 
     }
 

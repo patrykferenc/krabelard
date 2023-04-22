@@ -1,4 +1,4 @@
-package com.krabelard.gtfsparser.infrastructure;
+package com.krabelard.gtfsparser.infrastructure.adapter;
 
 import org.springframework.stereotype.Service;
 
