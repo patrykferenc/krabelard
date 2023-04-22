@@ -2,7 +2,6 @@ package com.krabelard.gtfsparser.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -15,12 +14,6 @@ import lombok.Setter;
 public class Route {
 
   @Id
-  @GeneratedValue
-  int id;
-
-  @Column(name = "agency_id")
-  int agencyId;
-
   @Column(name = "route_id")
   int routeId;
 
