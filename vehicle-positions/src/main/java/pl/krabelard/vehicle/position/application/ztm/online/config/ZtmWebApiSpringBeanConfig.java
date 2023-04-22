@@ -3,21 +3,17 @@ package pl.krabelard.vehicle.position.application.ztm.online.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import pl.krabelard.vehicle.position.application.ztm.ZtmApiVehiclePositionRepository;
-import pl.krabelard.vehicle.position.application.ztm.online.ZtmWebApiClientSpringBeanConfig;
+import pl.krabelard.vehicle.position.application.ztm.online.ZtmApiVehiclePositionRetrievingService;
 
 @Configuration
-@Import(ZtmWebApiClientSpringBeanConfig.class)
 @RequiredArgsConstructor
-public class ZtmWebApiSpringBeanConfig {
-
-	private final ZtmWebApiClientSpringBeanConfig ztmWebApiClientSpringBeanConfig;
+class ZtmWebApiSpringBeanConfig {
 
 	@Bean
-	public ZtmApiVehiclePositionRepository ztmApiVehiclePositionRepository() {
+	public ZtmApiVehiclePositionRepository ztmApiVehiclePositionRepository(ZtmApiVehiclePositionRetrievingService ztmApiVehiclePositionRetrievingService) {
 		return new ZtmApiVehiclePositionRepository(
-			ztmWebApiClientSpringBeanConfig.ztmApiVehiclePositionRetrievingService()
+				ztmApiVehiclePositionRetrievingService
 		);
 	}
 }
