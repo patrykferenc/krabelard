@@ -3,10 +3,13 @@ package pl.krabelard.vehicle.position.application.ztm.online;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Value;
+import pl.krabelard.vehicle.position.application.ztm.online.json.ZtmApiIdDeserialiser;
 
 @Value
 @NoArgsConstructor(force = true, access = AccessLevel.PRIVATE)
@@ -17,6 +20,7 @@ public class ZtmVehiclePositionDTO {
 	String line;
 
 	@JsonProperty("VehicleNumber")
+	@JsonDeserialize(using = ZtmApiIdDeserialiser.class)
 	int vehicleNumber;
 
 	@JsonProperty("Lat")
