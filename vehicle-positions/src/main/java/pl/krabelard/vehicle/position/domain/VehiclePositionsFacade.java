@@ -13,18 +13,10 @@ public class VehiclePositionsFacade {
 	private final VehiclePositionRepository vehiclePositionRepository;
 
 	public List<Vehicle> getAllVehiclesOfType(VehicleType vehicleType) {
-		return vehiclePositionRepository.getAllVehiclePositionsForVehicleType(
-			vehicleType
-		);
+		return vehiclePositionRepository.getAllVehiclePositionsForVehicleType(vehicleType);
 	}
 
-	public List<Vehicle> getAllVehiclesOnLineThatAreOfGivenType(
-		Line line,
-		VehicleType vehicleType
-	) {
-		return vehiclePositionRepository.getVehiclePositionsForLineAndVehicleType(
-			line,
-			vehicleType
-		);
+	public List<Vehicle> getAllVehiclesOnLineThatAreOfGivenType(Line line, VehicleType vehicleType) {
+		return vehiclePositionRepository.getVehiclePositionsForLineAndVehicleType(line, vehicleType);
 	}
 }

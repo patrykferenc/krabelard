@@ -29,8 +29,7 @@ public class LineTimetableServiceImplTest {
 	void whenGetForCalled_shouldCallRepositoryGetForMethod() {
 		//given
 		var stop = new BusStop("name", 1, 23);
-		when(repository.getFor(stop))
-			.thenReturn(new LineTimetable(List.of(LocalTime.NOON)));
+		when(repository.getFor(stop)).thenReturn(new LineTimetable(List.of(LocalTime.NOON)));
 		//when
 		service.getFor(stop);
 		//then

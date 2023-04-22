@@ -25,15 +25,12 @@ class VehiclePositionsFacadeUnitTest {
 
 	@BeforeEach
 	void setUpFacade() {
-		vehiclePositionsFacadeUnderTest =
-			new VehiclePositionsFacade(vehiclePositionRepositoryMocked);
+		vehiclePositionsFacadeUnderTest = new VehiclePositionsFacade(vehiclePositionRepositoryMocked);
 	}
 
 	@ParameterizedTest
 	@EnumSource(VehicleType.class)
-	void shouldReturnEmptyVehicleList_whenNoVehiclesAreFound(
-		VehicleType vehicleTypeToTest
-	) {
+	void shouldReturnEmptyVehicleList_whenNoVehiclesAreFound(VehicleType vehicleTypeToTest) {
 		// given there are no vehicles in the repository
 		setUpRepositoryMockToReturnEmptyLists(vehicleTypeToTest);
 
@@ -46,15 +43,9 @@ class VehiclePositionsFacadeUnitTest {
 		Assertions.assertThat(vehiclesReturnedFromRepository).isEmpty();
 	}
 
-	private void setUpRepositoryMockToReturnEmptyLists(
-		VehicleType vehicleTypeToTest
-	) {
+	private void setUpRepositoryMockToReturnEmptyLists(VehicleType vehicleTypeToTest) {
 		Mockito
-			.when(
-				vehiclePositionRepositoryMocked.getAllVehiclePositionsForVehicleType(
-					vehicleTypeToTest
-				)
-			)
+			.when(vehiclePositionRepositoryMocked.getAllVehiclePositionsForVehicleType(vehicleTypeToTest))
 			.thenReturn(List.of());
 	}
 
@@ -69,11 +60,7 @@ class VehiclePositionsFacadeUnitTest {
 			expectedLine,
 			vehicleTypeToTest
 		);
-		setUpRepositoryMockToReturnVehicles(
-			expectedVehicles,
-			expectedLine,
-			vehicleTypeToTest
-		);
+		setUpRepositoryMockToReturnVehicles(expectedVehicles, expectedLine, vehicleTypeToTest);
 
 		// when
 		final var vehiclesReturnedFromRepository = vehiclePositionsFacadeUnderTest.getAllVehiclesOnLineThatAreOfGivenType(

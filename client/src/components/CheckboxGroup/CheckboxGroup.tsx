@@ -11,7 +11,13 @@ interface CheckboxProps {
 
 const getId = (l: string, i: number) => `${l}_${i.toString()}`;
 
-const CheckboxGroup: FunctionComponent<CheckboxProps> = ({ isText, labels, checked, selectionChanged, requireOneSelected }) => {
+const CheckboxGroup: FunctionComponent<CheckboxProps> = ({
+  isText,
+  labels,
+  checked,
+  selectionChanged,
+  requireOneSelected,
+}) => {
   const [checkedBoxes, setCheckedBoxes] = useState(() => {
     const array = Array(labels.length).fill(checked);
     if (!checked && requireOneSelected) {
@@ -20,7 +26,9 @@ const CheckboxGroup: FunctionComponent<CheckboxProps> = ({ isText, labels, check
     return array;
   });
   const canToggle = (i: number): boolean =>
-    !requireOneSelected || (checkedBoxes[i] && checkedBoxes.filter(cb => cb).length > 1) || !checkedBoxes[i];
+    !requireOneSelected ||
+    (checkedBoxes[i] && checkedBoxes.filter((cb) => cb).length > 1) ||
+    !checkedBoxes[i];
   const check = (e: MouseEvent<HTMLInputElement>, i: number) => {
     if (canToggle(i)) {
       checkedBoxes[i] = !checkedBoxes[i];
@@ -37,15 +45,15 @@ const CheckboxGroup: FunctionComponent<CheckboxProps> = ({ isText, labels, check
         <div key={getId(l, i)} className={`${styles.checkbox}`}>
           <input
             defaultChecked={checked || (requireOneSelected && i == 0)}
-            onClick={e => {
+            onClick={(e) => {
               check(e, i);
             }}
             id={getId(l, i)}
-            type="checkbox"
+            type='checkbox'
             className={`${styles.input}`}
           />
           <label htmlFor={`${l}_${i.toString()}`} className={`${styles.label}`}>
-            {isText ? null : <img src={l} alt="" />}
+            {isText ? null : <img src={l} alt='' />}
           </label>
         </div>
       ))}

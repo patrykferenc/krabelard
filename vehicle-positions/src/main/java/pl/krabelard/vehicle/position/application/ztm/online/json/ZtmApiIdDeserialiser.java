@@ -14,8 +14,7 @@ public class ZtmApiIdDeserialiser extends StdDeserializer<Integer> {
 	}
 
 	@Override
-	public Integer deserialize(JsonParser parser, DeserializationContext context)
-		throws IOException {
+	public Integer deserialize(JsonParser parser, DeserializationContext context) throws IOException {
 		JsonNode node = parser.getCodec().readTree(parser);
 		String id = node.asText().split("\\+")[0];
 		return Integer.parseInt(id);

@@ -59,9 +59,7 @@ class ZtmWebApiClientIntegrationTest extends IntegrationTest {
 					ztmWebApiClient.getAllVehiclePositionsForVehicleType(VehicleType.BUS)
 				)
 				.isInstanceOf(ZtmWebApiClientIsUnauthorisedException.class)
-				.hasMessage(
-					"ZTM Web API Client is unauthorised because of invalid API key"
-				);
+				.hasMessage("ZTM Web API Client is unauthorised because of invalid API key");
 		}
 
 		@Test
@@ -73,9 +71,7 @@ class ZtmWebApiClientIntegrationTest extends IntegrationTest {
 					ztmWebApiClient.getAllVehiclePositionsForVehicleType(VehicleType.BUS)
 				)
 				.isInstanceOf(ZtmWebApiClientIsUnauthorisedException.class)
-				.hasMessage(
-					"ZTM Web API Client is unauthorised because API key was not provided"
-				);
+				.hasMessage("ZTM Web API Client is unauthorised because API key was not provided");
 		}
 		// TODO #KRB-86: Add tests for:
 		//  - ZtmWebApiClientResourceDoesNotExistException (check parsing error on a 200 response)

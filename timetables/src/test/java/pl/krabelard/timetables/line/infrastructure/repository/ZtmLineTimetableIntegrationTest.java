@@ -41,20 +41,14 @@ public class ZtmLineTimetableIntegrationTest {
 		@Primary
 		WebClient testClient(WebClient.Builder builder) {
 			return builder
-				.clientConnector(
-					new ReactorClientHttpConnector(
-						HttpClient.create().followRedirect(true)
-					)
-				)
+				.clientConnector(new ReactorClientHttpConnector(HttpClient.create().followRedirect(true)))
 				.baseUrl(ZTM_API_BASE_URI)
 				.build();
 		}
 
 		@Bean
 		@Primary
-		ZtmLineTimetableRepository ztmLineTimetableRepositoryTest(
-			WebClient client
-		) {
+		ZtmLineTimetableRepository ztmLineTimetableRepositoryTest(WebClient client) {
 			return new ZtmLineTimetableRepositoryImpl(
 				ZTM_API_KEY,
 				ZTM_API_TIMETABLE_DB_ID,
@@ -79,13 +73,9 @@ public class ZtmLineTimetableIntegrationTest {
 	@Test
 	void whenQueryingForNotExistingEntry_shouldThrowLineTimetableFetchingException() {
 		Assertions
-			.assertThatThrownBy(() ->
-				repository.getFor(new BusStop("not_existing", -1, -1))
-			)
+			.assertThatThrownBy(() -> repository.getFor(new BusStop("not_existing", -1, -1)))
 			.isInstanceOf(LineTimetableFetchingException.class)
-			.hasMessage(
-				"There are no timetables characterised by given query parameters"
-			);
+			.hasMessage("There are no timetables characterised by given query parameters");
 	}
 
 	@Test

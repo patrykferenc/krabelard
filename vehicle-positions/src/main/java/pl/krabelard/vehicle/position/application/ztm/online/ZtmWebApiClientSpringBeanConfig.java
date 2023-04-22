@@ -15,9 +15,7 @@ public class ZtmWebApiClientSpringBeanConfig {
 	}
 
 	@Bean
-	public ZtmWebApiClient ztmWebApiClient(
-		ZtmWebApiClientFactory ztmWebApiClientFactory
-	) {
+	public ZtmWebApiClient ztmWebApiClient(ZtmWebApiClientFactory ztmWebApiClientFactory) {
 		return ztmWebApiClientFactory.getClient();
 	}
 

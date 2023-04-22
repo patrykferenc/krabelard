@@ -15,11 +15,15 @@ const RoutePreferences: FunctionComponent<RoutePreferencesProps> = () => {
   const placesList = [
     { placeType: PlaceTypeEnum.Home, img: '/icons/home.svg', placeholder: 'ADRES DOMU' },
     { placeType: PlaceTypeEnum.School, img: '/icons/school.svg', placeholder: 'ADRES SZKOŁY' },
-    { placeType: PlaceTypeEnum.Work, img: '/icons/work.svg', placeholder: 'ADRES PRACY' }
+    { placeType: PlaceTypeEnum.Work, img: '/icons/work.svg', placeholder: 'ADRES PRACY' },
   ];
   const [places, setPlaces] = useState(placesList);
   const addPlace = () => {
-    places.push({ placeType: PlaceTypeEnum.Other, img: 'icons/saved-place.svg', placeholder: 'ADRES MIEJSCA' });
+    places.push({
+      placeType: PlaceTypeEnum.Other,
+      img: 'icons/saved-place.svg',
+      placeholder: 'ADRES MIEJSCA',
+    });
     setPlaces([...places]);
   };
   const removePlace = () => {
@@ -30,14 +34,14 @@ const RoutePreferences: FunctionComponent<RoutePreferencesProps> = () => {
   };
   return (
     <div className={`${styles.pageContainer}`}>
-      <Link className={`${styles.a}`} to="/preferences">
-        <img src="/icons/go-back.svg" alt="go back" />
+      <Link className={`${styles.a}`} to='/preferences'>
+        <img src='/icons/go-back.svg' alt='go back' />
       </Link>
       <h2 className={`${styles.h2}`}>JAK JEDZIEMY?</h2>
       {/* TODO convert to checkbox */}
       <RadioButtonGroup vertical={true}>
-        <SecondaryButton color="#0496FF" text="SZYBKO" onClick={() => {}} />
-        <SecondaryButton color="#0496FF" text="WYGODNIE" onClick={() => {}} />
+        <SecondaryButton color='#0496FF' text='SZYBKO' onClick={() => {}} />
+        <SecondaryButton color='#0496FF' text='WYGODNIE' onClick={() => {}} />
       </RadioButtonGroup>
       <div className={`${styles.separator}`}>
         <div></div>
@@ -49,15 +53,15 @@ const RoutePreferences: FunctionComponent<RoutePreferencesProps> = () => {
       ))}
       <div className={`${styles.buttons}`}>
         <SecondaryButton
-          color="#0496FF"
-          text="+"
+          color='#0496FF'
+          text='+'
           onClick={() => {
             addPlace();
           }}
         />
-        <SecondaryButton color="#E85F5C" text="-" onClick={removePlace} />
+        <SecondaryButton color='#E85F5C' text='-' onClick={removePlace} />
       </div>
-      <PrimaryButton text="ZAPISZ" onClick={() => {}} />
+      <PrimaryButton text='ZAPISZ' onClick={() => {}} />
     </div>
   );
 };

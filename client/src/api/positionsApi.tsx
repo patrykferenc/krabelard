@@ -17,5 +17,5 @@ export const positionsApi = {
 
   getAllBusesPositionsOnLine(line: string) {
     return postionsClient.get(`/buses/${line}`);
-  }
+  },
 };

@@ -10,7 +10,11 @@ interface PrimaryButtonProps {
 const SecondaryButton: FunctionComponent<PrimaryButtonProps> = ({ text, onClick, color }) => {
   if (!color) color = '#000000';
   return (
-    <button style={{ borderColor: color, color: color }} className={`${styles.button}`} onClick={onClick}>
+    <button
+      style={{ borderColor: color, color: color }}
+      className={`${styles.button}`}
+      onClick={onClick}
+    >
       {text}
     </button>
   );

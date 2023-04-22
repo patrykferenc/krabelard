@@ -14,8 +14,6 @@ class ZtmWebApiSpringBeanConfig {
 	public ZtmApiVehiclePositionRepository ztmApiVehiclePositionRepository(
 		ZtmApiVehiclePositionRetrievingService ztmApiVehiclePositionRetrievingService
 	) {
-		return new ZtmApiVehiclePositionRepository(
-			ztmApiVehiclePositionRetrievingService
-		);
+		return new ZtmApiVehiclePositionRepository(ztmApiVehiclePositionRetrievingService);
 	}
 }

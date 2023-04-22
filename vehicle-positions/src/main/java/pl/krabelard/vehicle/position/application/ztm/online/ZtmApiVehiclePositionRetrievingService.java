@@ -15,15 +15,10 @@ public class ZtmApiVehiclePositionRetrievingService {
 		Line line,
 		VehicleType vehicleType
 	) {
-		return ztmWebApiClient.getVehiclePositionsForLineAndVehicleType(
-			line,
-			vehicleType
-		);
+		return ztmWebApiClient.getVehiclePositionsForLineAndVehicleType(line, vehicleType);
 	}
 
-	public List<ZtmVehiclePositionDTO> getAllVehiclePositionsForVehicleType(
-		VehicleType vehicleType
-	) {
+	public List<ZtmVehiclePositionDTO> getAllVehiclePositionsForVehicleType(VehicleType vehicleType) {
 		return ztmWebApiClient.getAllVehiclePositionsForVehicleType(vehicleType);
 	}
 }

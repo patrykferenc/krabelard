@@ -31,18 +31,9 @@ class ZtmApiToVehicleMapperUnitTest {
 		// then
 		assertAll(
 			() -> assertEquals(11, vehicleMappedFromDTO.getVehicleNumber()),
-			() ->
-				assertEquals(
-					Position.of(12.0, 3.0),
-					vehicleMappedFromDTO.getPosition()
-				),
-			() ->
-				assertEquals(VehicleType.BUS, vehicleMappedFromDTO.getVehicleType()),
-			() ->
-				assertEquals(
-					TimeUtils.LOCAL_DATE_TIME_NOW_MOCKED,
-					vehicleMappedFromDTO.getTimestamp()
-				)
+			() -> assertEquals(Position.of(12.0, 3.0), vehicleMappedFromDTO.getPosition()),
+			() -> assertEquals(VehicleType.BUS, vehicleMappedFromDTO.getVehicleType()),
+			() -> assertEquals(TimeUtils.LOCAL_DATE_TIME_NOW_MOCKED, vehicleMappedFromDTO.getTimestamp())
 		);
 	}
 }

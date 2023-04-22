@@ -5,8 +5,8 @@ export const krapi = (url: string): AxiosInstance => {
     baseURL: url,
     headers: {
       'Content-Type': 'application/json',
-      Accept: 'application/json'
-    }
+      Accept: 'application/json',
+    },
   });
 
   client.interceptors.response.use(

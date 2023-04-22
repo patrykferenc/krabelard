@@ -21,10 +21,7 @@ class ZtmApiToVehicleMapper {
 			.vehicleType(vehicleType)
 			.line(Line.of(ztmApiVehiclePosition.getLine()))
 			.position(
-				Position.of(
-					ztmApiVehiclePosition.getLatitude(),
-					ztmApiVehiclePosition.getLongitude()
-				)
+				Position.of(ztmApiVehiclePosition.getLatitude(), ztmApiVehiclePosition.getLongitude())
 			)
 			.timestamp(ztmApiVehiclePosition.getTimeOfLastUpdate())
 			.build();

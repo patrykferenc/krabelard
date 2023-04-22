@@ -17,7 +17,7 @@ const Map: FunctionComponent<MapProps> = ({ center, zoom, children }) => {
       view: new View({ zoom, center }),
       layers: [],
       controls: [],
-      overlays: []
+      overlays: [],
     };
     const mapObject = new OlMap(MapOptions);
     mapObject.setTarget(mapRef.current);

@@ -3,37 +3,29 @@
   position: relative;
 }
 
-.circles > *[number="8"] {
-  transform: translate(-50%, -50%) rotate(-45deg) translateX(6.875rem)
-    rotate(45deg);
+.circles > *[number='8'] {
+  transform: translate(-50%, -50%) rotate(-45deg) translateX(6.875rem) rotate(45deg);
 }
-.circles > *[number="7"] {
-  transform: translate(-50%, -50%) rotate(-90deg) translateX(6.875rem)
-    rotate(90deg);
+.circles > *[number='7'] {
+  transform: translate(-50%, -50%) rotate(-90deg) translateX(6.875rem) rotate(90deg);
 }
-.circles > *[number="6"] {
-  transform: translate(-50%, -50%) rotate(-135deg) translateX(6.875rem)
-    rotate(135deg);
+.circles > *[number='6'] {
+  transform: translate(-50%, -50%) rotate(-135deg) translateX(6.875rem) rotate(135deg);
 }
-.circles > *[number="5"] {
-  transform: translate(-50%, -50%) rotate(180deg) translateX(6.875rem)
-    rotate(180deg);
+.circles > *[number='5'] {
+  transform: translate(-50%, -50%) rotate(180deg) translateX(6.875rem) rotate(180deg);
 }
-.circles > *[number="4"] {
-  transform: translate(-50%, -50%) rotate(135deg) translateX(6.875rem)
-    rotate(-135deg);
+.circles > *[number='4'] {
+  transform: translate(-50%, -50%) rotate(135deg) translateX(6.875rem) rotate(-135deg);
 }
-.circles > *[number="3"] {
-  transform: translate(-50%, -50%) rotate(90deg) translateX(6.875rem)
-    rotate(-90deg);
+.circles > *[number='3'] {
+  transform: translate(-50%, -50%) rotate(90deg) translateX(6.875rem) rotate(-90deg);
 }
-.circles > *[number="2"] {
-  transform: translate(-50%, -50%) rotate(45deg) translateX(6.875rem)
-    rotate(-45deg);
+.circles > *[number='2'] {
+  transform: translate(-50%, -50%) rotate(45deg) translateX(6.875rem) rotate(-45deg);
 }
-.circles > *[number="1"] {
-  transform: translate(-50%, -50%) rotate(0deg) translateX(6.875rem)
-    rotate(0deg);
+.circles > *[number='1'] {
+  transform: translate(-50%, -50%) rotate(0deg) translateX(6.875rem) rotate(0deg);
 }
 
 .mainCircle {

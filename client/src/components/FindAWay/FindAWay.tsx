@@ -15,7 +15,7 @@ const FindAWay: FunctionComponent = () => {
   useEffect(() => {
     krapi('/api/v1/')
       .get('/vehicle-positions/buses/N37')
-      .then(response => {
+      .then((response) => {
         console.log(response);
       });
   }, []);
@@ -24,8 +24,8 @@ const FindAWay: FunctionComponent = () => {
   };
   return (
     <div className={`${styles.container}`}>
-      <Link className={`${styles.a}`} to="/">
-        <img src="/icons/go-back.svg" alt="go back" />
+      <Link className={`${styles.a}`} to='/'>
+        <img src='/icons/go-back.svg' alt='go back' />
       </Link>
       {!isFullscreen && (
         <CheckboxGroup
@@ -45,32 +45,32 @@ const FindAWay: FunctionComponent = () => {
           </Layers>
         </Map>
         <button className={`${styles.button}`} onClick={toggle}>
-          <img src={isFullscreen ? '/icons/arrow-up.svg' : '/icons/arrow-down.svg'} alt="toggle" />
+          <img src={isFullscreen ? '/icons/arrow-up.svg' : '/icons/arrow-down.svg'} alt='toggle' />
         </button>
       </div>
       {!isFullscreen && (
         <>
           {/* @ts-ignore */}
           <Input
-            label="Z"
-            placeholder="TWOJA LOKALIZACJA"
+            label='Z'
+            placeholder='TWOJA LOKALIZACJA'
             labelWidth={'2rem'}
-            onChange={currentLocation => {
+            onChange={(currentLocation) => {
               // TODO
             }}
           />
           {/* @ts-ignore */}
           <Input
-            label="DO"
-            placeholder="TWÓJ CEL"
+            label='DO'
+            placeholder='TWÓJ CEL'
             labelWidth={'2rem'}
-            onChange={destination => {
+            onChange={(destination) => {
               // TODO
             }}
           />
         </>
       )}
-      <PrimaryButton text="JEDŹ" onClick={() => {}}></PrimaryButton>
+      <PrimaryButton text='JEDŹ' onClick={() => {}}></PrimaryButton>
     </div>
   );
 };

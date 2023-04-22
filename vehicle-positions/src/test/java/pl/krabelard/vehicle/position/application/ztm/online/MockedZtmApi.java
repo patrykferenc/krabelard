@@ -20,13 +20,9 @@ public class MockedZtmApi {
 
 	private final WireMockServer wireMockServer;
 
-	public MockedZtmApi(
-		ZtmWebApiClientConfiguration ztmWebApiClientConfiguration
-	) {
-		this.wireMockServer =
-			new WireMockServer(WireMockConfiguration.options().port(5080)); // TODO#KRB-86: add base url
-		this.mockedZtmApiPositionsResourceUrl =
-			ztmWebApiClientConfiguration.getPositionsResourceUrl();
+	public MockedZtmApi(ZtmWebApiClientConfiguration ztmWebApiClientConfiguration) {
+		this.wireMockServer = new WireMockServer(WireMockConfiguration.options().port(5080)); // TODO#KRB-86: add base url
+		this.mockedZtmApiPositionsResourceUrl = ztmWebApiClientConfiguration.getPositionsResourceUrl();
 		this.positionsResourceId = ztmWebApiClientConfiguration.getResourceId();
 		this.mockedValidApiKey = ztmWebApiClientConfiguration.getApiKey();
 	}
@@ -43,9 +39,7 @@ public class MockedZtmApi {
 		mockAnyPathAndReturnJsonFromFile("unauthorised_response_bad_api_key.json");
 	}
 
-	private void mockAnyPathAndReturnJsonFromFile(
-		String jsonResponseFileLocation
-	) {
+	private void mockAnyPathAndReturnJsonFromFile(String jsonResponseFileLocation) {
 		wireMockServer.stubFor(
 			WireMock
 				.get(WireMock.urlPathMatching(mockedZtmApiPositionsResourceUrl + "?.*"))
@@ -70,10 +64,7 @@ public class MockedZtmApi {
 				.withQueryParam("resource_id", WireMock.equalTo(positionsResourceId))
 				.withQueryParam("line", WireMock.equalTo("179"))
 				.withQueryParam("apikey", WireMock.equalTo(mockedValidApiKey))
-				.withQueryParam(
-					"type",
-					WireMock.equalTo(String.valueOf(busQueryParameterValue))
-				)
+				.withQueryParam("type", WireMock.equalTo(String.valueOf(busQueryParameterValue)))
 				.willReturn(
 					WireMock
 						.aResponse()
@@ -117,10 +108,7 @@ public class MockedZtmApi {
 				.withQueryParam("resource_id", WireMock.equalTo(positionsResourceId))
 				.withQueryParam("line", WireMock.equalTo("17"))
 				.withQueryParam("apikey", WireMock.equalTo(mockedValidApiKey))
-				.withQueryParam(
-					"type",
-					WireMock.equalTo(String.valueOf(tramQueryParameterValue))
-				)
+				.withQueryParam("type", WireMock.equalTo(String.valueOf(tramQueryParameterValue)))
 				.willReturn(
 					WireMock
 						.aResponse()
@@ -157,9 +145,7 @@ public class MockedZtmApi {
 		);
 	}
 
-	public void thatReturnsEmptyListWithQueryParameterOfBusesOrTrams(
-		boolean isBusOrTram
-	) {
+	public void thatReturnsEmptyListWithQueryParameterOfBusesOrTrams(boolean isBusOrTram) {
 		wireMockServer.stubFor(
 			WireMock
 				.get(WireMock.urlPathMatching(mockedZtmApiPositionsResourceUrl))
@@ -168,9 +154,7 @@ public class MockedZtmApi {
 				.withQueryParam(
 					"type",
 					WireMock.equalTo(
-						String.valueOf(
-							isBusOrTram ? tramQueryParameterValue : busQueryParameterValue
-						)
+						String.valueOf(isBusOrTram ? tramQueryParameterValue : busQueryParameterValue)
 					)
 				)
 				.willReturn(
@@ -189,10 +173,7 @@ public class MockedZtmApi {
 				.get(WireMock.urlPathMatching(mockedZtmApiPositionsResourceUrl))
 				.withQueryParam("resource_id", WireMock.equalTo(positionsResourceId))
 				.withQueryParam("apikey", WireMock.equalTo(mockedValidApiKey))
-				.withQueryParam(
-					"type",
-					WireMock.equalTo(String.valueOf(busQueryParameterValue))
-				)
+				.withQueryParam("type", WireMock.equalTo(String.valueOf(busQueryParameterValue)))
 				.willReturn(
 					WireMock
 						.aResponse()
@@ -242,10 +223,7 @@ public class MockedZtmApi {
 				.get(WireMock.urlPathMatching(mockedZtmApiPositionsResourceUrl))
 				.withQueryParam("resource_id", WireMock.equalTo(positionsResourceId))
 				.withQueryParam("apikey", WireMock.equalTo(mockedValidApiKey))
-				.withQueryParam(
-					"type",
-					WireMock.equalTo(String.valueOf(tramQueryParameterValue))
-				)
+				.withQueryParam("type", WireMock.equalTo(String.valueOf(tramQueryParameterValue)))
 				.willReturn(
 					WireMock
 						.aResponse()

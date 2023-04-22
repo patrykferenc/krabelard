@@ -11,14 +11,14 @@ export default function QuickSelect() {
   const { loggedIn, setLoggedIn } = useContext(LoggedInContext);
   const isLoggedIn = () => loggedIn && loggedIn !== '';
   const main = (
-    <Link className={`${styles.mainCircle}`} to="/find-a-way">
-      <img src="icons/route.svg" alt="route" />
+    <Link className={`${styles.mainCircle}`} to='/find-a-way'>
+      <img src='icons/route.svg' alt='route' />
     </Link>
   );
   return (
     <div className={`${styles.pageContainer}`}>
-      <Link to="/preferences">
-        <img src="icons/user-with-border.svg" alt="user" className={styles.userIcon} />
+      <Link to='/preferences'>
+        <img src='icons/user-with-border.svg' alt='user' className={styles.userIcon} />
       </Link>
       <CircleMenu main={main} startFrom={0}>
         <Circle disabled={false}>
@@ -28,21 +28,21 @@ export default function QuickSelect() {
           </div>
         </Circle>
         <Circle disabled={false}>
-          <img src="icons/timetables.svg" alt="timetables" />
+          <img src='icons/timetables.svg' alt='timetables' />
         </Circle>
         <Circle disabled={!isLoggedIn()}>
-          <img src="icons/work.svg" alt="work" />
+          <img src='icons/work.svg' alt='work' />
         </Circle>
         <Circle disabled={!isLoggedIn()}>
-          <img src="icons/home.svg" alt="home" />
+          <img src='icons/home.svg' alt='home' />
         </Circle>
         <Circle disabled={!isLoggedIn()}>
-          <img src="icons/school.svg" alt="school" />
+          <img src='icons/school.svg' alt='school' />
         </Circle>
-        {savedLocations.map(sl => (
+        {savedLocations.map((sl) => (
           <Circle key={sl} disabled={!isLoggedIn()}>
             <div key={sl} className={`${styles.savedLocationContent}`}>
-              <img src="icons/saved-place.svg" alt={`saved place - ${sl}`} />
+              <img src='icons/saved-place.svg' alt={`saved place - ${sl}`} />
               <p className={`${styles.savedLocationLabel}`}>{sl}</p>
             </div>
           </Circle>
@@ -52,7 +52,7 @@ export default function QuickSelect() {
         <></>
       ) : (
         <div className={`${styles.buttonContainer}`}>
-          <PrimaryButton text="zaloguj się" onClick={() => {}} />
+          <PrimaryButton text='zaloguj się' onClick={() => {}} />
           {loggedIn}
         </div>
       )}
