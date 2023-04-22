@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: vehicle_positions
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/v1/vehicle-positions/**
+          filters:
+            - StripPrefix=2
