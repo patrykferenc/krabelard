@@ -8,7 +8,7 @@
       }
     },
     {
-      "files": ["*.ts", "*.html", "*.js"],
+      "files": ["*.ts", "*.tsx", "*.html", "*.js"],
       "options": {
         "trailingComma": "none",
         "singleQuote": true,

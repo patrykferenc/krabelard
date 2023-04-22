@@ -1,6 +1,6 @@
-import { krapi } from "./krapi";
+import { krapi } from './krapi';
 
-const timetablesClient = krapi("/timetables");
+const timetablesClient = krapi('/timetables');
 
 export const timetableApi = {
   getAllLines() {
@@ -21,11 +21,7 @@ export const timetableApi = {
     return null;
   },
 
-  getArrivalsForStopAndLine(
-    line: string,
-    stopName: string,
-    stopNumber: string
-  ) {
+  getArrivalsForStopAndLine(line: string, stopName: string, stopNumber: string) {
     return timetablesClient.get(`/${stopName}/${stopNumber}/${line}`);
-  },
+  }
 };

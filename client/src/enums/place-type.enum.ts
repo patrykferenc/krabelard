@@ -3,6 +3,6 @@ enum PlaceTypeEnum {
   Work = 2,
   School = 3,
   Other = 4
-};
+}
 
 export default PlaceTypeEnum;
