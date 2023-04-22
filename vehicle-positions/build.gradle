@@ -1,8 +1,9 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.0.0'
+    id 'org.springframework.boot' version '3.0.6'
     id 'io.spring.dependency-management' version '1.1.0'
-    id "io.freefair.lombok" version "6.6"
+    id "io.freefair.lombok" version "8.0.1"
+    id 'jacoco'
 }
 
 group = 'pl.krabelard'
@@ -16,10 +17,31 @@ repositories {
 dependencies {
     // Spring Boot
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
+    // Vavr
+    implementation 'io.vavr:vavr:1.0.0-alpha-4'
+
+    // Mockito
+    testImplementation 'org.mockito:mockito-core:4.10.0'
+    // AssertJ
+    testImplementation 'org.assertj:assertj-core:3.23.1'
+    // Wiremock (standalone since it woks better with spring boot)
+    testImplementation 'com.github.tomakehurst:wiremock-jre8-standalone:2.35.0'
 }
 
 tasks.named('test') {
+    environment("spring.profiles.active", "test")
+
+    filter {
+        excludeTestsMatching '*OnlineTest'
+    }
     useJUnitPlatform()
+    finalizedBy 'jacocoTestReport'
+}
+
+jacocoTestReport {
+    dependsOn(test)
 }

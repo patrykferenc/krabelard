@@ -7,8 +7,8 @@
 Code is formatted using prettier so make sure you first install node (use the recommended version from .nvmrc file).
 It is also recommended that you install the Prettier plugin in IntelliJ.
 
-Setup:
-0. It is recommended to use nvm (install it via brew/pacman/apt/clone it from GitHub).
+Setup: 0. It is recommended to use nvm (install it via brew/pacman/apt/clone it from GitHub).
+
 1. Install and switch to the required node version `nvm use`.
 2. Install all required dependencies `npm install .`.
 3. Run prettier `npm run format`.

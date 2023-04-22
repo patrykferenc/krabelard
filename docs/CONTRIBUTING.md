@@ -15,21 +15,21 @@ Please adhere to the guidelines described in the document.
 
 Please use the following structure:
 
- - master 
-   - that's the main branch, if you create a feature/bug branch please base it from here
-   - never merge into it directly, always use PRs
- - feature/123-Add_some_functionality
-   - these are feature branches - for when you add a new functionality
-   - describe what you are adding
-   - always reference the issue
-   - make sure the issue is correctly labeled
- - bugs/123-Fix_broken_button
-   - use bugs/ when you are fixing something
-   - if a bug concerns an active feature branch, you can create them from the feature branch, use master otherwise
- - wip/222-Add_tests_to_a_feature
-   - work in progress branches are useful and can be used especially when splitting a feature into smaller chunks
-   - do not create PRs from wip branches into master
-   - it is recommended to reference the issue number if possible
+- master
+  - that's the main branch, if you create a feature/bug branch please base it from here
+  - never merge into it directly, always use PRs
+- feature/123-Add_some_functionality
+  - these are feature branches - for when you add a new functionality
+  - describe what you are adding
+  - always reference the issue
+  - make sure the issue is correctly labeled
+- bugs/123-Fix_broken_button
+  - use bugs/ when you are fixing something
+  - if a bug concerns an active feature branch, you can create them from the feature branch, use master otherwise
+- wip/222-Add_tests_to_a_feature
+  - work in progress branches are useful and can be used especially when splitting a feature into smaller chunks
+  - do not create PRs from wip branches into master
+  - it is recommended to reference the issue number if possible
 
 ### Commits
 
@@ -48,6 +48,7 @@ Please use the following structure:
 - Don't get upset over comments :>
 
 Default merge strategy:
+
 - merge using rebase
 - squash commits when merging
 
