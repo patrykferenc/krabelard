@@ -2,6 +2,8 @@ package com.krabelard.gtfsparser.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -24,5 +26,20 @@ public class CalendarDates {
   @Column(name = "service_id")
   private String serviceId;
   @Column(name = "exception_type")
-  private int exceptionType;
+  @Enumerated(EnumType.ORDINAL)
+  private ExceptionType exceptionType;
+
+  private enum ExceptionType {
+    AddedForSpecifiedDate(1),
+    RemovedForSpecifiedDate(2);
+    private final int typeId;
+    ExceptionType(int typeId)
+    {
+      this.typeId = typeId;
+    }
+
+    public int numericalValue() {
+      return typeId;
+    }
+  }
 }
