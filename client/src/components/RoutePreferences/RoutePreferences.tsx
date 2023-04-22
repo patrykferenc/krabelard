@@ -43,12 +43,10 @@ const RoutePreferences: FunctionComponent<RoutePreferencesProps> = () => {
         <div></div>
       </div>
       <h2 className={`${styles.h2}`}>TWOJE CELE</h2>
-      {
+      {places.map((p, i) => (
         // @ts-ignore
-        places.map((p, i) => (
-          <Input key={i} label={p.img} placeholder={p.placeholder} labelImg={true} />
-        ))
-      }
+        <Input key={i} label={p.img} placeholder={p.placeholder} labelImg={true} />
+      ))}
       <div className={`${styles.buttons}`}>
         <SecondaryButton
           color="#0496FF"

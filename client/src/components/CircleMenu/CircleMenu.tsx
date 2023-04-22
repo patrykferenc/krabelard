@@ -15,14 +15,12 @@ const CircleMenu: FunctionComponent<CircleMenuProps> = ({ children, main, startF
   return (
     <div className={`${styles.circles}`}>
       <div className={`${styles.mainCircle}`}>{main}</div>
-      {
+      {Children.map(children, (child, i) => (
         // @ts-ignore
-        Children.map(children, (child, i) => (
-          <div className={`${styles.childWrap}`} number={getIndex(i)}>
-            {child}
-          </div>
-        ))
-      }
+        <div className={`${styles.childWrap}`} number={getIndex(i)}>
+          {child}
+        </div>
+      ))}
     </div>
   );
 };
