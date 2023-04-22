@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/krabelard.iml" filepath="$PROJECT_DIR$/.idea/krabelard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pl.krabelard.timetables.main.iml" filepath="$PROJECT_DIR$/.idea/modules/pl.krabelard.timetables.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/timetables.main.iml" filepath="$PROJECT_DIR$/.idea/modules/timetables.main.iml" />
     </modules>
   </component>

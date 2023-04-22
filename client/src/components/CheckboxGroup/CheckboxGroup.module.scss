@@ -21,14 +21,14 @@ $border-radius: $main-font-size;
 
 .checkbox {
   width: 100%;
-  background-color: #DADADA;
+  background-color: #dadada;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .checkbox:has(.input:checked) {
-  background-color: #0496FF;
+  background-color: #0496ff;
 }
 
 .checkbox:first-child {
