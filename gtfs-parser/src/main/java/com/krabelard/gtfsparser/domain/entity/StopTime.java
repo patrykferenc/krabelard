@@ -1,10 +1,9 @@
 package com.krabelard.gtfsparser.domain.entity;
 
 import jakarta.persistence.*;
+import java.time.LocalTime;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalTime;
 
 @Entity
 @Table(name = "stop_time")
@@ -12,41 +11,40 @@ import java.time.LocalTime;
 @Setter
 public class StopTime {
 
-    @Id
-    @GeneratedValue
-    private long id;
+	@Id
+	@GeneratedValue
+	private long id;
 
-    // TODO #KRB-31 configure foreign key referencing Trip
-    @ManyToOne
-    private Trip tripId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Trip tripId;
 
-    @Column(name = "arrival_time")
-    private LocalTime arrivalTime;
+	@Column(name = "arrival_time")
+	private LocalTime arrivalTime;
 
-    @Column(name = "departure_time")
-    private LocalTime departureTime;
+	@Column(name = "departure_time")
+	private LocalTime departureTime;
 
-    // TODO #KRB-31 configure foreign key referencing Stop
-    @ManyToOne
-    private Stop stopId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Stop stopId;
 
-    @Column(name = "stop_sequence")
-    private int stopSequence;
+	@Column(name = "stop_sequence")
+	private int stopSequence;
 
-    @Column(name = "pickup_type")
-    private PickupType pickupType;
+	@Column(name = "pickup_type")
+	@Enumerated(EnumType.ORDINAL)
+	private PickupType pickupType;
 
-    @Column(name = "dropoff_type")
-    private PickupType dropoffType;
+	@Column(name = "dropoff_type")
+	@Enumerated(EnumType.ORDINAL)
+	private PickupType dropoffType;
 
-    @Column(name = "shape_dist_travelled")
-    private double shapeDistTravelled;
+	@Column(name = "shape_dist_travelled")
+	private double shapeDistTravelled;
 
-    // TODO - figure out more sensible name
-    public enum PickupType {
-        REGULAR,
-        NOT_AVAILABLE,
-        MUST_PHONE_AGENCY,
-        MUST_COORDINATE_WITH_DRIVER
-    }
+	public enum PickupType {
+		REGULAR,
+		NOT_AVAILABLE,
+		MUST_PHONE_AGENCY,
+		MUST_COORDINATE_WITH_DRIVER,
+	}
 }

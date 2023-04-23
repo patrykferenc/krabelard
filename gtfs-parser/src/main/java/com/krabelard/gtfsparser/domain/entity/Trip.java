@@ -1,6 +1,7 @@
 package com.krabelard.gtfsparser.domain.entity;
 
 import jakarta.persistence.*;
+import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,47 +11,48 @@ import lombok.Setter;
 @Setter
 public class Trip {
 
-    @Id
-    @GeneratedValue
-    private long id;
+	@Id
+	@GeneratedValue
+	private long id;
 
-    // TODO #KRB-31 configure foreign key referencing Route
-    @ManyToOne
-    private Route routeId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Route routeId;
 
-    // TODO #KRB-31 configure foreign key referencing <<something>>
-    @Column(name = "service_id")
-    private long serviceId;
+	@Column(name = "trip_id")
+	private String tripId;
 
-    @Column(name = "trip_id")
-    private long gtfsId;
+	@Column(name = "head_sign")
+	private String headSign;
 
-    @Column(name = "head_sign")
-    private String headSign;
+	@Column(name = "direction_id")
+	private Direction directionId;
 
-    @Column(name = "direction_id")
-    private Direction directionId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Shape shapeId;
 
-    // TODO #KRB-31 configure foreign key referencing Shape
-    @ManyToOne
-    private Shape shapeId;
+	@Column(name = "wheelchair_accessible")
+	private Accessibility wheelchairAccessible;
 
-    // TODO #KRB-31 'exceptional' custom GTFS property
+	@Column(name = "bike_allowed")
+	private Accessibility bikesAllowed;
 
-    @Column(name = "wheelchair_accessible")
-    private Accessibility wheelchairAccessible;
+	@OneToMany(mappedBy = "tripId")
+	private Set<StopTime> stopTimes;
 
-    @Column(name = "bike_allowed")
-    private Accessibility bikesAllowed;
+	@OneToMany(mappedBy = "serviceId")
+	private Set<CalendarDates> dates;
 
-    public enum Direction {
-        OUTBOUND,
-        INBOUND
-    }
+	@OneToMany(mappedBy = "tripId")
+	private Set<Frequencies> frequencies;
 
-    public enum Accessibility {
-        NO_INFO,
-        AT_LEAST_ONE,
-        NOT_ALLOWED
-    }
+	public enum Direction {
+		OUTBOUND,
+		INBOUND,
+	}
+
+	public enum Accessibility {
+		NO_INFO,
+		AT_LEAST_ONE,
+		NOT_ALLOWED,
+	}
 }

@@ -1,12 +1,6 @@
 package com.krabelard.gtfsparser.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import java.time.LocalTime;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,24 +11,28 @@ import lombok.Setter;
 @Setter
 public class Frequencies {
 
-  @Id
-  @GeneratedValue
-  int id;
+	@Id
+	@GeneratedValue
+	private long id;
 
-  @Column(name = "trip_id")
-  private String tripId;
-  @Column(name = "start_time")
-  private LocalTime startTime;
-  @Column(name = "end_time")
-  private LocalTime endTime;
-  @Column(name = "headway_secs")
-  int headwaySecs;
-  @Column(name = "exact_times")
-  @Enumerated(EnumType.ORDINAL)
-  private ExactTimes exactTimes;
+	@ManyToOne
+	private Trip tripId;
 
-  private enum ExactTimes {
-    FrequencyBasedTrips,
-    ScheduleBasedTrips
-  }
+	@Column(name = "start_time")
+	private LocalTime startTime;
+
+	@Column(name = "end_time")
+	private LocalTime endTime;
+
+	@Column(name = "headway_secs")
+	int headwaySecs;
+
+	@Column(name = "exact_times")
+	@Enumerated(EnumType.ORDINAL)
+	private ExactTimes exactTimes;
+
+	public enum ExactTimes {
+		FrequencyBasedTrips,
+		ScheduleBasedTrips,
+	}
 }
