@@ -25,12 +25,8 @@ class ZtmWebApiClient {
 		);
 	}
 
-	List<ZtmVehiclePositionDTO> getAllVehiclePositionsForVehicleType(
-		VehicleType vehicleType
-	) {
-		return executeRequestToZtmApiUsingParameters(
-			buildUriWithVehicleTypeParameters(vehicleType)
-		);
+	List<ZtmVehiclePositionDTO> getAllVehiclePositionsForVehicleType(VehicleType vehicleType) {
+		return executeRequestToZtmApiUsingParameters(buildUriWithVehicleTypeParameters(vehicleType));
 	}
 
 	private List<ZtmVehiclePositionDTO> executeRequestToZtmApiUsingParameters(
@@ -48,28 +44,15 @@ class ZtmWebApiClient {
 			.block();
 	}
 
-	private Function<UriBuilder, URI> buildUriWithVehicleTypeParameters(
-		VehicleType vehicleType
-	) {
-		final var vehicleTypeToGet = VehicleTypeQueryStringParameters.from(
-			vehicleType
-		);
+	private Function<UriBuilder, URI> buildUriWithVehicleTypeParameters(VehicleType vehicleType) {
+		final var vehicleTypeToGet = VehicleTypeQueryStringParameters.from(vehicleType);
 
 		return uriBuilder ->
 			uriBuilder
 				.path(configuration.getPositionsResourceUrl())
-				.queryParam(
-					ZtmApiQueryParameters.RESOURCE_ID.value,
-					configuration.getResourceId()
-				)
-				.queryParam(
-					ZtmApiQueryParameters.APIKEY.value,
-					configuration.getApiKey()
-				)
-				.queryParam(
-					ZtmApiQueryParameters.VEHICLE_TYPE.value,
-					vehicleTypeToGet.value
-				)
+				.queryParam(ZtmApiQueryParameters.RESOURCE_ID.value, configuration.getResourceId())
+				.queryParam(ZtmApiQueryParameters.APIKEY.value, configuration.getApiKey())
+				.queryParam(ZtmApiQueryParameters.VEHICLE_TYPE.value, vehicleTypeToGet.value)
 				.build();
 	}
 
@@ -77,25 +60,14 @@ class ZtmWebApiClient {
 		VehicleType vehicleType,
 		Line line
 	) {
-		final var vehicleTypeToGet = VehicleTypeQueryStringParameters.from(
-			vehicleType
-		);
+		final var vehicleTypeToGet = VehicleTypeQueryStringParameters.from(vehicleType);
 
 		return uriBuilder ->
 			uriBuilder
 				.path(configuration.getPositionsResourceUrl())
-				.queryParam(
-					ZtmApiQueryParameters.RESOURCE_ID.value,
-					configuration.getResourceId()
-				)
-				.queryParam(
-					ZtmApiQueryParameters.APIKEY.value,
-					configuration.getApiKey()
-				)
-				.queryParam(
-					ZtmApiQueryParameters.VEHICLE_TYPE.value,
-					vehicleTypeToGet.value
-				)
+				.queryParam(ZtmApiQueryParameters.RESOURCE_ID.value, configuration.getResourceId())
+				.queryParam(ZtmApiQueryParameters.APIKEY.value, configuration.getApiKey())
+				.queryParam(ZtmApiQueryParameters.VEHICLE_TYPE.value, vehicleTypeToGet.value)
 				.queryParam(ZtmApiQueryParameters.LINE.value, line.getName())
 				.build();
 	}

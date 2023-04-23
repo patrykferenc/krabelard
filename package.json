@@ -2,8 +2,8 @@
   "name": "krabelard",
   "version": "0.0.0",
   "scripts": {
-    "check": "npx prettier --check {**/*,*}.{ts,java,js,css,scss,html,json}",
-    "format": "npx prettier --write {**/*,*}.{ts,java,js,css,scss,html,json}"
+    "check": "npx prettier --check .",
+    "format": "npx prettier --write ."
   },
   "devDependencies": {
     "prettier": "^2.8.0",

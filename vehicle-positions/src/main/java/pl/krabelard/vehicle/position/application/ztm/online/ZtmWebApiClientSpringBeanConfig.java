@@ -8,10 +8,10 @@ import org.springframework.context.annotation.Configuration;
 public class ZtmWebApiClientSpringBeanConfig {
 
 	@Bean
-	public ZtmApiVehiclePositionRetrievingService ztmApiVehiclePositionRetrievingService(ZtmWebApiClient ztmWebApiClient) {
-		return new ZtmApiVehiclePositionRetrievingService(
-				ztmWebApiClient
-		);
+	public ZtmApiVehiclePositionRetrievingService ztmApiVehiclePositionRetrievingService(
+		ZtmWebApiClient ztmWebApiClient
+	) {
+		return new ZtmApiVehiclePositionRetrievingService(ztmWebApiClient);
 	}
 
 	@Bean
@@ -20,7 +20,9 @@ public class ZtmWebApiClientSpringBeanConfig {
 	}
 
 	@Bean
-	public ZtmWebApiClientFactory ztmWebApiClientFactory(ZtmWebApiClientConfiguration ztmWebApiClientConfiguration) {
+	public ZtmWebApiClientFactory ztmWebApiClientFactory(
+		ZtmWebApiClientConfiguration ztmWebApiClientConfiguration
+	) {
 		return new ZtmWebApiClientFactory(ztmWebApiClientConfiguration);
 	}
 

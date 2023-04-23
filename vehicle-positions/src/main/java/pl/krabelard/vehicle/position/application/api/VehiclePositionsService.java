@@ -13,13 +13,9 @@ class VehiclePositionsService {
 	private final VehiclePositionsFacade vehiclePositionsFacade;
 
 	VehiclePositionsDTO getAllTrams() {
-		final var trams = vehiclePositionsFacade.getAllVehiclesOfType(
-			VehicleType.TRAM
-		);
+		final var trams = vehiclePositionsFacade.getAllVehiclesOfType(VehicleType.TRAM);
 
-		return new VehiclePositionsDTO(
-			trams.stream().map(VehiclePositionDTO::fromDomain).toList()
-		);
+		return new VehiclePositionsDTO(trams.stream().map(VehiclePositionDTO::fromDomain).toList());
 	}
 
 	VehiclePositionsDTO getTramsOnLine(String line) {
@@ -34,13 +30,9 @@ class VehiclePositionsService {
 	}
 
 	VehiclePositionsDTO getAllBuses() {
-		final var buses = vehiclePositionsFacade.getAllVehiclesOfType(
-			VehicleType.BUS
-		);
+		final var buses = vehiclePositionsFacade.getAllVehiclesOfType(VehicleType.BUS);
 
-		return new VehiclePositionsDTO(
-			buses.stream().map(VehiclePositionDTO::fromDomain).toList()
-		);
+		return new VehiclePositionsDTO(buses.stream().map(VehiclePositionDTO::fromDomain).toList());
 	}
 
 	VehiclePositionsDTO getBusesOnLine(String line) {

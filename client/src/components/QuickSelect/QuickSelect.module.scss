@@ -35,15 +35,30 @@
   color: black;
 }
 
-.circles>.circle:nth-child(9) { transform: translate(-50%, -50%) rotate(-45deg) translateX(6.875rem) rotate(45deg); }
-.circles>.circle:nth-child(8) { transform: translate(-50%, -50%) rotate(-90deg) translateX(6.875rem) rotate(90deg); }
-.circles>.circle:nth-child(7) { transform: translate(-50%, -50%) rotate(-135deg) translateX(6.875rem) rotate(135deg); }
-.circles>.circle:nth-child(6) { transform: translate(-50%, -50%) rotate(180deg) translateX(6.875rem) rotate(180deg); }
-.circles>.circle:nth-child(5) { transform: translate(-50%, -50%) rotate(135deg) translateX(6.875rem) rotate(-135deg); }
-.circles>.circle:nth-child(4) { transform: translate(-50%, -50%) rotate(90deg) translateX(6.875rem) rotate(-90deg); }
-.circles>.circle:nth-child(3) { transform: translate(-50%, -50%) rotate(45deg) translateX(6.875rem) rotate(-45deg); }
-.circles>.circle:nth-child(2) { transform: translate(-50%, -50%) rotate(0deg) translateX(6.875rem) rotate(0deg); }
-
+.circles > .circle:nth-child(9) {
+  transform: translate(-50%, -50%) rotate(-45deg) translateX(6.875rem) rotate(45deg);
+}
+.circles > .circle:nth-child(8) {
+  transform: translate(-50%, -50%) rotate(-90deg) translateX(6.875rem) rotate(90deg);
+}
+.circles > .circle:nth-child(7) {
+  transform: translate(-50%, -50%) rotate(-135deg) translateX(6.875rem) rotate(135deg);
+}
+.circles > .circle:nth-child(6) {
+  transform: translate(-50%, -50%) rotate(180deg) translateX(6.875rem) rotate(180deg);
+}
+.circles > .circle:nth-child(5) {
+  transform: translate(-50%, -50%) rotate(135deg) translateX(6.875rem) rotate(-135deg);
+}
+.circles > .circle:nth-child(4) {
+  transform: translate(-50%, -50%) rotate(90deg) translateX(6.875rem) rotate(-90deg);
+}
+.circles > .circle:nth-child(3) {
+  transform: translate(-50%, -50%) rotate(45deg) translateX(6.875rem) rotate(-45deg);
+}
+.circles > .circle:nth-child(2) {
+  transform: translate(-50%, -50%) rotate(0deg) translateX(6.875rem) rotate(0deg);
+}
 
 .mainCircle {
   width: 115px;
@@ -98,6 +113,6 @@
 }
 
 .disabled {
-  background-color: #DADADA;
+  background-color: #dadada;
   cursor: not-allowed;
 }

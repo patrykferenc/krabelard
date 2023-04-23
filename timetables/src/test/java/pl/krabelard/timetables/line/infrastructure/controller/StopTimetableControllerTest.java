@@ -43,9 +43,7 @@ public class StopTimetableControllerTest {
 	void whenQueryCorrect_shouldReturnCorrectResponse() throws Exception {
 		//given
 		var responseExpected = Files
-			.readString(
-				Path.of("src/test/resources/line/repository-timetable-response.json")
-			)
+			.readString(Path.of("src/test/resources/line/repository-timetable-response.json"))
 			.replaceAll("\\s+", "");
 		var serviceExpected = new LineTimetable(List.of(LocalTime.NOON));
 		when(service.getFor(any())).thenReturn(serviceExpected);
@@ -60,11 +58,7 @@ public class StopTimetableControllerTest {
 	void whenQueryIncorrect_shouldReturnCorrectResponse() throws Exception {
 		//given
 		when(service.getFor(any()))
-			.thenThrow(
-				new LineTimetableFetchingException(
-					"Error fetching data from ZTM repository"
-				)
-			);
+			.thenThrow(new LineTimetableFetchingException("Error fetching data from ZTM repository"));
 		//when - then
 		this.mockMvc.perform(get("/timetable/7009/1/520"))
 			.andDo(print())

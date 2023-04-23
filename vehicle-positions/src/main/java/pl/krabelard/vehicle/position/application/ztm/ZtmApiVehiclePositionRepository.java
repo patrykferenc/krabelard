@@ -9,8 +9,7 @@ import pl.krabelard.vehicle.position.domain.model.value.VehicleType;
 import pl.krabelard.vehicle.position.domain.port.VehiclePositionRepository;
 
 @RequiredArgsConstructor
-public class ZtmApiVehiclePositionRepository
-	implements VehiclePositionRepository {
+public class ZtmApiVehiclePositionRepository implements VehiclePositionRepository {
 
 	private final ZtmApiVehiclePositionRetrievingService ztmApiVehiclePositionRetrievingService;
 
@@ -33,9 +32,7 @@ public class ZtmApiVehiclePositionRepository
 	}
 
 	@Override
-	public List<Vehicle> getAllVehiclePositionsForVehicleType(
-		VehicleType vehicleType
-	) {
+	public List<Vehicle> getAllVehiclePositionsForVehicleType(VehicleType vehicleType) {
 		final var ztmVehiclePositionDTOs = ztmApiVehiclePositionRetrievingService.getAllVehiclePositionsForVehicleType(
 			vehicleType
 		);

@@ -1,20 +1,13 @@
 {
   "endOfLine": "auto",
+  "singleQuote": true,
+  "printWidth": 100,
+  "jsxSingleQuote": true,
   "overrides": [
     {
       "files": "*.java",
       "options": {
         "useTabs": true
-      }
-    },
-    {
-      "files": ["*.ts", "*.html", "*.js"],
-      "options": {
-        "trailingComma": "none",
-        "singleQuote": true,
-        "printWidth": 140,
-        "quoteProps": "as-needed",
-        "arrowParens": "avoid"
       }
     }
   ]

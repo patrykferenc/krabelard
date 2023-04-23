@@ -1,5 +1,5 @@
-import {createContext} from "react";
-import _default from "ol/layer/Property";
+import { createContext } from 'react';
+import _default from 'ol/layer/Property';
 import MAP = _default.MAP;
 
 const MapContext = createContext({});

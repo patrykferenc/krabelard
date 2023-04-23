@@ -22,9 +22,7 @@ class ZtmApiVehiclePositionRepositoryUnitTest {
 	@BeforeEach
 	void setUp() {
 		ztmApiVehiclePositionRepository =
-			new ZtmApiVehiclePositionRepository(
-				ztmApiVehiclePositionRetrievingService
-			);
+			new ZtmApiVehiclePositionRepository(ztmApiVehiclePositionRetrievingService);
 	}
 
 	@Test

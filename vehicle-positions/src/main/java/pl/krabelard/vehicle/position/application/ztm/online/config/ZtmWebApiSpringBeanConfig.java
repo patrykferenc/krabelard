@@ -11,9 +11,9 @@ import pl.krabelard.vehicle.position.application.ztm.online.ZtmApiVehiclePositio
 class ZtmWebApiSpringBeanConfig {
 
 	@Bean
-	public ZtmApiVehiclePositionRepository ztmApiVehiclePositionRepository(ZtmApiVehiclePositionRetrievingService ztmApiVehiclePositionRetrievingService) {
-		return new ZtmApiVehiclePositionRepository(
-				ztmApiVehiclePositionRetrievingService
-		);
+	public ZtmApiVehiclePositionRepository ztmApiVehiclePositionRepository(
+		ZtmApiVehiclePositionRetrievingService ztmApiVehiclePositionRetrievingService
+	) {
+		return new ZtmApiVehiclePositionRepository(ztmApiVehiclePositionRetrievingService);
 	}
 }

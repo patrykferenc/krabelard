@@ -33,9 +33,7 @@ public class TimetablesApplicationConfiguration {
 	@Bean
 	WebClient webClient(WebClient.Builder builder) {
 		return builder
-			.clientConnector(
-				new ReactorClientHttpConnector(HttpClient.create().followRedirect(true))
-			)
+			.clientConnector(new ReactorClientHttpConnector(HttpClient.create().followRedirect(true)))
 			.baseUrl(ZTM_API_BASE_URI)
 			.build();
 	}
@@ -45,11 +43,6 @@ public class TimetablesApplicationConfiguration {
 		ZtmLineTimetableMapper mapper,
 		WebClient client
 	) {
-		return new ZtmLineTimetableRepositoryImpl(
-			ZTM_API_KEY,
-			ZTM_API_TIMETABLE_DB_ID,
-			client,
-			mapper
-		);
+		return new ZtmLineTimetableRepositoryImpl(ZTM_API_KEY, ZTM_API_TIMETABLE_DB_ID, client, mapper);
 	}
 }

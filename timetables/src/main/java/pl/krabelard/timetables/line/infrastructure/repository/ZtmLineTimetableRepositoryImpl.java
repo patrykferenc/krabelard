@@ -13,8 +13,7 @@ import pl.krabelard.timetables.line.domain.usecase.ZtmLineTimetableRepository;
 import pl.krabelard.timetables.line.infrastructure.repository.resource.ZtmLineTimetableApiResource;
 import pl.krabelard.timetables.line.infrastructure.repository.resource.ZtmLineTimetableMapper;
 
-public class ZtmLineTimetableRepositoryImpl
-	implements ZtmLineTimetableRepository {
+public class ZtmLineTimetableRepositoryImpl implements ZtmLineTimetableRepository {
 
 	private final String apiKey;
 

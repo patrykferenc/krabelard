@@ -11,9 +11,7 @@ public class StopTimetableExceptionHandler {
 
 	@ExceptionHandler(LineTimetableFetchingException.class)
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
-	public String LineTimetableFetchingExceptionHandler(
-		LineTimetableFetchingException ex
-	) {
+	public String LineTimetableFetchingExceptionHandler(LineTimetableFetchingException ex) {
 		return ex.getMessage();
 	}
 }
