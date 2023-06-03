@@ -1,8 +1,20 @@
 package com.krabelard.gtfsparser.domain.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.util.Set;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "route")
@@ -18,7 +30,7 @@ public class Route {
 	private long id;
 
 	@Column(name = "route_id")
-	private long routeId;
+	private String routeId;
 
 	@Column(name = "route_short_name")
 	private String routeShortName;
