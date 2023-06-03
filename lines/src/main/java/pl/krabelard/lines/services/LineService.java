@@ -2,7 +2,11 @@ package pl.krabelard.lines.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.krabelard.lines.entities.*;
+import pl.krabelard.lines.entities.direction.DirectionsDTO;
+import pl.krabelard.lines.entities.line.LineDTO;
+import pl.krabelard.lines.entities.line.LinesDTO;
+import pl.krabelard.lines.entities.stop.StopDTO;
+import pl.krabelard.lines.entities.stop.StopsDTO;
 
 import java.util.List;
 
