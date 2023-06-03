@@ -2,16 +2,21 @@ package com.krabelard.gtfsparser.domain.entity;
 
 import jakarta.persistence.*;
 import java.util.Set;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "route")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Route {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+
 	@Column(name = "route_id")
 	private long routeId;
 
@@ -54,6 +59,10 @@ public class Route {
 
 		public int getTypeId() {
 			return typeId;
+		}
+
+		public static RouteType of(int id) {
+			return RouteType.values()[id];
 		}
 	}
 }

@@ -1,9 +1,13 @@
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: ${DB_URL}
     driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: mysecretpassword
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     hikari:
       idle-timeout: 10000
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    generate-ddl: true
