@@ -1,5 +1,5 @@
 import styles from './QuickSelect.module.scss'
-import {useContext, useEffect, useState} from "react";
+import {useContext, useState} from "react";
 import {LoggedInContext} from "../../App";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import CircleMenu from "../CircleMenu/CircleMenu";
@@ -24,7 +24,9 @@ export default function QuickSelect() {
           </div>
         </Circle>
         <Circle disabled={false}>
-          <img src="icons/timetables.svg" alt="timetables"/>
+          <Link to="/lines">
+            <img src="icons/timetables.svg" alt="timetables"/>
+          </Link>
         </Circle>
         <Circle disabled={!isLoggedIn()}>
           <img src="icons/work.svg" alt="work"/>

@@ -7,7 +7,7 @@ interface CheckboxProps {
   checked: boolean,
   selectionChanged: ((checked: boolean[]) => void);
   requireOneSelected: boolean
-};
+}
 
 const getId = (l: string, i: number) => `${l}_${i.toString()}`;
 

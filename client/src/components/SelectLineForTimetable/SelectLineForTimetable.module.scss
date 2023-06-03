@@ -1,0 +1,10 @@
+@import "../../index";
+
+$gap: 1.25rem;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+  height: 100%;
+}

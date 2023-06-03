@@ -1,0 +1,58 @@
+@import "../../index";
+
+$gap: 1.25rem;
+
+$border-radius: $main-font-size;
+
+.h2 {
+  text-align: center;
+  font-weight: 600;
+  font-size: $big-font-size;
+  margin: 20px;
+}
+
+.a {
+  width: fit-content;
+}
+
+.pageContainer {
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 50px;
+  box-sizing: border-box;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-grow: 1;
+}
+
+.button {
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap');
+  flex: 1;
+  height: 100%;
+  border-radius: 10px;
+  font-family: 'Noto Sans JP', sans-serif;
+  text-transform: uppercase;
+  font-size: large;
+  font-weight: bold;
+}
+
+.buttonForth {
+  @extend .button;
+  background-color: #0496FF;
+  color: white;
+  border-color: #0496FF;
+  margin-right: 1vh;
+  cursor: pointer;
+}
+
+.buttonBack {
+  @extend .button;
+  color: #0496FF;
+  background-color: white;
+  border-color: #0496FF;
+  cursor: pointer;
+}

@@ -6,9 +6,8 @@ import Input from "../Input/Input";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import PlaceTypeEnum from "../../enums/place-type.enum";
 import RadioButtonGroup from "../RadioButtonGroup/RadioButtonGroup";
-import {set} from "ol/transform";
 
-interface RoutePreferencesProps {};
+interface RoutePreferencesProps {}
 
 const RoutePreferences: FunctionComponent<RoutePreferencesProps> = () => {
   // TODO fetch from KrApi

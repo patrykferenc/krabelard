@@ -1,0 +1,17 @@
+.button {
+  background: none;
+  outline: none;
+  border: 3px solid black;
+  color: black;
+  font-family: 'Open Sans', sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 30px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.row {
+  display: grid;
+  grid-gap: 2px;
+}
