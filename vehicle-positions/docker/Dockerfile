@@ -1,13 +1,14 @@
-FROM busybox AS builder
-
-ARG build_file
-COPY "${build_file}" /build.zip
-RUN unzip /build.zip
+FROM eclipse-temurin:17 AS build
+WORKDIR /
+ADD . .
+RUN mkdir /b/
+RUN ./gradlew clean bootJar
+RUN mv build/libs/*.jar /b/
 
 FROM eclipse-temurin:17
 
 RUN mkdir /opt/app
-COPY --from=builder /b/vehicle-positions.jar /opt/app
+COPY --from=build /b/vehicle-positions.jar /opt/app
 
 WORKDIR /opt/app
 
