@@ -4,13 +4,13 @@ import lombok.Data;
 
 @Data
 public class LineDTO {
+    String vehicleType;
 
-    String lineNumber;
-    String lineType;
+    String line;
 
     public LineDTO(String lineNumber) {
-        this.lineType = identifyType(lineNumber).toString();
-        this.lineNumber = lineNumber;
+        this.vehicleType = identifyType(lineNumber).toString();
+        this.line = lineNumber;
     }
 
     public static VehicleType identifyType(String lineNumber) {
