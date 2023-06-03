@@ -2,9 +2,7 @@ package pl.krabelard.lines.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.krabelard.lines.entities.DirectionsDTO;
-import pl.krabelard.lines.entities.LineDTO;
-import pl.krabelard.lines.entities.LinesDTO;
+import pl.krabelard.lines.entities.*;
 
 import java.util.List;
 
@@ -91,5 +89,18 @@ public class LineService {
                 return new DirectionsDTO("Dworzec Wileński", "Rondo Waszyngtona");
         }
         return null;
+    }
+
+    public static StopsDTO getStopsMocked(String line, String direction) {
+        return new StopsDTO(List.of(
+                new StopDTO("1", "Młociny", "52.254", "21.038"),
+                new StopDTO("2", "Wawrzyszew", "52.254", "21.038"),
+                new StopDTO("3", "Stare Bielany", "52.254", "21.038"),
+                new StopDTO("4", "Słodowiec", "52.254", "21.038"),
+                new StopDTO("5", "Marymont", "52.254", "21.038"),
+                new StopDTO("6", "Plac Wilsona", "52.254", "21.038"),
+                new StopDTO("7", "Dworzec Gdański", "52.254", "21.038"),
+                new StopDTO("8", "Ratusz Arsenał", "52.254", "21.038"),
+                new StopDTO("9", "Świętokrzyska", "52.254", "21.038")));
     }
 }
