@@ -15,19 +15,19 @@ public class LinesController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public LinesDTO getAllLines(){
+    public LinesDTO getAllLines() {
         return LineService.getAllLinesMocked();
     }
 
     @GetMapping("/{line}")
     @ResponseStatus(HttpStatus.OK)
-    public DirectionsDTO getDirectionsForLine(@PathVariable("line") String line){
+    public DirectionsDTO getDirectionsForLine(@PathVariable("line") String line) {
         return LineService.getDirectionsMocked(line);
     }
 
     @GetMapping("/{line}/{direction}")
     @ResponseStatus(HttpStatus.OK)
-    public StopsDTO getStopsForLineAndDirection(@PathVariable("line") String line, @PathVariable("direction") String direction){
+    public StopsDTO getStopsForLineAndDirection(@PathVariable("line") String line, @PathVariable("direction") String direction) {
         return LineService.getStopsMocked(line, direction);
     }
 
