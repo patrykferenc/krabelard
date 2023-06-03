@@ -9,6 +9,7 @@ import { OSM } from 'ol/source';
 import { FunctionComponent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { krapi } from '../../api/krapi';
+import BusLayer from '../ol/Layers/BusLayer/BusLayer';
 
 const FindAWay: FunctionComponent = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -39,9 +40,31 @@ const FindAWay: FunctionComponent = () => {
         />
       )}
       <div className={`${styles.mapContainer}`}>
-        <Map zoom={4} center={[52.2297, 21.0122]}>
+        <Map zoom={14} center={
+          [
+            21.0122,
+            52.2297
+          ]
+        }>
           <Layers>
+             <BusLayer busPositions={
+              [
+                {
+                  id: 1,
+                  latitude: 52.2297,
+                  longitude: 21.0122,
+                },
+                {
+                  id: 2,
+                  latitude: 52.1297,
+                  longitude: 21.0122,
+                }
+              ]
+            }
+            zIndex={2}
+            />
             <TileLayer source={new OSM()} zIndex={1} />
+           
           </Layers>
         </Map>
         <button className={`${styles.button}`} onClick={toggle}>

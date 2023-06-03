@@ -3,6 +3,7 @@ import { View, Map as OlMap } from 'ol';
 import { FunctionComponent, ReactNode, useEffect, useRef, useState } from 'react';
 import MapContext from './MapContext';
 import { ViewOptions } from 'ol/View';
+import {fromLonLat} from 'ol/proj';
 interface MapProps {
   center: number[];
   zoom: number;
@@ -14,7 +15,9 @@ const Map: FunctionComponent<MapProps> = ({ center, zoom, children }) => {
   const [map, setMap] = useState();
   useEffect(() => {
     const MapOptions = {
-      view: new View({ zoom, center }),
+      view: new View({ zoom: zoom, 
+        center: fromLonLat(center)
+       }),
       layers: [],
       controls: [],
       overlays: [],
@@ -26,17 +29,6 @@ const Map: FunctionComponent<MapProps> = ({ center, zoom, children }) => {
     return () => mapObject.setTarget(undefined);
   }, []);
 
-  useEffect(() => {
-    if (!map) return;
-    // @ts-ignore
-    map.getView().setZoom(zoom);
-  }, [zoom]);
-
-  useEffect(() => {
-    if (!map) return;
-    // @ts-ignore
-    map.getView().setCenter(center);
-  }, [center]);
 
   return (
     <MapContext.Provider value={{ map }}>
