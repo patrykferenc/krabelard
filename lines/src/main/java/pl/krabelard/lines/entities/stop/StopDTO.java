@@ -1,4 +1,4 @@
-package pl.krabelard.lines.entities;
+package pl.krabelard.lines.entities.stop;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
