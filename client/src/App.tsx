@@ -11,8 +11,15 @@ import { createContext, useState } from 'react';
 import FindAWay from './components/FindAWay/FindAWay';
 import UserPreferences from './components/UserPreferences/UserPreferences';
 import RoutePreferences from './components/RoutePreferences/RoutePreferences';
+import SelectLineForTimetable from './components/SelectLineForTimetable/SelectLineForTimetable';
+import StationsList from './components/StationsList/StationsList';
+import Direction from './components/Direction/Direction';
+import Timetables from './components/Timetables/Timetables';
 
-const initialLoggedIn = { loggedIn: null, setLoggedIn: (username: string) => {} };
+const initialLoggedIn = {
+  loggedIn: null,
+  setLoggedIn: (username: string) => {},
+};
 export const LoggedInContext = createContext(initialLoggedIn);
 
 export default function App() {
@@ -22,7 +29,11 @@ export default function App() {
       <Route path='/find-a-way' element={<FindAWay />} />,
       <Route path='/select' element={<QuickSelect />} />,
       <Route path='/preferences' element={<UserPreferences />} />,
-      <Route path='routes' element={<RoutePreferences />} />,
+      <Route path='/routes' element={<RoutePreferences />} />,
+      <Route path='/lines' element={<SelectLineForTimetable />} />,
+      <Route path='/direction' element={<Direction />} />,
+      <Route path='/station-list' element={<StationsList />} />,
+      <Route path='/timetables' element={<Timetables />} />,
       <Route path='/' element={<Navigate to='/select' />} />,
     ])
   );

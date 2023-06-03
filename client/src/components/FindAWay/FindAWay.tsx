@@ -6,19 +6,11 @@ import PrimaryButton from '../PrimaryButton/PrimaryButton';
 import Layers from '../ol/Layers/Layers';
 import TileLayer from '../ol/Layers/TileLayer/TileLayer';
 import { OSM } from 'ol/source';
-import { FunctionComponent, useEffect, useState } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { krapi } from '../../api/krapi';
 
 const FindAWay: FunctionComponent = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
-  useEffect(() => {
-    krapi('/api/v1/')
-      .get('/vehicle-positions/buses/N37')
-      .then((response) => {
-        console.log(response);
-      });
-  }, []);
   const toggle = () => {
     setIsFullscreen(!isFullscreen);
   };

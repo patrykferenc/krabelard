@@ -1,0 +1,114 @@
+.table {
+  border-radius: 21px;
+  height: 10vh;
+  width: 30vh;
+  border: white solid;
+  font-family: 'Outfit', sans-serif;
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: 400;
+  background-color: #dadada;
+}
+
+.table {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.table > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.destination {
+  margin: 0 0 0 1rem;
+  font-size: 1.5vh;
+}
+
+.timeData {
+  display: flex;
+  flex-direction: row;
+}
+
+.time {
+  margin: 0 0 0 1rem;
+  position: relative;
+  font-size: 5vh;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.white_part {
+  display: flex;
+}
+
+.time:before {
+  content: '';
+  position: absolute;
+  top: 3vh;
+  right: 0;
+  padding: 0.2rem;
+}
+
+.changeTime {
+  margin-left: 0.2rem;
+  font-weight: 600;
+}
+
+.none {
+  display: none;
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 100;
+}
+
+.color_part {
+  background-color: #34d098;
+  border-radius: 0 21px 21px 0;
+  height: 10vh;
+  width: 8vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.low-departures {
+  background-color: red;
+}
+
+.medium-departures {
+  background-color: yellow;
+}
+
+.high-departures {
+  background-color: green;
+}
+
+.departure {
+  margin: 0;
+  position: relative;
+  font-size: 4vh;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.departure:before {
+  content: '';
+  position: absolute;
+  top: -1.5rem;
+  right: 0;
+  padding: 0.2rem;
+}
+
+.za {
+  margin-bottom: -0.5vh;
+}
+
+.min {
+  margin-top: -0.5vh;
+}
