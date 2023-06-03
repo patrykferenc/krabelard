@@ -2,6 +2,7 @@ package pl.krabelard.lines.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.krabelard.lines.entities.DirectionsDTO;
 import pl.krabelard.lines.entities.LineDTO;
 import pl.krabelard.lines.entities.LinesDTO;
 
@@ -48,5 +49,47 @@ public class LineService {
             new LineDTO("111"),
             new LineDTO("112"),
             new LineDTO("120")));
+    }
+
+    public static DirectionsDTO getDirections(String line) {
+        return null;
+    }
+
+    public static DirectionsDTO getDirectionsMocked(String line) {
+        switch(line){
+            case "M1":
+                return new DirectionsDTO("Młociny", "Kabaty");
+            case "M2":
+                return new DirectionsDTO("Dworzec Wileński", "Bemowo");
+            case "1":
+                return new DirectionsDTO("Kino Femina", "Os. Górczewska");
+            case "2":
+                return new DirectionsDTO("Dworzec Wileński", "Os. Górczewska");
+            case "3":
+                return new DirectionsDTO("Pl. Wilsona", "Woronicza");
+            case "4":
+                return new DirectionsDTO("Dworzec Wileński", "Pl. Wilsona");
+            case "6":
+                return new DirectionsDTO("Dworzec Wileński", "Rondo Waszyngtona");
+            case "7":
+                return new DirectionsDTO("Dworzec Wileński", "Pl. Wilsona");
+            case "9":
+                return new DirectionsDTO("Dworzec Wileński", "Rondo Waszyngtona");
+            case "11":
+                return new DirectionsDTO("Dworzec Wileński", "Rondo Waszyngtona");
+            case "13":
+                return new DirectionsDTO("Dworzec Wileński", "Rondo Waszyngtona");
+            case "15":
+                return new DirectionsDTO("Dworzec Wileński", "Rondo Waszyngtona");
+            case "17":
+                return new DirectionsDTO("Dworzec Wileński", "Rondo Waszyngtona");
+            case "102":
+                return new DirectionsDTO("Dworzec Wileński", "Rondo Waszyngtona");
+            case "103":
+                return new DirectionsDTO("Dworzec Wileński", "Rondo Waszyngtona");
+            case "104":
+                return new DirectionsDTO("Dworzec Wileński", "Rondo Waszyngtona");
+        }
+        return null;
     }
 }
