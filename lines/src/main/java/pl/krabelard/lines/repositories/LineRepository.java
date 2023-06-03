@@ -1,4 +1,3 @@
 package pl.krabelard.lines.repositories;
 
-public interface LineRepository {
-}
+public interface LineRepository {}
