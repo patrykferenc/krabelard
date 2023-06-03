@@ -17,6 +17,9 @@ $border-radius: $main-font-size;
   user-select: none;
   width: 100%;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .checkbox {

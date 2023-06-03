@@ -1,0 +1,9 @@
+.separator {
+  display: flex;
+  justify-content: center;
+  & > div {
+    height: 0;
+    border: 1px solid #dedede;
+    width: 85%;
+  }
+}
