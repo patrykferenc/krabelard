@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class DirectionsDTO {
-    String directionFrom;
-    String directionTo;
+
+	String directionFrom;
+	String directionTo;
 }

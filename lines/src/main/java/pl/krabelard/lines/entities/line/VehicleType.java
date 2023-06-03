@@ -1,8 +1,8 @@
 package pl.krabelard.lines.entities.line;
 
 public enum VehicleType {
-    BUS,
-    TRAM,
-    METRO,
-    TRAIN;
+	BUS,
+	TRAM,
+	METRO,
+	TRAIN,
 }

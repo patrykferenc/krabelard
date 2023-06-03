@@ -6,9 +6,9 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class StopDTO {
-    private String stopId;
-    private String stopName;
-    private String stopLat;
-    private String stopLon;
 
+	private String stopId;
+	private String stopName;
+	private String stopLat;
+	private String stopLon;
 }

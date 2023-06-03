@@ -13,22 +13,24 @@ import pl.krabelard.lines.services.LineService;
 @RequiredArgsConstructor
 public class LinesController {
 
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public LinesDTO getAllLines() {
-        return LineService.getAllLinesMocked();
-    }
+	@GetMapping
+	@ResponseStatus(HttpStatus.OK)
+	public LinesDTO getAllLines() {
+		return LineService.getAllLinesMocked();
+	}
 
-    @GetMapping("/{line}")
-    @ResponseStatus(HttpStatus.OK)
-    public DirectionsDTO getDirectionsForLine(@PathVariable("line") String line) {
-        return LineService.getDirectionsMocked(line);
-    }
+	@GetMapping("/{line}")
+	@ResponseStatus(HttpStatus.OK)
+	public DirectionsDTO getDirectionsForLine(@PathVariable("line") String line) {
+		return LineService.getDirectionsMocked(line);
+	}
 
-    @GetMapping("/{line}/{direction}")
-    @ResponseStatus(HttpStatus.OK)
-    public StopsDTO getStopsForLineAndDirection(@PathVariable("line") String line, @PathVariable("direction") String direction) {
-        return LineService.getStopsMocked(line, direction);
-    }
-
+	@GetMapping("/{line}/{direction}")
+	@ResponseStatus(HttpStatus.OK)
+	public StopsDTO getStopsForLineAndDirection(
+		@PathVariable("line") String line,
+		@PathVariable("direction") String direction
+	) {
+		return LineService.getStopsMocked(line, direction);
+	}
 }
