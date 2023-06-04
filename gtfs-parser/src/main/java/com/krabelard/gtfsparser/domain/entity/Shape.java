@@ -1,18 +1,8 @@
 package com.krabelard.gtfsparser.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import jakarta.persistence.*;
 import java.util.Set;
+import lombok.*;
 
 @Entity
 @Table(name = "shape")
@@ -24,11 +14,8 @@ import java.util.Set;
 public class Shape {
 
 	@Id
-	@GeneratedValue
-	private long id;
-
-	@Column(name = "gtfs_id")
-	private String gtfsId;
+	@Column(name = "shape_id")
+	private String shapeId;
 
 	@Column(name = "pt_sequence")
 	private int ptSequence;

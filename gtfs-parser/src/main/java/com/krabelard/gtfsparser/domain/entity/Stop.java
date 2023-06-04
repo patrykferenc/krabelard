@@ -1,20 +1,8 @@
 package com.krabelard.gtfsparser.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import jakarta.persistence.*;
 import java.util.Set;
+import lombok.*;
 
 @Entity
 @Table(name = "stop")
@@ -26,11 +14,8 @@ import java.util.Set;
 public class Stop {
 
 	@Id
-	@GeneratedValue
-	private long id;
-
 	@Column(name = "stop_id")
-	private String gtfsId;
+	private String stopId;
 
 	@Column(name = "stop_name")
 	private String name;

@@ -1,9 +1,8 @@
 package com.krabelard.gtfsparser.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-
 import java.util.Set;
+import lombok.*;
 
 @Entity
 @Table(name = "trip")
@@ -15,15 +14,12 @@ import java.util.Set;
 public class Trip {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	@Column(name = "trip_id")
+	private String tripId;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "route_id")
 	private Route routeId;
-
-	@Column(name = "trip_id")
-	private String tripId;
 
 	@Column(name = "head_sign")
 	private String headSign;
@@ -52,7 +48,7 @@ public class Trip {
 
 	public enum Direction {
 		OUTBOUND,
-		INBOUND;
+		INBOUND,
 	}
 
 	public enum Accessibility {
