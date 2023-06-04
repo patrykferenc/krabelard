@@ -17,6 +17,16 @@ services:
       args:
         - build_file=build.zip
 
+  lines:
+    image: lines:latest
+    ports:
+      - '8083:8080'
+    build:
+      context: ./lines
+      dockerfile: docker/Dockerfile
+      args:
+        - build_file=build.zip
+
   vehicle-positions:
     image: vehicle-positions:latest
     ports:

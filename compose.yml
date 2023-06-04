@@ -15,6 +15,14 @@ services:
       context: ./krapi
       dockerfile: docker/Dockerfile
 
+  lines:
+    image: lines:latest
+    ports:
+      - '8083:8080'
+    build:
+      context: ./lines
+      dockerfile: docker/Dockerfile
+
   vehicle-positions:
     image: vehicle-positions:latest
     ports:
