@@ -1,6 +1,8 @@
 package pl.krabelard.lines.services;
 
 import java.util.List;
+
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.krabelard.lines.entities.direction.DirectionsDTO;
@@ -8,16 +10,20 @@ import pl.krabelard.lines.entities.line.LineDTO;
 import pl.krabelard.lines.entities.line.LinesDTO;
 import pl.krabelard.lines.entities.stop.StopDTO;
 import pl.krabelard.lines.entities.stop.StopsDTO;
+import pl.krabelard.lines.repositories.LineRepository;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class LineService {
 
-	public static LinesDTO getAllLines() {
+	private final LineRepository lineRepository;
+
+	public LinesDTO getAllLines() {
+		System.out.println(lineRepository.findAll());
 		return null;
 	}
 
-	public static LinesDTO getAllLinesMocked() {
+	public LinesDTO getAllLinesMocked() {
 		return new LinesDTO(
 			List.of(
 				new LineDTO("M1"),
@@ -55,11 +61,11 @@ public class LineService {
 		);
 	}
 
-	public static DirectionsDTO getDirections(String line) {
+	public DirectionsDTO getDirections(String line) {
 		return null;
 	}
 
-	public static DirectionsDTO getDirectionsMocked(String line) {
+	public DirectionsDTO getDirectionsMocked(String line) {
 		switch (line) {
 			case "M1":
 				return new DirectionsDTO("Młociny", "Kabaty");
@@ -97,7 +103,7 @@ public class LineService {
 		return null;
 	}
 
-	public static StopsDTO getStopsMocked(String line, String direction) {
+	public StopsDTO getStopsMocked(String line, String direction) {
 		return new StopsDTO(
 			List.of(
 				new StopDTO("1", "Młociny", "52.254", "21.038"),
