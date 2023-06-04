@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 public class ApplicationStartup
 	implements ApplicationListener<ApplicationReadyEvent> {
 
+	private static final int SECONDS_IN_DAY = 60 * 60 * 24;
 	private final CalendarDateRepository calendarDateRepository;
 	private final FrequencyRepository frequencyRepository;
 	private final RouteRepository routeRepository;
@@ -58,54 +59,62 @@ public class ApplicationStartup
 	public void injectCalendarDatesToDatabase(
 		Collection<ServiceCalendarDate> calendarDates
 	) {
-		for (var calendarDate : calendarDates) {
-			var dbCalendarDate = CalendarDate
-				.builder()
-				.date(calendarDate.getDate().getAsDate())
-				.exceptionType(
-					CalendarDate.ExceptionType.of(calendarDate.getExceptionType())
-				)
-				.build();
+		var dbCalendarDates = calendarDates
+			.stream()
+			.map(calendarDate ->
+				CalendarDate
+					.builder()
+					.date(calendarDate.getDate().getAsDate())
+					.exceptionType(
+						CalendarDate.ExceptionType.of(calendarDate.getExceptionType())
+					)
+					.build()
+			)
+			.toList();
 
-			calendarDateRepository.save(dbCalendarDate);
-		}
+		calendarDateRepository.saveAll(dbCalendarDates);
 	}
 
 	@Transactional
 	public void injectFrequenciesToDatabase(
 		Collection<org.onebusaway.gtfs.model.Frequency> frequencies
 	) {
-		var secondsInDay = 24 * 60 * 60;
-		for (var frequency : frequencies) {
-			var dbFrequency = Frequency
-				.builder()
-				.startTime(
-					LocalTime.ofSecondOfDay(frequency.getStartTime() % secondsInDay)
-				)
-				.endTime(LocalTime.ofSecondOfDay(frequency.getEndTime() % secondsInDay))
-				.headwaySecs(frequency.getHeadwaySecs())
-				.exactTimes(Frequency.ExactTimes.of(frequency.getExactTimes()))
-				.build();
-
-			frequencyRepository.save(dbFrequency);
-		}
+		var dbFrequencies = frequencies
+			.stream()
+			.map(frequency ->
+				Frequency
+					.builder()
+					.startTime(
+						LocalTime.ofSecondOfDay(frequency.getStartTime() % SECONDS_IN_DAY)
+					)
+					.endTime(
+						LocalTime.ofSecondOfDay(frequency.getEndTime() % SECONDS_IN_DAY)
+					)
+					.headwaySecs(frequency.getHeadwaySecs())
+					.exactTimes(Frequency.ExactTimes.of(frequency.getExactTimes()))
+					.build()
+			)
+			.toList();
+		frequencyRepository.saveAll(dbFrequencies);
 	}
 
 	@Transactional
 	public void injectRoutesToDatabase(
 		Collection<org.onebusaway.gtfs.model.Route> routes
 	) {
-		for (var route : routes) {
-			var dbRoute = Route
-				.builder()
-				.routeId(route.getId().getId())
-				.longRouteName(route.getLongName())
-				.routeShortName(route.getShortName())
-				.routeSortOrder(route.getSortOrder())
-				.build();
-
-			routeRepository.save(dbRoute);
-		}
+		var dbRoutes = routes
+			.stream()
+			.map(route ->
+				Route
+					.builder()
+					.routeId(route.getId().getId())
+					.longRouteName(route.getLongName())
+					.routeShortName(route.getShortName())
+					.routeSortOrder(route.getSortOrder())
+					.build()
+			)
+			.toList();
+		routeRepository.saveAll(dbRoutes);
 	}
 
 	@Transactional
