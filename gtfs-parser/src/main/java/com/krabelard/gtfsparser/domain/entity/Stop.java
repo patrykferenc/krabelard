@@ -1,14 +1,28 @@
 package com.krabelard.gtfsparser.domain.entity;
 
-import jakarta.persistence.*;
-import java.util.Set;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "stop")
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Stop {
 
 	@Id
@@ -16,7 +30,7 @@ public class Stop {
 	private long id;
 
 	@Column(name = "stop_id")
-	private long gtfsId;
+	private String gtfsId;
 
 	@Column(name = "stop_name")
 	private String name;
@@ -32,7 +46,7 @@ public class Stop {
 	private LocationType locationType;
 
 	@Column(name = "zone_id")
-	private long zoneId;
+	private String zoneId;
 
 	@OneToMany(mappedBy = "stopId")
 	Set<StopTime> stopTimes;
@@ -42,6 +56,10 @@ public class Stop {
 		STATION,
 		ENTRANCE_EXIT,
 		GENERIC,
-		BOARDING_AREA,
+		BOARDING_AREA;
+
+		public static LocationType of(int id) {
+			return LocationType.values()[id];
+		}
 	}
 }
