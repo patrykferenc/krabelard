@@ -1,8 +1,9 @@
 import styles from './SelectLineForTimetable.module.scss';
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import CheckboxGroup from '../CheckboxGroup/CheckboxGroup';
 import ButtonGroup, { Button } from '../ButtonGroup/ButtonGroup';
+import { timetablesApi } from '../../api/timetablesApi';
 
 interface SelectLineForTimetableProps {}
 
@@ -16,37 +17,40 @@ const SelectLineForTimetable: FunctionComponent<SelectLineForTimetableProps> = (
   const [showMetros, setShowMetros] = useState(true);
   const [showBuses, setShowBuses] = useState(true);
   const [showTrams, setShowTrams] = useState(true);
+
+  const [metros, setMetros] = useState<Button[]>([]);
+  const [trams, setTrams] = useState<Button[]>([]);
+  const [buses, setBuses] = useState<Button[]>([]);
+
+  useEffect(() => {
+    timetablesApi.getAllLines().then(lines => {
+      setMetros(lines
+        .filter(line => line.vehicleType === 'METRO')
+        .map(line => ({
+          label: line.line,
+          action: () => {navigate(`/direction?line=${line.line}`)},
+          color: '#E85F5C',
+        } as Button))
+      );
+      setTrams(lines
+        .filter(line => line.vehicleType === 'TRAM')
+        .map(line => ({
+          label: line.line,
+          action: () => {navigate(`/direction?line=${line.line}`)}
+        } as Button))
+      );
+      setBuses(lines
+        .filter(line => line.vehicleType === 'BUS')
+        .map(line => ({
+          label: line.line,
+          action: () => {navigate(`/direction?line=${line.line}`)},
+          color: '#000500',
+        } as Button))
+      );
+    });
+  }, []);
+
   const navigate = useNavigate();
-
-  const metros: Button[] = [
-    {
-      label: 'M1',
-      action: () => {
-        navigate(`/direction?line=M1`);
-      },
-    },
-    {
-      label: 'M2',
-      action: () => {
-        navigate('/direction?line=M2');
-      },
-      color: '#E85F5C',
-    },
-  ];
-
-  const trams: Button[] = ['78', '4', '15', '35', '9'].map((station) => ({
-    label: station,
-    action: () => {
-      navigate(`/direction?line=${station}`);
-    },
-  }));
-
-  const buses: Button[] = ['179', '189', '185', '192', '503', '504', '209'].map((station) => ({
-    label: station,
-    action: () => {
-      navigate(`/direction?line=${station}`);
-    },
-  }));
 
   return (
     <div className={`${styles.container}`}>
@@ -66,6 +70,7 @@ const SelectLineForTimetable: FunctionComponent<SelectLineForTimetableProps> = (
       />
       {showMetros && (
         <div className={styles.metros}>
+          {/*@ts-ignore*/}
           <ButtonGroup buttons={metros} color={'#1877F2'} maxPerRow={3} />
         </div>
       )}

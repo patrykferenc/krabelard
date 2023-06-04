@@ -1,10 +1,16 @@
 import styles from './Timetables.module.scss';
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import TimeTable from '../TimeTable/TimeTable';
 import { Link, useSearchParams } from 'react-router-dom';
 import TimetableQueryParams from '../../enums/TimetableQueryParams';
+import { timetablesApi } from '../../api/timetablesApi';
 
 interface TimetablesProps {}
+
+interface Time {
+  date: Date;
+  delay: number;
+}
 
 const Timetables: FunctionComponent<TimetablesProps> = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,28 +24,47 @@ const Timetables: FunctionComponent<TimetablesProps> = () => {
     return dest ?? '';
   });
 
+  const [times, setTimes] = useState<Time[]>([]);
+
+  useEffect(() => {
+    const line = searchParams.get(TimetableQueryParams.Line);
+    const direction = searchParams.get(TimetableQueryParams.Direction);
+    const stop = searchParams.get(TimetableQueryParams.Station);
+    if (line && direction && stop) {
+      timetablesApi.getLineAtStopDepartureTimesWithDelay(line, stop, direction).then(times => {
+        setTimes(times.map<Time>(time => {
+          return {
+            date: new Date(time.departureTime),
+            delay: time.delay
+          }
+        }));
+      });
+    }
+  }, []);
+
   return (
     <div className={`${styles.pageContainer}`}>
       <Link className={`${styles.a}`} to={getPreviousLink()}>
-        <img src='/icons/go-back.svg' alt='go back' />
+        <img src="/icons/go-back.svg" alt="go back" />
       </Link>
       <h2 className={styles.h2}>{searchParams.get(TimetableQueryParams.Line)}</h2>
-      <div className={styles.container}>
-        <TimeTable
-          destination={destination}
-          hour={12}
-          minutes={12}
-          departures={3}
-          timeChange={-1}
-        />
-        <TimeTable
-          destination={destination}
-          hour={12}
-          minutes={15}
-          departures={7}
-          timeChange={+1}
-        />
-        <TimeTable destination={destination} hour={12} minutes={18} departures={7} timeChange={0} />
+      <div className={styles.listContainer}>
+        {
+          times.map((time, index) => {
+            const hours = time.date.getHours();
+            const minutes = time.date.getMinutes();
+            return (
+              <TimeTable
+                destination={destination}
+                hour={hours.toString().length === 1 ? `0${hours}` : hours.toString()}
+                minutes={minutes.toString().length === 1 ? `0${minutes}` : minutes.toString()}
+                departures={time.date.getTime() - new Date().getTime() > 0 ? Math.floor((time.date.getTime() - new Date().getTime()) / 60000) : 0}
+                timeChange={time.delay}
+                key={index}
+              />
+            )
+          })
+        }
       </div>
     </div>
   );

@@ -3,8 +3,8 @@ import { FunctionComponent } from 'react';
 
 interface TimeTableProps {
   destination: string;
-  hour: number;
-  minutes: number;
+  hour: string;
+  minutes: string;
   departures: number;
   timeChange: number;
 }

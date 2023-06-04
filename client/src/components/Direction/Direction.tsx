@@ -1,16 +1,30 @@
 import styles from './Direction.module.scss';
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import TimetableQueryParams from '../../enums/TimetableQueryParams';
+import { timetablesApi } from '../../api/timetablesApi';
 
 interface DirectionListProps {}
 
 const Direction: FunctionComponent<DirectionListProps> = () => {
-  const [forth, setForth] = useState('MŁOCINY');
-  const [back, setBack] = useState('KABATY');
 
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const [directionFrom, setDirectionFrom] = useState('');
+  const [directionTo, setDirectionTo] = useState('');
+
+  useEffect(() => {
+    const line = searchParams.get(TimetableQueryParams.Line);
+    if (line) {
+      timetablesApi.getLineDirections(line).then(directions => {
+        if (directions) {
+          setDirectionFrom(directions.directionFrom);
+          setDirectionTo(directions.directionTo);
+        }
+      });
+    }
+  }, []);
 
   const getNextLink = (direction: string) =>
     `/station-list` +
@@ -19,27 +33,27 @@ const Direction: FunctionComponent<DirectionListProps> = () => {
 
   return (
     <div className={`${styles.pageContainer}`}>
-      <Link className={`${styles.a}`} to='/lines'>
-        <img src='/icons/go-back.svg' alt='go back' />
+      <Link className={`${styles.a}`} to="/lines">
+        <img src="/icons/go-back.svg" alt="go back" />
       </Link>
       <h2 className={`${styles.h2}`}>WSKAŻ KIERUNEK</h2>
 
       <div className={`${styles.buttonContainer}`}>
         <button
           onClick={() => {
-            navigate(getNextLink(forth));
+            navigate(getNextLink(directionFrom));
           }}
           className={styles.buttonForth}
         >
-          {forth}
+          {directionFrom}
         </button>
         <button
           onClick={() => {
-            navigate(getNextLink(back));
+            navigate(getNextLink(directionTo));
           }}
           className={styles.buttonBack}
         >
-          {back}
+          {directionTo}
         </button>
       </div>
     </div>
