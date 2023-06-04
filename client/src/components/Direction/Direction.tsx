@@ -17,11 +17,19 @@ const Direction: FunctionComponent<DirectionListProps> = () => {
     `?${TimetableQueryParams.Line}=${searchParams.get(TimetableQueryParams.Line)}` +
     `&${TimetableQueryParams.Direction}=${direction}`;
 
+  // const getMapLink = (direction: string) =>
+  //   `/position-maps` 
+  //   // +
+  //   // `?${TimetableQueryParams.Line}=${searchParams.get(TimetableQueryParams.Line)}` +
+  //   // `&${TimetableQueryParams.Direction}=${direction}`;
+
+
   return (
     <div className={`${styles.pageContainer}`}>
       <Link className={`${styles.a}`} to='/lines'>
         <img src='/icons/go-back.svg' alt='go back' />
       </Link>
+      
       <h2 className={`${styles.h2}`}>WSKAŻ KIERUNEK</h2>
 
       <div className={`${styles.buttonContainer}`}>
@@ -41,7 +49,16 @@ const Direction: FunctionComponent<DirectionListProps> = () => {
         >
           {back}
         </button>
+      
       </div>
+        <button
+          onClick={() => {
+            navigate('/positions-map');
+          }}
+      className={styles.buttonBottom}>
+          fff
+        </button>
+      
     </div>
   );
 };

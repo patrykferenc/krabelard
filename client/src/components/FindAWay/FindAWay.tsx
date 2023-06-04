@@ -39,22 +39,7 @@ const FindAWay: FunctionComponent = () => {
           ]
         }>
           <Layers>
-             <BusLayer busPositions={
-              [
-                {
-                  id: 1,
-                  latitude: 52.2297,
-                  longitude: 21.0122,
-                },
-                {
-                  id: 2,
-                  latitude: 52.1297,
-                  longitude: 21.0122,
-                }
-              ]
-            }
-            zIndex={2}
-            />
+            
             <TileLayer source={new OSM()} zIndex={1} />
            
           </Layers>

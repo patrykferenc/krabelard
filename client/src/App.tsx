@@ -15,6 +15,7 @@ import SelectLineForTimetable from './components/SelectLineForTimetable/SelectLi
 import StationsList from './components/StationsList/StationsList';
 import Direction from './components/Direction/Direction';
 import Timetables from './components/Timetables/Timetables';
+import PositionsMap from './components/PositionsMap/PositionsMap';
 
 const initialLoggedIn = {
   loggedIn: null,
@@ -34,6 +35,7 @@ export default function App() {
       <Route path='/direction' element={<Direction />} />,
       <Route path='/station-list' element={<StationsList />} />,
       <Route path='/timetables' element={<Timetables />} />,
+      <Route path='/positions-map' element={<PositionsMap />} />,
       <Route path='/' element={<Navigate to='/select' />} />,
     ])
   );
