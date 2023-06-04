@@ -110,75 +110,87 @@ public class ApplicationStartup
 
 	@Transactional
 	public void injectShapesToDatabase(Collection<ShapePoint> shapes) {
-		for (var shape : shapes) {
-			var dbShape = Shape
-				.builder()
-				.shapeId(shape.getShapeId().getId())
-				.ptSequence(shape.getSequence())
-				.distanceTravelled(shape.getDistTraveled())
-				.ptLatitude(shape.getLat())
-				.ptLongitude(shape.getLon())
-				.build();
+		var dbShapes = shapes
+			.stream()
+			.map(shape ->
+				Shape
+					.builder()
+					.shapeId(shape.getShapeId().getId())
+					.ptSequence(shape.getSequence())
+					.distanceTravelled(shape.getDistTraveled())
+					.ptLatitude(shape.getLat())
+					.ptLongitude(shape.getLon())
+					.build()
+			)
+			.toList();
 
-			shapeRepository.save(dbShape);
-		}
+		shapeRepository.saveAll(dbShapes);
 	}
 
 	@Transactional
 	public void injectStopsToDatabase(
 		Collection<org.onebusaway.gtfs.model.Stop> stops
 	) {
-		for (var stop : stops) {
-			var dbStop = Stop
-				.builder()
-				.stopId(stop.getId().getId())
-				.name(stop.getName())
-				.latitude(stop.getLat())
-				.longitude(stop.getLon())
-				.locationType(Stop.LocationType.of(stop.getLocationType()))
-				.zoneId(stop.getZoneId())
-				.build();
+		var dbStops = stops
+			.stream()
+			.map(stop ->
+				Stop
+					.builder()
+					.stopId(stop.getId().getId())
+					.name(stop.getName())
+					.latitude(stop.getLat())
+					.longitude(stop.getLon())
+					.locationType(Stop.LocationType.of(stop.getLocationType()))
+					.zoneId(stop.getZoneId())
+					.build()
+			)
+			.toList();
 
-			stopRepository.save(dbStop);
-		}
+		stopRepository.saveAll(dbStops);
 	}
 
 	@Transactional
 	public void injectStopTimesToDatabase(
 		Collection<org.onebusaway.gtfs.model.StopTime> stopTimes
 	) {
-		for (var stopTime : stopTimes) {
-			var dbStopTime = StopTime
-				.builder()
-				.arrivalTime(LocalTime.ofSecondOfDay(stopTime.getArrivalTime()))
-				.departureTime(LocalTime.ofSecondOfDay(stopTime.getDepartureTime()))
-				.stopSequence(stopTime.getStopSequence())
-				.pickupType(StopTime.PickupType.of(stopTime.getPickupType()))
-				.dropoffType(StopTime.PickupType.of(stopTime.getDepartureTime()))
-				.shapeDistTravelled(stopTime.getShapeDistTraveled())
-				.build();
+		var dbStopTimes = stopTimes
+			.stream()
+			.map(stopTime ->
+				StopTime
+					.builder()
+					.arrivalTime(LocalTime.ofSecondOfDay(stopTime.getArrivalTime()))
+					.departureTime(LocalTime.ofSecondOfDay(stopTime.getDepartureTime()))
+					.stopSequence(stopTime.getStopSequence())
+					.pickupType(StopTime.PickupType.of(stopTime.getPickupType()))
+					.dropoffType(StopTime.PickupType.of(stopTime.getDepartureTime()))
+					.shapeDistTravelled(stopTime.getShapeDistTraveled())
+					.build()
+			)
+			.toList();
 
-			stopTimeRepository.save(dbStopTime);
-		}
+		stopTimeRepository.saveAll(dbStopTimes);
 	}
 
 	@Transactional
 	public void injectTripsToDatabase(
 		Collection<org.onebusaway.gtfs.model.Trip> trips
 	) {
-		for (var trip : trips) {
-			var dbTrip = Trip
-				.builder()
-				.tripId(trip.getId().getId())
-				.headSign(trip.getTripHeadsign())
-				.directionId(Trip.Direction.valueOf(trip.getDirectionId()))
-				.wheelchairAccessible(
-					Trip.Accessibility.of(trip.getWheelchairAccessible())
-				)
-				.bikesAllowed(Trip.Accessibility.of(trip.getBikesAllowed()))
-				.build();
+		var dbTrips = trips
+			.stream()
+			.map(trip ->
+				Trip
+					.builder()
+					.tripId(trip.getId().getId())
+					.headSign(trip.getTripHeadsign())
+					.directionId(Trip.Direction.valueOf(trip.getDirectionId()))
+					.wheelchairAccessible(
+						Trip.Accessibility.of(trip.getWheelchairAccessible())
+					)
+					.bikesAllowed(Trip.Accessibility.of(trip.getBikesAllowed()))
+					.build()
+			)
+			.toList();
 
-			tripRepository.save(dbTrip);
-		}
+		tripRepository.saveAll(dbTrips);
 	}
 }
