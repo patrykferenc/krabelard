@@ -17,11 +17,10 @@ const Direction: FunctionComponent<DirectionListProps> = () => {
     `?${TimetableQueryParams.Line}=${searchParams.get(TimetableQueryParams.Line)}` +
     `&${TimetableQueryParams.Direction}=${direction}`;
 
-  // const getMapLink = (direction: string) =>
-  //   `/position-maps` 
-  //   // +
-  //   // `?${TimetableQueryParams.Line}=${searchParams.get(TimetableQueryParams.Line)}` +
-  //   // `&${TimetableQueryParams.Direction}=${direction}`;
+  const getMapLink = () =>
+    `/positions-map` 
+    +
+    `?${TimetableQueryParams.Line}=${searchParams.get(TimetableQueryParams.Line)}`;
 
 
   return (
@@ -53,7 +52,7 @@ const Direction: FunctionComponent<DirectionListProps> = () => {
       </div>
         <button
           onClick={() => {
-            navigate('/positions-map');
+            navigate(getMapLink());
           }}
       className={styles.buttonBottom}>
           fff
