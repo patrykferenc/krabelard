@@ -1,8 +1,9 @@
 package com.krabelard.gtfsparser.domain.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalTime;
 import lombok.*;
+
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "stop_time")
@@ -17,7 +18,10 @@ public class StopTime {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(
+			fetch = FetchType.LAZY,
+			cascade = CascadeType.ALL
+	)
 	@JoinColumn(name = "trip_id")
 	private Trip tripId;
 
@@ -27,7 +31,10 @@ public class StopTime {
 	@Column(name = "departure_time")
 	private LocalTime departureTime;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(
+			fetch = FetchType.LAZY,
+			cascade = CascadeType.ALL
+	)
 	@JoinColumn(name = "stop_id")
 	private Stop stopId;
 
