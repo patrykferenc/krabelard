@@ -21,11 +21,31 @@ public class Route {
 	private String routeShortName;
 
 	@Column(name = "route_long_name")
-	private String longRouteName;
+	private String routeLongName;
+
+	@Column(name = "route_type")
+	private Type routeType;
 
 	@Column(name = "route_sort_order")
 	private int routeSortOrder;
 
 	@OneToMany(mappedBy = "routeId")
 	private Set<Trip> trips;
+
+	public enum Type {
+		LightRail,
+		UndergroundRail,
+		Rail,
+		Bus,
+		Ferry,
+		CableTram,
+		AerialLift,
+		Funicular,
+		Trolleybus,
+		Monorail;
+
+		public static Type of(int id) {
+			return Type.values()[id];
+		}
+	}
 }

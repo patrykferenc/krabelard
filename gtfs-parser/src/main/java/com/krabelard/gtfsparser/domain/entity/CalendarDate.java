@@ -1,9 +1,8 @@
 package com.krabelard.gtfsparser.domain.entity;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
 import lombok.*;
-
-import java.util.Date;
 
 @Entity
 @Table(name = "calendar_date")
@@ -19,12 +18,9 @@ public class CalendarDate {
 	private long id;
 
 	@Column(name = "date")
-	private Date date;
+	private LocalDate date;
 
-	@ManyToOne(
-			fetch = FetchType.LAZY,
-			cascade = CascadeType.ALL
-	)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "service_id")
 	private Trip serviceId;
 
