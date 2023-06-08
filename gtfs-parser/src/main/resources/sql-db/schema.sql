@@ -7,7 +7,7 @@ drop table if exists shape;
 drop table if exists route;
 
 
-CREATE TABLE calendar_dates
+CREATE TABLE calendar_date
 (
     id             BIGINT NOT NULL,
     date           TIMESTAMP WITHOUT TIME ZONE,
@@ -91,7 +91,7 @@ CREATE TABLE stop
     CONSTRAINT pk_stop PRIMARY KEY (id)
 );
 
-ALTER TABLE calendar_dates
+ALTER TABLE calendar_date
     ADD CONSTRAINT FK_CALENDAR_DATES_ON_SERVICEID FOREIGN KEY (service_id_id) REFERENCES trip (id);
 
 ALTER TABLE stop

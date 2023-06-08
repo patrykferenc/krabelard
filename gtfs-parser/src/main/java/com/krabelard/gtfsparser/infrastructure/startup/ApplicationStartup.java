@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class ApplicationStartup
 	implements ApplicationListener<ApplicationReadyEvent> {
 
@@ -39,6 +41,13 @@ public class ApplicationStartup
 				String.format("Error unzipping %s", GTFS_ARCHIVE),
 				e
 			);
+		}
+
+		// this solution is ugly, but filesystem needs a moment to notice freshly unzipped files
+		try {
+			Thread.sleep(1);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
 		}
 
 		try {
@@ -73,8 +82,9 @@ public class ApplicationStartup
 	public void injectShapesToDatabase(List<CSVRecord> csvRecords) {
 		var dbShapes = csvRecords
 			.stream()
-			.map(csvRecord ->
-				Shape
+			.map(csvRecord -> {
+				log.info("{}", csvRecord);
+				return Shape
 					.builder()
 					.shapeId(csvRecord.get("shape_id"))
 					.ptSequence(Integer.parseInt(csvRecord.get("shape_pt_sequence")))
@@ -83,8 +93,8 @@ public class ApplicationStartup
 					)
 					.ptLatitude(Double.parseDouble(csvRecord.get("shape_pt_lat")))
 					.ptLongitude(Double.parseDouble(csvRecord.get("shape_pt_lon")))
-					.build()
-			)
+					.build();
+			})
 			.toList();
 
 		shapeRepository.saveAll(dbShapes);
@@ -94,8 +104,9 @@ public class ApplicationStartup
 	public void injectRoutesToDatabase(List<CSVRecord> csvRecords) {
 		var dbRoutes = csvRecords
 			.stream()
-			.map(csvRecord ->
-				Route
+			.map(csvRecord -> {
+				log.info("{}", csvRecord);
+				return Route
 					.builder()
 					.routeId(csvRecord.get("route_id"))
 					.routeShortName(csvRecord.get("route_short_name"))
@@ -104,8 +115,8 @@ public class ApplicationStartup
 						Route.Type.of(Integer.parseInt(csvRecord.get("route_type")))
 					)
 					.routeSortOrder(Integer.parseInt(csvRecord.get("route_sort_order")))
-					.build()
-			)
+					.build();
+			})
 			.toList();
 
 		routeRepository.saveAll(dbRoutes);
@@ -115,8 +126,9 @@ public class ApplicationStartup
 	public void injectStopsToDatabase(List<CSVRecord> csvRecords) {
 		var dbStops = csvRecords
 			.stream()
-			.map(csvRecord ->
-				Stop
+			.map(csvRecord -> {
+				log.info("{}", csvRecord);
+				return Stop
 					.builder()
 					.stopId(csvRecord.get("stop_id"))
 					.name(csvRecord.get("stop_name"))
@@ -128,8 +140,8 @@ public class ApplicationStartup
 						)
 					)
 					.zoneId(csvRecord.get("zone_id"))
-					.build()
-			)
+					.build();
+			})
 			.toList();
 
 		stopRepository.saveAll(dbStops);
@@ -140,6 +152,7 @@ public class ApplicationStartup
 		var dbTrips = csvRecords
 			.stream()
 			.map(csvRecord -> {
+				log.info("{}", csvRecord);
 				var route = routeRepository
 					.findById(csvRecord.get("route_id"))
 					.orElseThrow();
@@ -177,6 +190,7 @@ public class ApplicationStartup
 		var dbStopTimes = csvRecords
 			.stream()
 			.map(csvRecord -> {
+				log.info("{}", csvRecord);
 				var trip = tripRepository
 					.findById(csvRecord.get("trip_id"))
 					.orElseThrow();
@@ -215,6 +229,7 @@ public class ApplicationStartup
 		var dbCalendarDates = csvRecords
 			.stream()
 			.map(csvRecord -> {
+				log.info("{}", csvRecord);
 				var trip = tripRepository
 					.findById(csvRecord.get("trip_id"))
 					.orElseThrow();
@@ -239,6 +254,7 @@ public class ApplicationStartup
 		var dbFrequencies = csvRecords
 			.stream()
 			.map(csvRecord -> {
+				log.info("{}", csvRecord);
 				var trip = tripRepository
 					.findById(csvRecord.get("trip_id"))
 					.orElseThrow();

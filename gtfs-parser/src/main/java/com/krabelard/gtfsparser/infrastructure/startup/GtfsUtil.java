@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,6 +24,8 @@ public class GtfsUtil {
 
 	private static final int MiB = 1_048_576;
 
+	private final ResourceLoader resourceLoader;
+
 	/**
 	 * Unzips .zip archive into the directory it's in
 	 * @param zipFile Name of the .zip archive from project's resources directory
@@ -30,21 +33,24 @@ public class GtfsUtil {
 	 * @throws IOException Rethrown from {@link FileInputStream} if it throws
 	 */
 	public void unzip(String zipFile) throws IOException {
-		var destDir = new File("src/main/resources");
-		if (!destDir.exists()) {
-			throw new FileNotFoundException(
-				String.format("%s cannot be found", destDir)
-			);
-		}
-
-		// warsaw.zip has ~62MiB so little overhead just in case
-		var buffer = new byte[65 * MiB];
+		var zipResource = resourceLoader.getResource(
+			String.format("classpath:%s", zipFile)
+		);
 		try (
-			var inputStream = this.getClass()
-				.getClassLoader()
-				.getResourceAsStream(zipFile);
+			var inputStream = zipResource.getInputStream();
 			var zipInputStream = new ZipInputStream(inputStream)
 		) {
+			var destDir = zipResource.getFile().getParentFile();
+			log.info("Detected zip resource: {}", zipResource.getFilename());
+			log.info("Detected resource dir: {}", destDir);
+			if (!destDir.exists()) {
+				throw new FileNotFoundException(
+					String.format("%s cannot be found", destDir)
+				);
+			}
+			// warsaw.zip has ~62MiB so little overhead just in case
+			var buffer = new byte[65 * MiB];
+
 			var zipEntry = zipInputStream.getNextEntry();
 			while (zipEntry != null) {
 				var fileName = zipEntry.getName();
@@ -72,10 +78,11 @@ public class GtfsUtil {
 	 * @throws IOException Rethrown from {@link InputStream} reading
 	 */
 	public List<CSVRecord> parseCsv(String fileName) throws IOException {
+		var csvResource = resourceLoader.getResource(
+			String.format("classpath:%s", fileName)
+		);
 		try (
-			var inputStream = this.getClass()
-				.getClassLoader()
-				.getResourceAsStream(fileName);
+			var inputStream = csvResource.getInputStream();
 			var inputStreamReader = new InputStreamReader(
 				inputStream,
 				StandardCharsets.UTF_8
