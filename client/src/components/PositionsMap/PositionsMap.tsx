@@ -24,56 +24,42 @@ const PositionsMap: FunctionComponent = () => {
     longitude: number;
   } | null>(null);
 
+  const getPreviousLink = () =>
+    `/direction?${TimetableQueryParams.Line}=${searchParams.get(TimetableQueryParams.Line)}`;
 
-  const getPreviousLink = () => `/direction?${TimetableQueryParams.Line}=${searchParams.get(TimetableQueryParams.Line)}`;
+  const getLine = () => searchParams.get(TimetableQueryParams.Line);
 
-  // const getCurrentPosition = () => {
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(
-  //       (position) => {
-  //         setCurrentPosition({
-  //           latitude: position.coords.latitude,
-  //           longitude: position.coords.longitude,
-  //         });
-  //       },
-  //       (error) => {
-  //         console.error('Error getting current position:', error);
-  //       }
-  //     );
-  //     console.log('Current position:', currentPosition);
-      
-  //   } else {
-  //     console.error('Geolocation is not supported by this browser.');
-  //   }
-  // };
+  const typeOfTransport: string = getLine()?.length === 3 ? 'buses' : 'trams';
 
-const getCurrentPosition = () => {
-  if (navigator.geolocation) {
-    try {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setCurrentPosition({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          });
-        },
-        (error) => {
-          console.error('Error getting current position:', error);
-        }
-      );
-    } catch (error) {
-      console.error('Error accessing geolocation:', error);
+  const getCurrentPosition = async() => {
+    if (navigator.geolocation) {
+      try {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setCurrentPosition({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            });
+          },
+          (error) => {
+            console.error('Error getting current position:', error);
+          }
+        );
+      } catch (error) {
+        console.error('Error accessing geolocation:', error);
+      }
+      console.log(currentPosition);
+    } else {
+      console.error('Geolocation is not supported by this browser.');
     }
-  } else {
-    console.error('Geolocation is not supported by this browser.');
-  }
-};
-
+  };
 
   useEffect(() => {
     const fetchPositions = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8080/vehicle-positions/buses/523');
+        const response = await fetch(
+          'http://127.0.0.1:8080/vehicle-positions/' + typeOfTransport + getLine()
+        );
         const data = await response.json();
         if (Array.isArray(data.vehiclePositions)) {
           const positions = data.vehiclePositions.map((position: any) => ({
@@ -89,9 +75,6 @@ const getCurrentPosition = () => {
       }
     };
 
-    console.log('Fetching positions...');
-    console.log('Line:', busPositions);
-
     const intervalId = setInterval(fetchPositions, 5000);
 
     return () => {
@@ -101,8 +84,12 @@ const getCurrentPosition = () => {
 
   useEffect(() => {
     getCurrentPosition();
-  }
-  , []);
+
+    const intervalId2 = setInterval(getCurrentPosition, 5000);
+    return () => {
+      clearInterval(intervalId2);
+    };
+  }, []);
 
   return (
     <div className={`${styles.container}`}>
@@ -116,8 +103,9 @@ const getCurrentPosition = () => {
           center={currentPosition ? [currentPosition.longitude, currentPosition.latitude] : [0, 0]}
         >
           <Layers>
+            <MyPosition currentPosition={currentPosition} zIndex={2} />
+
             <BusLayer busPositions={busPositions} zIndex={2} />
-            <MyPosition currentPosition={currentPosition} zIndex={1} />
             <TileLayer source={new OSM()} zIndex={1} />
           </Layers>
         </Map>

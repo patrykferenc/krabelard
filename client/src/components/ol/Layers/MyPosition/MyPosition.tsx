@@ -20,7 +20,7 @@ const MyPosition: React.FC<MyPositionProps> = ({ currentPosition, zIndex }) => {
   const { map } = useContext(MapContext);
 
   useEffect(() => {
-    if (!map || !currentPosition) return;
+    if (!map) return;
 
     const myPositionLayer = new VectorLayer({
       source: new VectorSource(),
@@ -41,12 +41,14 @@ const MyPosition: React.FC<MyPositionProps> = ({ currentPosition, zIndex }) => {
       .getLayers()
       .getArray()
       //@ts-ignore
-      .find((layer) => layer.get('name') === 'MyPosition')
-      ?.getSource() as VectorSource<Point>;
+      .find((layer) => layer instanceof VectorLayer) as VectorLayer<VectorSource<Point>>;
+    //   .find((layer) => layer.get('name') === 'MyPosition')
+    //   ?.getSource() as VectorLayer<VectorSource<Point>>;
+
 
     if (!myPositionSource) return;
 
-    myPositionSource.clear();
+    myPositionSource?.getSource()?.clear();
 
     const { latitude, longitude } = currentPosition;
     const myPositionCoordinates = fromLonLat([longitude, latitude]);
@@ -69,7 +71,8 @@ const MyPosition: React.FC<MyPositionProps> = ({ currentPosition, zIndex }) => {
     });
 
     myPositionFeature.setStyle(myPositionIconStyle);
-    myPositionSource.addFeature(myPositionFeature);
+     myPositionSource?.getSource()?.addFeature(myPositionFeature);
+    console.log('myPositionSource', myPositionSource);
   }, [currentPosition, map]);
 
   return null;
