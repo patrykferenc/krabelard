@@ -31,7 +31,7 @@ const PositionsMap: FunctionComponent = () => {
 
   const typeOfTransport: string = getLine()?.length === 3 ? 'buses' : 'trams';
 
-  const getCurrentPosition = async() => {
+  const getCurrentPosition = async () => {
     if (navigator.geolocation) {
       try {
         navigator.geolocation.getCurrentPosition(
@@ -100,7 +100,9 @@ const PositionsMap: FunctionComponent = () => {
       <div className={styles.mapContainer}>
         <Map
           zoom={14}
-          center={currentPosition ? [currentPosition.longitude, currentPosition.latitude] : [0, 0]}
+          center={
+            currentPosition ? [currentPosition.latitude, currentPosition.longitude] : [21.06, 52.34]
+          }
         >
           <Layers>
             <MyPosition currentPosition={currentPosition} zIndex={2} />
