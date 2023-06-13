@@ -33,7 +33,7 @@ $border-radius: $main-font-size;
 .button {
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap');
   flex: 1;
-  height: 80%;
+  // height: 80%;
   border-radius: 10px;
   font-family: 'Noto Sans JP', sans-serif;
   text-transform: uppercase;
@@ -58,10 +58,32 @@ $border-radius: $main-font-size;
   cursor: pointer;
 }
 
+.directionContainer {
+  height: 80%;
+}
+
 .buttonBottom {
   @extend .button;
-  height: 50px;
+  height: 20%;
+  width: 100%;
   background-color: white;
   border-color: #0496ff;
-  // margin-top: auto;
+  margin-top: 3%;
+  
+}
+
+.iconBigger {
+  font-size: 2rem;
+  top: 50%;
+  left: 50%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.buttonBottom img {
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
 }
