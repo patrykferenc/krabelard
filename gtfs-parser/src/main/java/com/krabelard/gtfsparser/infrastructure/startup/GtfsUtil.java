@@ -16,6 +16,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 @Component
 @RequiredArgsConstructor
@@ -118,5 +119,22 @@ public class GtfsUtil {
 				}
 			}
 		);
+	}
+
+	/**
+	 * Parses format from gtfs time format which can go beyond 24-hour format, for trips
+	 * where the transit started the day before.
+	 * @param gtfsTime String representing time in 'hh:mm:ss' format where hh can be greater than 24
+	 * @return String in 'hh:mm:ss' format but hh will comply with 24-hour format.
+	 */
+	public String toIsoLocalTime(String gtfsTime) {
+		var arrivalHour = Integer.parseInt(gtfsTime.substring(0, 2));
+		return arrivalHour >= 24
+			? "%02d%s".formatted(arrivalHour % 24, gtfsTime.substring(2))
+			: gtfsTime;
+	}
+
+	public String defaultBlanks(String numericalValue) {
+		return numericalValue.isEmpty() ? "0" : numericalValue;
 	}
 }

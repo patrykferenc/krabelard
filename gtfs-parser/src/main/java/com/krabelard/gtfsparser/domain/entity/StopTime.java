@@ -17,7 +17,7 @@ public class StopTime {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "trip_id")
 	private Trip tripId;
 
@@ -27,7 +27,7 @@ public class StopTime {
 	@Column(name = "departure_time")
 	private LocalTime departureTime;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "stop_id")
 	private Stop stopId;
 
