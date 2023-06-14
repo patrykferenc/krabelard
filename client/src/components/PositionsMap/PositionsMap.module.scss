@@ -33,3 +33,23 @@ $border-radius: $main-font-size;
   height: fit-content;
   cursor: pointer;
 }
+
+.getPositionButton{
+  border: none;
+  background-color: #f6f8f9;
+  border-radius: 1.313rem;
+  position: absolute;
+  bottom: 0.625rem;
+  left: 85%;
+  transform: translateX(-50%);
+  width: 20%;
+  height: 10%;
+  cursor: pointer;
+  border-color: #000000;
+  border-style: solid;
+}
+
+.getPositionButton img{
+  
+  margin: auto;
+}

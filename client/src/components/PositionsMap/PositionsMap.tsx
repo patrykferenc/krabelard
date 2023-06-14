@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { OSM } from 'ol/source';
 import Map from '../ol/Map/Map';
 import Layers from '../ol/Layers/Layers';
@@ -16,13 +16,13 @@ interface BusPosition {
 }
 
 const PositionsMap: FunctionComponent = () => {
-  const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [busPositions, setBusPositions] = useState<BusPosition[]>([]);
   const [currentPosition, setCurrentPosition] = useState<{
     latitude: number;
     longitude: number;
   } | null>(null);
+  const [refreshMap, setRefreshMap] = useState(false);
 
   const getPreviousLink = () =>
     `/direction?${TimetableQueryParams.Line}=${searchParams.get(TimetableQueryParams.Line)}`;
@@ -48,17 +48,24 @@ const PositionsMap: FunctionComponent = () => {
       } catch (error) {
         console.error('Error accessing geolocation:', error);
       }
-      console.log(currentPosition);
     } else {
       console.error('Geolocation is not supported by this browser.');
     }
   };
 
   useEffect(() => {
+    const intervalId = setInterval(getCurrentPosition, 5000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
+  useEffect(() => {
     const fetchPositions = async () => {
       try {
         const response = await fetch(
-          'http://127.0.0.1:8080/vehicle-positions/' + typeOfTransport + getLine()
+          'http://127.0.0.1:8080/vehicle-positions/' + typeOfTransport + '/' + getLine()
         );
         const data = await response.json();
         if (Array.isArray(data.vehiclePositions)) {
@@ -80,16 +87,12 @@ const PositionsMap: FunctionComponent = () => {
     return () => {
       clearInterval(intervalId);
     };
-  }, []);
+  }, [typeOfTransport, getLine]);
 
-  useEffect(() => {
+  const handleGetPositionClick = () => {
     getCurrentPosition();
-
-    const intervalId2 = setInterval(getCurrentPosition, 5000);
-    return () => {
-      clearInterval(intervalId2);
-    };
-  }, []);
+    setRefreshMap(!refreshMap);
+  };
 
   return (
     <div className={`${styles.container}`}>
@@ -99,18 +102,24 @@ const PositionsMap: FunctionComponent = () => {
 
       <div className={styles.mapContainer}>
         <Map
-          zoom={14}
+          key={refreshMap.toString()}
+          zoom={16}
           center={
-            currentPosition ? [currentPosition.latitude, currentPosition.longitude] : [21.06, 52.34]
+            currentPosition
+              ? [currentPosition?.longitude, currentPosition?.latitude]
+              : [21.009, 52.2206]
           }
         >
           <Layers>
-            <MyPosition currentPosition={currentPosition} zIndex={2} />
-
+            <MyPosition currentPosition={currentPosition} zIndex={3} />
             <BusLayer busPositions={busPositions} zIndex={2} />
             <TileLayer source={new OSM()} zIndex={1} />
           </Layers>
         </Map>
+
+        <button onClick={handleGetPositionClick} className={styles.getPositionButton}>
+          <img src='/icons/my-location-icon.svg' alt='go back' />
+        </button>
       </div>
     </div>
   );

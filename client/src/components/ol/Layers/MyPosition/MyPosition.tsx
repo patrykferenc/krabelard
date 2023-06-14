@@ -72,7 +72,6 @@ const MyPosition: React.FC<MyPositionProps> = ({ currentPosition, zIndex }) => {
 
     myPositionFeature.setStyle(myPositionIconStyle);
      myPositionSource?.getSource()?.addFeature(myPositionFeature);
-    console.log('myPositionSource', myPositionSource);
   }, [currentPosition, map]);
 
   return null;
