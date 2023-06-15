@@ -2,6 +2,7 @@ package com.krabelard.gtfsparser.domain.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 import lombok.*;
 
 @Entity
@@ -14,15 +15,14 @@ import lombok.*;
 public class CalendarDate {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	@Column(name = "service_id")
+	private String serviceId;
 
 	@Column(name = "date")
 	private LocalDate date;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "service_id")
-	private Trip serviceId;
+	@OneToMany(mappedBy = "serviceId")
+	private Set<Trip> trips;
 
 	@Column(name = "exception_type")
 	@Enumerated(EnumType.ORDINAL)

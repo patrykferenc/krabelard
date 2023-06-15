@@ -17,7 +17,11 @@ public class Trip {
 	@Column(name = "trip_id")
 	private String tripId;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "service_id")
+	private CalendarDate serviceId;
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "route_id")
 	private Route routeId;
 
@@ -27,7 +31,7 @@ public class Trip {
 	@Column(name = "direction_id")
 	private Direction directionId;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "shape_id")
 	private Shape shapeId;
 
@@ -39,9 +43,6 @@ public class Trip {
 
 	@OneToMany(mappedBy = "tripId")
 	private Set<StopTime> stopTimes;
-
-	@OneToMany(mappedBy = "serviceId")
-	private Set<CalendarDate> dates;
 
 	@OneToMany(mappedBy = "tripId")
 	private Set<Frequency> frequencies;

@@ -6,6 +6,8 @@ import jakarta.transaction.Transactional;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +24,7 @@ public class ApplicationStartup
 	implements ApplicationListener<ApplicationReadyEvent> {
 
 	private static final String GTFS_ARCHIVE = "warsaw.zip";
+	private static final int BATCH_SIZE = 1000;
 
 	private final GtfsUtil gtfsUtil;
 	private final CalendarDateRepository calendarDateRepository;
@@ -51,12 +54,12 @@ public class ApplicationStartup
 		}
 
 		try {
+			injectCalendarDatesToDatabase(gtfsUtil.parseCsv("calendar_dates.txt"));
 			injectShapesToDatabase(gtfsUtil.parseCsv("shapes.txt"));
+			injectRoutesToDatabase(gtfsUtil.parseCsv("routes.txt"));
 			injectTripsToDatabase(gtfsUtil.parseCsv("trips.txt"));
 			injectStopsToDatabase(gtfsUtil.parseCsv("stops.txt"));
-			injectRoutesToDatabase(gtfsUtil.parseCsv("routes.txt"));
 			injectStopTimesToDatabase(gtfsUtil.parseCsv("stop_times.txt"));
-			injectCalendarDatesToDatabase(gtfsUtil.parseCsv("calendar_dates.txt"));
 			injectFrequenciesToDatabase(gtfsUtil.parseCsv("frequencies.txt"));
 		} catch (IOException e) {
 			throw new GtfsArchiveProcessingException(
@@ -136,7 +139,9 @@ public class ApplicationStartup
 					.longitude(Double.parseDouble(csvRecord.get("stop_lon")))
 					.locationType(
 						Stop.LocationType.of(
-							Integer.parseInt(csvRecord.get("location_type"))
+							Integer.parseInt(
+								gtfsUtil.defaultBlanks(csvRecord.get("location_type"))
+							)
 						)
 					)
 					.zoneId(csvRecord.get("zone_id"))
@@ -159,9 +164,13 @@ public class ApplicationStartup
 				var shape = shapeRepository
 					.findById(csvRecord.get("shape_id"))
 					.orElseThrow();
+				var calendar = calendarDateRepository
+					.findById(csvRecord.get("service_id"))
+					.orElseThrow();
 				return Trip
 					.builder()
 					.tripId(csvRecord.get("trip_id"))
+					.serviceId(calendar)
 					.routeId(route)
 					.headSign(csvRecord.get("trip_headsign"))
 					.directionId(
@@ -170,12 +179,16 @@ public class ApplicationStartup
 					.shapeId(shape)
 					.wheelchairAccessible(
 						Trip.Accessibility.of(
-							Integer.parseInt(csvRecord.get("wheelchair_accessible"))
+							Integer.parseInt(
+								gtfsUtil.defaultBlanks(csvRecord.get("wheelchair_accessible"))
+							)
 						)
 					)
 					.bikesAllowed(
 						Trip.Accessibility.of(
-							Integer.parseInt(csvRecord.get("bikes_allowed"))
+							Integer.parseInt(
+								gtfsUtil.defaultBlanks(csvRecord.get("bikes_allowed"))
+							)
 						)
 					)
 					.build();
@@ -187,59 +200,79 @@ public class ApplicationStartup
 
 	@Transactional
 	public void injectStopTimesToDatabase(List<CSVRecord> csvRecords) {
-		var dbStopTimes = csvRecords
-			.stream()
-			.map(csvRecord -> {
-				log.info("{}", csvRecord);
-				var trip = tripRepository
-					.findById(csvRecord.get("trip_id"))
-					.orElseThrow();
-				var stop = stopRepository
-					.findById(csvRecord.get("stop_id"))
-					.orElseThrow();
-				return StopTime
-					.builder()
-					.tripId(trip)
-					.arrivalTime(LocalTime.parse(csvRecord.get("arrival_time")))
-					.departureTime(LocalTime.parse(csvRecord.get("departure_time")))
-					.stopId(stop)
-					.stopSequence(Integer.parseInt(csvRecord.get("stop_sequence")))
-					.pickupType(
-						StopTime.PickupType.of(
-							Integer.parseInt(csvRecord.get("pickup_type"))
+		for (
+			int i = 0;
+			i < (int) Math.ceil((double) csvRecords.size() / BATCH_SIZE);
+			i++
+		) {
+			var lowerIndex = i * BATCH_SIZE;
+			var upperIndex = Math.min((i + 1) * BATCH_SIZE, csvRecords.size());
+			var dbStopTimesBatch = csvRecords
+				.subList(lowerIndex, upperIndex)
+				.stream()
+				.map(csvRecord -> {
+					log.info("{}", csvRecord);
+					var trip = tripRepository
+						.findById(csvRecord.get("trip_id"))
+						.orElseThrow();
+					var stop = stopRepository
+						.findById(csvRecord.get("stop_id"))
+						.orElseThrow();
+					return StopTime
+						.builder()
+						.tripId(trip)
+						.arrivalTime(
+							LocalTime.parse(
+								gtfsUtil.toIsoLocalTime(csvRecord.get("arrival_time"))
+							)
 						)
-					)
-					.dropoffType(
-						StopTime.PickupType.of(
-							Integer.parseInt(csvRecord.get("drop_off_type"))
+						.departureTime(
+							LocalTime.parse(
+								gtfsUtil.toIsoLocalTime(csvRecord.get("departure_time"))
+							)
 						)
-					)
-					.shapeDistTravelled(
-						Double.parseDouble(csvRecord.get("shape_dist_traveled"))
-					)
-					.build();
-			})
-			.toList();
-
-		stopTimeRepository.saveAll(dbStopTimes);
+						.stopId(stop)
+						.stopSequence(Integer.parseInt(csvRecord.get("stop_sequence")))
+						.pickupType(
+							StopTime.PickupType.of(
+								Integer.parseInt(
+									gtfsUtil.defaultBlanks(csvRecord.get("pickup_type"))
+								)
+							)
+						)
+						.dropoffType(
+							StopTime.PickupType.of(
+								Integer.parseInt(
+									gtfsUtil.defaultBlanks(csvRecord.get("drop_off_type"))
+								)
+							)
+						)
+						.shapeDistTravelled(
+							Double.parseDouble(csvRecord.get("shape_dist_traveled"))
+						)
+						.build();
+				})
+				.toList();
+			stopTimeRepository.saveAll(dbStopTimesBatch);
+		}
 	}
 
 	@Transactional
 	public void injectCalendarDatesToDatabase(List<CSVRecord> csvRecords) {
+		var gtfsDateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 		var dbCalendarDates = csvRecords
 			.stream()
 			.map(csvRecord -> {
 				log.info("{}", csvRecord);
-				var trip = tripRepository
-					.findById(csvRecord.get("trip_id"))
-					.orElseThrow();
 				return CalendarDate
 					.builder()
-					.date(LocalDate.parse(csvRecord.get("date")))
-					.serviceId(trip)
+					.date(LocalDate.parse(csvRecord.get("date"), gtfsDateFormatter))
+					.serviceId(csvRecord.get("service_id"))
 					.exceptionType(
 						CalendarDate.ExceptionType.of(
-							Integer.parseInt(csvRecord.get("exception_type"))
+							Integer.parseInt(
+								gtfsUtil.defaultBlanks(csvRecord.get("exception_type"))
+							)
 						)
 					)
 					.build();
@@ -261,8 +294,14 @@ public class ApplicationStartup
 				return Frequency
 					.builder()
 					.tripId(trip)
-					.startTime(LocalTime.parse(csvRecord.get("start_time")))
-					.endTime(LocalTime.parse(csvRecord.get("end_time")))
+					.startTime(
+						LocalTime.parse(
+							gtfsUtil.toIsoLocalTime(csvRecord.get("start_time"))
+						)
+					)
+					.endTime(
+						LocalTime.parse(gtfsUtil.toIsoLocalTime(csvRecord.get("end_time")))
+					)
 					.headwaySecs(Integer.parseInt(csvRecord.get("headway_secs")))
 					.exactTimes(
 						Frequency.ExactTimes.of(
